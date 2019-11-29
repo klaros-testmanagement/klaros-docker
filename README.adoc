@@ -1,2 +1,25 @@
+//Vielleicht noch ein Inhaltsverzeichnis
 
-test
+== Klaros Test Management
+=== Introduction
+//Text
+//Kurzes Gif, um zu zeigen, wie es aussehen würde, wenn man den Server startet und sich einloggt
+
+//Anforderungen, notwendige Voraussetzungen für die Installation und benennen, wie man diese Installiert
+=== Prerequisites
+==== Windows //Wird wahrscheinlich aufklappbar sein
+
+==== Linux //Wird wahrscheinlich aufklappbar sein
+
+=== Installation
+==== Clone
+==== Setup
+
+=== Usage
+
+
+
+
+=== Documentation
+//Kleiner Text und Link zur Dokumentation
+=== License
