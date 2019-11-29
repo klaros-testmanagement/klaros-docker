@@ -1,25 +1,30 @@
-//Vielleicht noch ein Inhaltsverzeichnis
+//Aktuelle Versionsnummer als Badge zeigen http://badges.github.io/badgerbadgerbadger/
 
-== Klaros Test Management
-=== Introduction
+= Klaros Test Management
+== Table of Contents
+== Introduction
 //Text
 //Kurzes Gif, um zu zeigen, wie es aussehen würde, wenn man den Server startet und sich einloggt
 
 //Anforderungen, notwendige Voraussetzungen für die Installation und benennen, wie man diese Installiert
-=== Prerequisites
-==== Windows //Wird wahrscheinlich aufklappbar sein
+== Prerequisites
+=== Windows //Wird wahrscheinlich aufklappbar sein
 
-==== Linux //Wird wahrscheinlich aufklappbar sein
+=== Linux //Wird wahrscheinlich aufklappbar sein
 
-=== Installation
-==== Clone
-==== Setup
+//Dazu vielleicht auch nochmal ein gif erstellen und am Ende der Installation einfügen
+== Installation
+=== Clone //Vielleicht wird auch einfach ein Aufzählungspunkt genutzt oder ein stichpunktartiger Text
+=== Build
 
-=== Usage
+== Usage
 
+== Update
 
+== Uninstallation
 
-
-=== Documentation
+== Documentation
 //Kleiner Text und Link zur Dokumentation
-=== License
+== License
+
+== Contact
