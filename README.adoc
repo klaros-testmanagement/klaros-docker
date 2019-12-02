@@ -26,21 +26,26 @@ You can find further information at https://www.docker.com/why-docker[Why-Docker
 
 == Prerequisites
 
-=== Windows
+.Windows
+[%collapsible]
+====
 
 The current hardware requirements and installation steps are described in the https://docs.docker.com/docker-for-windows/install/[official Docker documentation.] The Docker Desktop installation requires a login.
 
-To make it easier to update Klaros Test Management later, it is recommended to download the Dockerfile using Git from GitHub. Git can be downloaded and installed from the https://git-scm.com[official site.]
+To make it easier to update Klaros Test Management later, it is recommended to download the Dockerfile using Git from GitHub.
+Git can be downloaded and installed from the https://git-scm.com[official site.]
 
 During the installation you can select whether and how the line endings of files should be converted. Since the server is running on Linux inside the container, and the line endings differ from Windows (\r) and Linux (\n), we recommend to select the option "Checkout as-is, commit Unix-style line endings" or "Checkout as-is, commit as-is".
-
 
 
 Abbildung
 
 This completes the preparations for Windows. The chapter "Download the Dockerfile from Klaros Test Management via GitHub" describes how to use Git Bash to download the Dockerfile and prepare it for future updates.
+====
 
-=== Linux
+.Linux
+[%collapsible]
+====
 
 See the official Docker documentation for the latest hardware requirements and installation steps.
 
@@ -56,41 +61,104 @@ Under CentOS and RHEL, Podman is a popular alternative to Docker. Since Podman p
 
 Supported https://podman.io/getting-started/installation.html[Podman] version: 1.4.4
 
-Git is required to successfully download the Klaros-Testmanagement Dockerfile from GitHub.
+https://git-scm.com/[Git] is required to successfully download the Klaros Test Management Dockerfile from GitHub.
+
 
 .Git installation via Ubuntu/Debian:
-[source,sh]
 ----
 sudo apt-get update
 sudo apt-get install git
 ----
 
 .Git installation via CentOS/RHEL:
-[source,sh]
 ----
 sudo yum check-update
 sudo yum install git-core
 ----
 
+
 The following command can be used to check whether the installation was successful:
-
+----
 git --version
-Ausgabe: git version 2.20.1
+Output: git version 2.20.1
+----
 
+This completes the preparations for Linux. The chapter "Download the Dockerfile from Klaros Test Management via GitHub" describes how the Dockerfile can be downloaded and prepared for future updates.
+====
 
 == Installation
+=== Clone
+Once you are in the directory you want, you can start downloading the Dockerfile.
+----
+git init
+git clone https://github.com/klaros-testmanagement/klaros-docker 
+----
 
-=== Clone //Vielleicht wird auch einfach ein Aufzählungspunkt genutzt oder ein stichpunktartiger Text
+With "ls" you can check whether the directory was created correctly.
+----
+ls
+Output: klaros-docker
+----
+
 === Build
+The image is needed to create the Klaros container and start the server. +
+Windows users are switching from Git Bash to Powershell.
+
+----
+cd ~/klaros-docker/ApacheDerby
+docker build -t klaros .
+----
 
 == Usage
+=== How to start an instance
+For the successful start of Klaros Test Management, a Docker-Container with the name "Klaros" will be created. The port marked in blue can be changed if necessary.
+
+Warning: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
+
+.One-time execution: Create a Klaros container (anonymous volume)
+----
+docker create --name Klaros -p 18080:18080 klaros
+----
+
+.One-time execution: Create a Klaros container (named volume)
+----
+docker create --name Klaros -p 18080:18080 -v klaros-data:/data klaros
+----
+
+.Once the container has been created, the server can be booted with "docker start".
+----
+docker start -a Klaros
+----
+
+.To execute the container in detached mode, the -a parameter must be removed.
+----
+docker start Klaros
+----
+
+You can find further information in the https://docs.docker.com/engine/reference/commandline/start/[Official Docker Documentation.]
+
+After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
+
+----
+Username: admin
+Password: admin
+----
+
+Example: 127.0.0.1:18080
+
+It is also possible to create a second instance of Klaros via another port with its own database.
+
+.Create a second Klaros instance with its own database
+----
+docker create --name Klaros2 -p 18081:18080 klaros
+----
 
 == Update
 
 == Uninstallation
 
 == Documentation
-//Kleiner Text und Link zur Dokumentation
+
 == License
 
 == Contact
