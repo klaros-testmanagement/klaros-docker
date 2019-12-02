@@ -57,13 +57,16 @@ Under CentOS and RHEL, Podman is a popular alternative to Docker. Since Podman p
 Supported https://podman.io/getting-started/installation.html[Podman] version: 1.4.4
 
 Git is required to successfully download the Klaros-Testmanagement Dockerfile from GitHub.
+
 .Git installation via Ubuntu/Debian:
+[source,sh]
 ----
 sudo apt-get update
 sudo apt-get install git
 ----
 
 .Git installation via CentOS/RHEL:
+[source,sh]
 ----
 sudo yum check-update
 sudo yum install git-core
