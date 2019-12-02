@@ -1,7 +1,9 @@
-//Aktuelle Versionsnummer als Badge zeigen http://badges.github.io/badgerbadgerbadger/
+//Aktuelle Versionsnummer als Badged zeigen http://badges.github.io/badgerbadgerbadger/
 
 = Klaros Test Management
 == Table of Contents
+
+
 == Introduction
 //Text
 //Kurzes Gif, um zu zeigen, wie es aussehen würde, wenn man den Server startet und sich einloggt
