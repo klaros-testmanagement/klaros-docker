@@ -161,6 +161,18 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ====
 =====
 
+== Use older version
+Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
+
+All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
+
+After the Dockerfile has been downloaded via Git together with the configurations, a version list can be listed with "git tag" and selected as local branch via "git checkout".
+
+----
+git tag
+git checkout tags/<tag_name> -b klaros
+----
+
 == Installation
 === Clone
 Once you are in the directory you want, you can start downloading the Dockerfile.
@@ -210,7 +222,10 @@ docker start -a Klaros
 docker start Klaros
 ----
 
+[%collapsible]
+====
 You can find further information in the https://docs.docker.com/engine/reference/commandline/start/[Official Docker Documentation.]
+
 
 After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
 
@@ -220,6 +235,8 @@ Password: admin
 ----
 
 Example: 127.0.0.1:18080
+
+====
 
 It is also possible to create a second instance of Klaros via another port with its own database.
 
