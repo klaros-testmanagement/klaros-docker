@@ -1,1 +1,73 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
+= Klaros Test Management
+== Table of Contents
+
+== Introduction
+
+== Prerequisites
+
+.Windows
+[%collapsible]
+====
+
+====
+
+.Linux
+[%collapsible]
+====
+
+====
+
+== Configuring Docker Environment Variables
+
+== Installation
+=== Clone
+=== Build
+
+== Usage
+=== How to start an instance
+=== How to shut down your instance
+
+== Create and restore a backup
+=== Creating a backup
+.Under Windows
+----
+
+----
+
+.Under Linux
+----
+
+----
+
+=== Restore a Backup
+
+
+
+
+== How and where can I find the logfiles?
+=== Show logs via the Docker shell
+=== Show logs from backup
+
+== Update
+=== Update via master branch
+=== Update via tags
+=== Refresh image
+
+== Uninstallation
+
+== Documentation
+Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases. You can also read our documentation in our blog.
+
+== License
+Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
+
+== Contact
+We thank you for your attention and hope to meet the interests of many users with our documentation. We look forward to your feedback at support@verit.de
