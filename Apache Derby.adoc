@@ -1,3 +1,11 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
 = Klaros Test Management
 == Table of Contents
 
@@ -178,7 +186,7 @@ docker build -t klaros .
 === How to start an instance
 For the successful start of Klaros Test Management, a Docker-Container with the name "Klaros" will be created.
 
-WARNING: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
+IMPORTANT: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
 
 .One-time execution: Create a Klaros container (anonymous volume)
 ----
@@ -351,7 +359,7 @@ Afterwards, the Klaros Test Management logs can be displayed in the "logs" folde
 
 Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
 
-WARNING: If the update is only for testing purposes, do not use the original branch(klaros).
+IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros).
 Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 ----
 docker stop Klaros
