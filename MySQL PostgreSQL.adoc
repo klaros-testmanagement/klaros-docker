@@ -11,21 +11,125 @@ endif::[]
 
 == Introduction
 
+IMPORTANT: The Apache Derby database is only supported for testing purposes. Instructions for installing Klaros Test Management with Apache Derby can be found under (Still in progress).
+
+Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
+
+Klaros can be configured in a multitude of ways and reduces maintenance costs through reusable test procedures.
+
+Manual and automated test cases are consolidated and evaluated collectively. Workload, progress and success of test activities can be tracked at any time.
+
+You can checkout our demo version https://www.klaros-testmanagement.com/demo/pages/login.seam[here.]
+
+https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux without a great deal of additional effort.
+
+This installation documentation shows step by step how to install and configure Klaros Test Management under Docker for Windows and Linux.
+
+The database systems: MySQL and PostgreSQL are supported by Klaros Test Management under Docker and are ready for production.
+An adjustment of the configurations is described in the section "Configuring Docker Environment Variables".
+
+You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management]
+
 == Prerequisites
 
 .Windows
 [%collapsible]
 ====
+The current hardware requirements and installation steps are described in the https://docs.docker.com/docker-for-windows/install/[official Docker documentation.] The Docker Desktop installation requires a login.
 
+To make it easier to update Klaros Test Management later, it is recommended to download the Dockerfile using Git from GitHub.
+Git can be downloaded and installed from the https://git-scm.com[official site.]
+
+During the installation you can select whether and how the line endings of files should be converted. Since the server is running on Linux inside the container, and the line endings differ from Windows (\r) and Linux (\n), we recommend to select the option "Checkout as-is, commit Unix-style line endings" or "Checkout as-is, commit as-is".
+
+.Configuration of the line end conversion
+image::images/ConfigurationOfTheLineEndConversion.png[Configuration of the line end conversion]
+
+This completes the preparations for Windows. The chapter "Download the Dockerfile from Klaros Test Management via GitHub" describes how to use Git Bash to download the Dockerfile and prepare it for future updates.
 ====
 
 .Linux
 [%collapsible]
 ====
+See the official Docker documentation for the latest hardware requirements and installation steps.
 
+https://docs.docker.com/install/linux/docker-ce/ubuntu/[Ubuntu Docker]
+
+https://docs.docker.com/install/linux/docker-ce/debian/[Debian Docker]
+
+https://docs.docker.com/install/linux/docker-ce/centos/[CentOS Docker]
+
+https://www.cyberciti.biz/faq/install-use-setup-docker-on-rhel7-centos7-linux/[RHEL Docker]
+
+https://docs.docker.com/compose/install/[Docker Compose]
+
+.Git installation via Ubuntu/Debian:
+----
+sudo apt-get update
+sudo apt-get install git
+----
+
+.Git installation via CentOS/RHEL:
+----
+sudo yum check-update
+sudo yum install git-core
+----
+
+The following command can be used to check whether the installation was successful:
+----
+git --version
+Output: git version 2.20.1
+----
+
+This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.
 ====
 
 == Configuring Docker Environment Variables
+.Configurable environment variables via .env
+[options="header,footer"]
+|=======================
+|Variable                               |Description
+|DATABASE_NAME=klaros                   |Database Name
+|DATABASE_USER=klaros                   |Database User
+|DATABASE_CONTAINER_NAME=klaros_db      |Database container name
+|DATABASE_PASSWORD=P@ssw0rd             |Database Password
+|DATABASE_ROOT_PASSWORD=P@ssw0rd        |[MySQL Only] Root password for the "root" user
+|DATABASE_PORT=10001                    |Public Database Port
+|KLAROS_CONTAINER_NAME=klaros_postgresql|Klaros Test Management Containername
+|KLAROS_PORT=18080                      |Public Klaros Test Management Port
+|TOMCAT_PASSWORD=P@ssw0rd               |Password for login to 127.0.0.1:18080/monitoring
+|TIMEZONE=Europe/Berlin                 |Time zone
+|MEMORY_MAX=786                         |Maximum available RAM in MB
+|MEMORY_MIN=128                         |Minimum available RAM in MB
+|VOLUME_NAME=klaros-data                |The volume will be automatically created by Compose with the name "klaros-data" if it does not exist.
+|=======================
+
+.Modifiable variables after the first server start
+[options="footer"]
+|=======================
+|DATABASE_CONTAINER_NAME=klaros_db
+|DATABASE_PORT=10001
+|KLAROS_CONTAINER_NAME=klaros_postgresql
+|KLAROS_PORT=18080
+|TIMEZONE=Europe/Berlin
+|MEMORY_MAX=786
+|MEMORY_MIN=128
+|VOLUME_NAME=klaros-data
+|=======================
+
+The environment variables can be configured and changed via the .env file.
+For port forwarding only the ports "KLAROS_PORT" and "DATABASE_PORT" in the .env file have to be changed.
+
+When creating the image, all blue marked values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (restart required).
+
+.Configuration via the .env file
+The .env file is located in the same directory as the docker-compose.yml file and can be opened with your preferred text editor.
+----
+vi .env
+----
+
+
+
 
 == Installation
 === Clone
