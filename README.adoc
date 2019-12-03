@@ -341,7 +341,8 @@ Windows users can use the https://www.winrar.de/downld.php[WinRAR] archive progr
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
 
 ==== Linux
-To read the logs from the backup, use tar to unpack the archive.
+
+.To read the logs from the backup, use tar to unpack the archive.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
@@ -349,6 +350,7 @@ sudo tar -xzf backup_klaros19-10-28.tar.gz
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
 
 == Update
+
 Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
 
 Warning: If the update is only for testing purposes, do not use the original branch(klaros).
@@ -358,13 +360,16 @@ docker stop Klaros
 docker create --name Klaros-tmp --volumes-from Klaros alpine
 docker rm Klaros
 ----
+
 === Update via master branch
-If no branch other than master is used, Klaros can be updated to the latest version with git pull.
+
+.If no branch other than master is used, Klaros can be updated to the latest version with git pull.
 ----
 git pull origin master
 ----
 
 === Update via tags
+
 To perform an update from an older to a newer version, the first step is to check for new updates in the GitHub repository. Current versions can be displayed via "git tag". Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.
 ----
 git checkout master
@@ -377,7 +382,7 @@ git branch -D update
 
 === Refresh image
 
-After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
+.After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
 ----
 docker rmi klaros
 docker build -t klaros .
@@ -391,6 +396,7 @@ docker start -a Klaros
 ----
 
 == Uninstallation
+
 To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
 
 Then remove the _~/klaros-docker_ directory and the image.
