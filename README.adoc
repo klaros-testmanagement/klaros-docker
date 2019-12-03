@@ -106,7 +106,7 @@ This completes the preparations for Linux. The chapter "Download the Dockerfile 
 |ENV KLAROS_VER ${KLAROS_VER:-4.12.1}           |Current Klarosversion. Versions can be found on the Official https://www.klaros-testmanagement.com/de_DE/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
-.Dockerfile independent variables
+.Modifiable variables after the first server start
 [options="footer"]
 |=======================
 |TOMCAT_MEMORY_MAX 768
@@ -358,11 +358,11 @@ sudo tar -xzf backup_klaros19-10-28.tar.gz
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
 
 == Update
+IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros).
+Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 
 Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
 
-IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros).
-Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 ----
 docker stop Klaros
 docker create --name Klaros-tmp --volumes-from Klaros alpine
