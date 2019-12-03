@@ -282,7 +282,8 @@ sudo docker start -a Klaros
 ----
 
 === Restore a Backup
-.Note to adjust the date of the respective backups.
+
+Note to adjust the date of the respective backups.
 ----
 docker stop Klaros
 docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
@@ -290,30 +291,32 @@ docker start -a Klaros
 ----
 
 === Test a Backup
+
 To test a backup, you can create a second Klaros instance to play the backup on. The second instance must be fully booted once before the backup can be installed.
 
 ----
 docker run --name Klaros-test -p 18081:18080 klaros
 ----
 
-.The server is then stopped with CTRL + C or with "docker stop".
+The server is then stopped with CTRL + C or with "docker stop".
 ----
 docker stop Klaros-test
 ----
 
-.Note to adjust the date of the respective backups.
+Note to adjust the date of the respective backups.
 ----
 docker run --rm --volumes-from Klaros-test -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
 docker start -a Klaros-test
 ----
 
-.If the backup has been successfully tested, the server can be stopped and removed.
+If the backup has been successfully tested, the server can be stopped and removed.
 ----
 docker stop Klaros-test
 docker rm -v Klaros-test
 ----
 
 == How and where can I find the logfiles?
+
 It may happen that log files are required for error detection. In this case, it is possible to open a shell directly in the Docker container in order to read the logs in the container, or to display the logs directly from the backup.
 
 If an error occurs while creating the backup, the log file provides useful hints.
@@ -336,8 +339,9 @@ The log files can then be read using cat or head and tail.
 Windows users can use the https://www.winrar.de/downld.php[WinRAR] archive program to extract .tar.gz archives.
 
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
+
 ==== Linux
-.To read the logs from the backup, use tar to unpack the archive.
+To read the logs from the backup, use tar to unpack the archive.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
@@ -355,7 +359,7 @@ docker create --name Klaros-tmp --volumes-from Klaros alpine
 docker rm Klaros
 ----
 === Update via master branch
-.If no branch other than master is used, Klaros can be updated to the latest version with git pull.
+If no branch other than master is used, Klaros can be updated to the latest version with git pull.
 ----
 git pull origin master
 ----
@@ -372,7 +376,8 @@ git branch -D update
 ----
 
 === Refresh image
-.After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
+
+After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
 ----
 docker rmi klaros
 docker build -t klaros .
