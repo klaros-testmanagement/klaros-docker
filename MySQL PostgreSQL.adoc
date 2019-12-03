@@ -6,6 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+
 = Klaros Test Management
 == Table of Contents
 
@@ -128,16 +129,133 @@ The .env file is located in the same directory as the docker-compose.yml file an
 vi .env
 ----
 
+== Use older version
+Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
 
+All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
 
+After the Dockerfile has been downloaded via Git together with the configurations, a version list can be listed with "git tag" and selected as local branch via "git checkout".
+
+----
+git tag
+git checkout tags/<tag_name> -b klaros
+----
 
 == Installation
 === Clone
+Once you are in the directory you want, you can start downloading the Dockerfile.
+----
+git init
+git clone https://github.com/klaros-testmanagement/klaros-docker 
+----
+
+With "ls" you can check whether the directory was created correctly.
+----
+ls
+Output: klaros-docker
+----
+
 === Build
+The image is needed to create the Klaros container and start the server.
+
+.PostgreSQL
+----
+cd ~/klaros-docker/PostgreSQL
+docker-compose build
+----
+
+.MySQL
+----
+cd ~/klaros-docker/MySQL
+docker-compose build
+----
 
 == Usage
 === How to start an instance
+For the successful start of Klaros Test Management, two Docker-Containers are automatically created for the server and the database. The configurations can be found in the .env file.
+
+.Starting the server
+----
+docker-compose up
+----
+
+[%collapsible]
+====
+.To execute the container in detached mode, the -d parameter must be added
+----
+docker-compose up -d
+----
+
+You can find further information in the https://docs.docker.com/compose/reference/up/[Official Docker-Compose Documentation.]
+
+After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
+
+----
+Username: admin
+Password: admin
+----
+
+Example: 127.0.0.1:18080
+
+
+====
+
+=== How to start multiple instances
+
+Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
+To start an independent Klaros instance, some configuration must be done. In order to save your existing configurations, it is recommended to create single instances in separate file paths.
+
+.PostgreSQL
+[%collapsible]
+====
+Copy the directory under a different name.
+----
+cp -r PostgreSQL/ PostgreSQL2
+----
+
+Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+----
+cd ~/klaros-docker/PostgreSQL2
+vi .env
+----
+====
+
+.MySQL
+[%collapsible]
+====
+Copy the directory under a different name.
+
+----
+cp -r MySQL/  MySQL2
+----
+
+Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+
+----
+cd ~/klaros-docker/MySQL2
+vi .env
+----
+
+====
+//// In Arbeit ////
+For a second instance to run independently of the first instance, the instances must differ in name, port, and volume.
+
+.Configurable environment variables via .env
+[options="header,footer"]
+|=======================
+|
+|=======================
+
+
 === How to shut down your instance
+In detached mode, the server must be shut down via "docker-compose stop".
+If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. If this is not the case, the server must be shut down with "docker-compose stop".
+----
+docker-compose stop
+----
+
+
+
 
 == Create and restore a backup
 === Creating a backup
