@@ -371,7 +371,7 @@ docker rm Klaros
 
 === Update via master branch
 
-If no branch other than master is used, Klaros can be updated to the latest version with git pull.
+Klaros can be updated to the latest version with "git pull".
 ----
 git pull origin master
 ----
