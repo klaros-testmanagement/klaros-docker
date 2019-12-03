@@ -417,7 +417,7 @@ rm -rf ~/klaros-docker
 
 == Documentation
 
-Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases.
+Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases. You can also read our documentation in our blog.
 
 == License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
