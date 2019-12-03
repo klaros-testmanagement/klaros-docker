@@ -16,6 +16,8 @@ Klaros can be configured in a multitude of ways and reduces maintenance costs th
 
 Manual and automated test cases are consolidated and evaluated collectively. Workload, progress and success of test activities can be tracked at any time.
 
+You can checkout our demo version https://www.klaros-testmanagement.com/demo/pages/login.seam[here.]
+
 https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux without a great deal of additional effort.
 
 This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
