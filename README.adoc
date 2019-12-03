@@ -90,7 +90,7 @@ git --version
 Output: git version 2.20.1
 ----
 
-This completes the preparations for Linux. The chapter "Download the Dockerfile from Klaros Test Management via GitHub" describes how the Dockerfile can be downloaded and prepared for future updates.
+This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.
 ====
 
 == Configuring Docker Environment Variables
