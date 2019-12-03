@@ -283,7 +283,7 @@ sudo docker start -a Klaros
 
 === Restore a Backup
 
-Note to adjust the date of the respective backups.
+.Note to adjust the date of the respective backups.
 ----
 docker stop Klaros
 docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
@@ -298,18 +298,18 @@ To test a backup, you can create a second Klaros instance to play the backup on.
 docker run --name Klaros-test -p 18081:18080 klaros
 ----
 
-The server is then stopped with CTRL + C or with "docker stop".
+.The server is then stopped with CTRL + C or with "docker stop".
 ----
 docker stop Klaros-test
 ----
 
-Note to adjust the date of the respective backups.
+.Note to adjust the date of the respective backups.
 ----
 docker run --rm --volumes-from Klaros-test -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
 docker start -a Klaros-test
 ----
 
-If the backup has been successfully tested, the server can be stopped and removed.
+.If the backup has been successfully tested, the server can be stopped and removed.
 ----
 docker stop Klaros-test
 docker rm -v Klaros-test
