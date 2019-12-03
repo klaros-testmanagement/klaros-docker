@@ -1,17 +1,14 @@
-//Aktuelle Versionsnummer als Badged zeigen http://badges.github.io/badgerbadgerbadger/
-
 = Klaros Test Management
 == Table of Contents
 
-//Kurzes Gif, um zu zeigen, wie es aussehen würde, wenn man den Server startet und sich einloggt
 == Introduction
-Plan, control and document your entire test process with Klaros Test Management and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
+Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
 
 Klaros can be configured in a multitude of ways and reduces maintenance costs through reusable test procedures.
 
 Manual and automated test cases are consolidated and evaluated collectively. Workload, progress and success of test activities can be tracked at any time.
 
-Docker is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux without a great deal of additional effort.
+https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux without a great deal of additional effort.
 
 This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
@@ -93,10 +90,10 @@ This completes the preparations for Linux. The chapter "Download the Dockerfile 
 |=======================
 |Variable|Description
 |ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd    |Password for login 127.0.0.1:18080/monitoring
-|ENV TOMCAT_MEMORY_MAX 768    |Maximum available memory in MB
-|ENV TOMCAT_MEMORY_MIN 128    |Minimum available RAM in MB
+|ENV TOMCAT_MEMORY_MAX 768             |Maximum available memory in MB
+|ENV TOMCAT_MEMORY_MIN 128             |Minimum available RAM in MB
 |ENV JAVA_OPTS -Duser.timezone=Europe/Berlin    |Time zone
-|ENV KLAROS_VER ${KLAROS_VER:-4.12.1} |Current Klarosversion. Versions can be found on the Official https://www.klaros-testmanagement.com/de_DE/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
+|ENV KLAROS_VER ${KLAROS_VER:-4.12.1}           |Current Klarosversion. Versions can be found on the Official https://www.klaros-testmanagement.com/de_DE/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
 .Dockerfile independent variables
@@ -181,7 +178,7 @@ docker build -t klaros .
 === How to start an instance
 For the successful start of Klaros Test Management, a Docker-Container with the name "Klaros" will be created.
 
-Warning: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
+WARNING: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
 
 .One-time execution: Create a Klaros container (anonymous volume)
 ----
@@ -265,6 +262,7 @@ sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backu
 =====
 
 === Creating a backup
+
 .Under Windows
 ----
 docker stop Klaros
@@ -298,7 +296,7 @@ To test a backup, you can create a second Klaros instance to play the backup on.
 docker run --name Klaros-test -p 18081:18080 klaros
 ----
 
-.The server is then stopped with CTRL + C or with "docker stop".
+The server is then stopped with CTRL + C or with "docker stop".
 ----
 docker stop Klaros-test
 ----
@@ -309,7 +307,7 @@ docker run --rm --volumes-from Klaros-test -v ~/klaros-docker/backup:/backup alp
 docker start -a Klaros-test
 ----
 
-.If the backup has been successfully tested, the server can be stopped and removed.
+If the backup has been successfully tested, the server can be stopped and removed.
 ----
 docker stop Klaros-test
 docker rm -v Klaros-test
@@ -342,7 +340,7 @@ Afterwards, the Klaros Test Management logs can be displayed in the "logs" folde
 
 ==== Linux
 
-.To read the logs from the backup, use tar to unpack the archive.
+To read the logs from the backup, use tar to unpack the archive.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
@@ -353,7 +351,7 @@ Afterwards, the Klaros Test Management logs can be displayed in the "logs" folde
 
 Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
 
-Warning: If the update is only for testing purposes, do not use the original branch(klaros).
+WARNING: If the update is only for testing purposes, do not use the original branch(klaros).
 Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 ----
 docker stop Klaros
@@ -363,7 +361,7 @@ docker rm Klaros
 
 === Update via master branch
 
-.If no branch other than master is used, Klaros can be updated to the latest version with git pull.
+If no branch other than master is used, Klaros can be updated to the latest version with git pull.
 ----
 git pull origin master
 ----
@@ -382,7 +380,7 @@ git branch -D update
 
 === Refresh image
 
-.After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
+After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
 ----
 docker rmi klaros
 docker build -t klaros .
@@ -408,6 +406,8 @@ rm -rf ~/klaros-docker
 ----
 
 == Documentation
+
+
 
 == License
 
