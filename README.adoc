@@ -9,6 +9,7 @@ endif::[]
 = Klaros Test Management
 :toc: macro
 :toc-title: 
+toclevels: 4
 
 == Table of Contents
 toc::[]
