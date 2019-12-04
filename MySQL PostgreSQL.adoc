@@ -359,7 +359,7 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 
 ====
 
-=== Creating a Volume backup
+=== Creating a volume backup
 For a volume backup, the server must be shut down.
 
 .Windows
@@ -421,7 +421,7 @@ cd -
 
 ====
 
-=== Creating a Volume and SQL backup
+=== Creating a volume and SQL backup
 The first step is to create an SQL backup while the system is running. Then the server will be shut down to perform the volume backup.
 
 .Windows
@@ -623,7 +623,7 @@ Log files may be required for error detection. In this case it is possible to op
 
 Important logs can be found below:
 
-_/data/catalina-base/logs_
+_/data/catalina-base/logs_ +
 _/data/mysql-data_ ← Additional for MySQL
 
 === Show logs via the Docker shell
