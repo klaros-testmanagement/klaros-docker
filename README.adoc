@@ -226,7 +226,6 @@ docker start Klaros
 ====
 You can find further information in the https://docs.docker.com/engine/reference/commandline/start/[Official Docker Documentation.]
 
-
 After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
 
 ----
@@ -267,7 +266,7 @@ $(date '+%y-%m-%d-%H:%M:%S')
 
 .More details
 [%collapsible]
-=====
+====
 This would give the backup the following name:
 
 Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
@@ -286,7 +285,7 @@ docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backup alp
 mkdir ~/klaros-docker/Path/backup
 sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backup alpine tar cvzf /backup/backup_klaros$(date '+%y-%m-%d').tar.gz /data/klaros-home /data/catalina-base/logs
 ----
-=====
+====
 
 === Creating a backup
 
