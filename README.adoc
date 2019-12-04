@@ -102,8 +102,8 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd  |P@ssw0rd  |Password for login 127.0.0.1:18080/monitoring
 |ENV TOMCAT_MEMORY_MIN 128           |128 |Minimum available RAM in MB
 |ENV TOMCAT_MEMORY_MAX 768           |768   |Maximum available RAM in MB
-|ENV JAVA_OPTS -Duser.timezone=Europe/Berlin  |-Duser.timezone=  | With JAVA_OPTS additional settings can be transferred to the TomCat server. In this example the time zone is set to Europe/Berlin.
-|ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.1}         |${KLAROS_VERSION:-4.12.1} |Klaros version used during installation. Versions can be found on the Official https://www.klaros-testmanagement.com/en_US/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
+|ENV JAVA_OPTS -Duser.timezone=Europe/Berlin  |-Duser.timezone=Europe/Berlin  | With JAVA_OPTS additional settings can be transferred to the Tomcat server. In this example the time zone is set to Europe/Berlin.
+|ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.1}         |${KLAROS_VERSION:-4.12.1} |Klaros version used during installation. Versions can be found on the official https://www.klaros-testmanagement.com/en_US/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
 .Modifiable variables after the first server start via the Dockerfile
@@ -119,7 +119,6 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. In the Dockerfile is a list of different ENV variables available, which can be adapted and changed as desired. See Table 1 for more information.
 
 The image must then be recreated.
-
 
 === 3.2. Configuration at server startup
 
@@ -218,7 +217,7 @@ docker start Klaros
 
 [%collapsible]
 ====
-You can find further information in the https://docs.docker.com/engine/reference/commandline/start/[Official Docker Documentation.]
+You can find further information in the https://docs.docker.com/engine/reference/commandline/start/[official Docker Documentation.]
 
 After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
 
