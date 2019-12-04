@@ -9,7 +9,13 @@ endif::[]
 = Klaros Test Management
 == Table of Contents
 
-== Introduction
+= AsciiDoc Writer's Guide
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2013-08-01
+:toc:
+
+
+== 1. Introduction
 IMPORTANT: The Apache Derby database is only supported for testing purposes. For configuration customization, refer to the "Configuring Docker Environment Variables" section.
 
 Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
@@ -31,7 +37,7 @@ Instructions for installing Klaros Test Management with MySQL or PostgreSQL can 
 You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management]
 
 
-== Prerequisites
+== 2. Prerequisites
 
 .Windows
 [%collapsible]
@@ -93,7 +99,7 @@ Output: git version 2.20.1
 This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.
 ====
 
-== Configuring Docker Environment Variables
+== 3. Configuring Docker Environment Variables
 
 .Configurable environment variables before the first server start via the Dockerfile
 [options="header,footer"]
@@ -114,14 +120,14 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |JAVA_OPTS
 |=======================
 
-=== Configuration via the Dockerfile
+=== 3.1. Configuration via the Dockerfile
 
 Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. In the Dockerfile is a list of different ENV variables available, which can be adapted and changed as desired. See Table 1 for more information.
 
 The image must then be recreated.
 
 
-=== Configuration at server startup
+=== 3.2. Configuration at server startup
 
 Changeable variables can be found in Table 2.
 The environment variables can be changed with the -e parameter.
@@ -131,7 +137,7 @@ The environment variables can be changed with the -e parameter.
 sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Other Variables> klaros
 ----
 
-=== Configuration via a file
+=== 3.3. Configuration via a file
 
 To specify the configurations via a file, any text file can be created in the ApacheDerby directory. Modifiable variables can be found in Table 2. When creating the container, add the --env-file parameter.
 
@@ -155,7 +161,7 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ----
 ====
 
-== How to use an older version
+== 4. How to use an older version
 Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
 
 All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
@@ -167,8 +173,8 @@ git tag
 git checkout tags/<tag_name> -b klaros
 ----
 
-== Installation
-=== Clone
+== 5. Installation
+=== 5.1. Clone
 Once you are in the directory you want, you can start downloading the Dockerfile.
 ----
 git init
@@ -181,7 +187,7 @@ ls
 Output: klaros-docker
 ----
 
-=== Build
+=== 5.2. Build
 The image is needed to create the Klaros container and start the server. +
 Windows users are switching from Git Bash to Powershell.
 
@@ -190,8 +196,8 @@ cd ~/klaros-docker/ApacheDerby
 docker build -t klaros .
 ----
 
-== Usage
-=== How to start an instance
+== 6. Usage
+=== 6.1. How to start an instance
 For the successful start of Klaros Test Management, a Docker-Container with the name "Klaros" will be created.
 
 IMPORTANT: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
@@ -238,14 +244,14 @@ It is also possible to create a second instance of Klaros via another port with 
 docker create --name Klaros2 -p 18081:18080 klaros
 ----
 
-=== How to shut down your instance
+=== 6.2. How to shut down your instance
 In detached mode, the server must be shut down via "docker stop".
 If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. Windows is considered as an exception and the container must be closed via "docker stop".
 ----
 docker stop Klaros
 ----
 
-== Create, restore and test a backup
+== 7. Create, restore and test a backup
 Backups are labeled with the name "backup_klaros<date>.tar.gz". If you create several backups per day, it is recommended to specify a time (hours, minutes and seconds) when creating the backups. To do this, add %H(hour), %M(minute), and %S(second) in date/Get-Date.
 
 .Windows Example
@@ -280,7 +286,7 @@ sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backu
 ----
 ====
 
-=== Creating a backup
+=== 7.1. Creating a backup
 
 .Windows
 ----
@@ -298,7 +304,7 @@ sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alp
 sudo docker start -a Klaros
 ----
 
-=== Restore a Backup
+=== 7.2. Restore a Backup
 
 .Note to adjust the date of the respective backups.
 ----
@@ -307,7 +313,7 @@ docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /
 docker start -a Klaros
 ----
 
-=== Test a Backup
+=== 7.3. Test a Backup
 
 To test a backup, you can create a second Klaros instance to play the backup on. The second instance must be fully booted once before the backup can be installed.
 
@@ -332,13 +338,13 @@ docker stop Klaros-test
 docker rm -v Klaros-test
 ----
 
-== How and where can I find the logfiles?
+== 8. How and where can I find the logfiles?
 
 It may happen that log files are required for error detection. In this case, it is possible to open a shell directly in the Docker-Container in order to read the logs in the container, or to display the logs directly from the backup.
 
 If an error occurs while creating the backup, the log file provides useful hints.
 
-=== Show logs via the Docker shell
+=== 8.1. Show logs via the Docker shell
 Open a shell with "docker exec" in the Klaros container to get access to the logs.
 
 Please note that the server must be started during access via the shell and must not be shut down.
@@ -351,7 +357,7 @@ docker exec -it Klaros /bin/sh
 ----
 The log files can then be read using cat or head and tail.
 
-=== Show logs from backup
+=== 8.2. Show logs from backup
 
 .Windows
 [%collapsible]
@@ -372,7 +378,7 @@ sudo tar -xzf backup_klaros19-10-28.tar.gz
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
 ====
 
-== Update
+== 9. Update
 IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros). Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 
 Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
@@ -383,14 +389,14 @@ docker create --name Klaros-tmp --volumes-from Klaros alpine
 docker rm Klaros
 ----
 
-=== Update via master branch
+=== 9.1. Update via master branch
 
 Klaros can be updated to the latest version with "git pull".
 ----
 git pull origin master
 ----
 
-=== Update via tags
+=== 9.2. Update via tags
 
 To perform an update from an older to a newer version, the first step is to check for new updates in the GitHub repository. Current versions can be displayed via "git tag". Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.
 ----
@@ -402,7 +408,7 @@ git merge update
 git branch -D update
 ----
 
-=== Refresh image
+=== 9.3. Refresh image
 
 After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
 ----
@@ -417,7 +423,7 @@ docker rm Klaros-tmp
 docker start -a Klaros
 ----
 
-== Uninstallation
+== 10. Uninstallation
 
 To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
 
@@ -429,12 +435,12 @@ docker rmi klaros
 rm -rf ~/klaros-docker
 ----
 
-== Documentation
+== 11. Documentation
 
 Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases. You can also read our documentation in our blog.
 
-== License
+== 12. License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
-== Contact
+== 13. Contact
 We thank you for your attention and hope to meet the interests of many users with our documentation. We look forward to your feedback at support@verit.de
