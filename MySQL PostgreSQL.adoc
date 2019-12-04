@@ -203,6 +203,7 @@ Example: 127.0.0.1:18080
 === How to start multiple instances
 
 Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
+
 To start an independent Klaros instance, some configuration must be done. In order to save your existing configurations, it is recommended to create single instances in separate file paths.
 
 .PostgreSQL
@@ -238,7 +239,7 @@ vi .env
 
 ====
 
-For a second instance to run independently of the first instance, the instances must differ in name, port, and volume.
+To run a second instance independently of the first instance, the instances must differ in name, port, and volume.
 
 .Values to be changed per instance
 [options="header,footer"]
@@ -283,12 +284,11 @@ $(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
 $(date '+%y-%m-%d-%H:%M:%S')
 ----
 
-.More details
 [%collapsible]
 ====
 This would give the backup the following name:
 
-Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz
+Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
 Linux: backup_klaros19-10-28-11:34:33.tar.gz
 
 To change the backup path, the variable "BACKUP_DIR" can be changed to any other path.
