@@ -8,8 +8,7 @@ endif::[]
 
 
 = Klaros Test Management
-== Table of Contents
-
+:toc:
 == Introduction
 
 IMPORTANT: The Apache Derby database is only supported for testing purposes. Instructions for installing Klaros Test Management with Apache Derby can be found under (Still in progress).
