@@ -125,11 +125,14 @@ When creating the image, all values in table 1 can be changed before the first s
 
 If required, you can add the environment variable JAVA_OPTS to the Dockerfile of the klaros directory for additional settings of the Tomcat server.
 
-Example to set the time zone(Please set the time zone in the env file):
+.Example to set the time zone with JAVA_OPTS(Please set the time zone in the env file)
+[%collapsible]
+====
 [options="footer"]
 |=======================
 |ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
 |=======================
+====
 
 .Configuration via the .env file
 The .env file is located in the same directory as the docker-compose.yml file and can be opened with your preferred text editor.
