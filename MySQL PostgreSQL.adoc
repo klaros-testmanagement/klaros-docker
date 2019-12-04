@@ -129,7 +129,7 @@ The .env file is located in the same directory as the docker-compose.yml file an
 vi .env
 ----
 
-== Use older version
+== How to use an older version
 Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
 
 All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
