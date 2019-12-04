@@ -264,7 +264,6 @@ $(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
 $(date '+%y-%m-%d-%H:%M:%S')
 ----
 
-.More details
 [%collapsible]
 ====
 This would give the backup the following name:
@@ -289,7 +288,7 @@ sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backu
 
 === Creating a backup
 
-.Under Windows
+.Windows
 ----
 docker stop Klaros
 mkdir ~/klaros-docker/backup
@@ -297,7 +296,7 @@ docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine t
 docker start -a Klaros
 ----
 
-.Under Linux
+.Linux
 ----
 sudo docker ps
 sudo docker stop Klaros
