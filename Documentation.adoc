@@ -99,7 +99,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |KLAROS_CONTAINER_NAME=klaros_postgresql|Klaros Test Management Containername
 |KLAROS_PORT=18080                      |Public Klaros Test Management Port
 |TOMCAT_PASSWORD=P@ssw0rd               |Password for login to 127.0.0.1:18080/monitoring
-|TIMEZONE=Europe/Berlin                 |Time zone
+|TIMEZONE=                              |Time zone
 |MEMORY_MAX=786                         |Maximum available RAM in MB
 |MEMORY_MIN=128                         |Minimum available RAM in MB
 |VOLUME_NAME=klaros-data                |The volume will be automatically created by Compose with the name "klaros-data" if it does not exist.
@@ -112,7 +112,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |DATABASE_PORT=10001
 |KLAROS_CONTAINER_NAME=klaros_postgresql
 |KLAROS_PORT=18080
-|TIMEZONE=Europe/Berlin
+|TIMEZONE=
 |MEMORY_MAX=786
 |MEMORY_MIN=128
 |VOLUME_NAME=klaros-data
@@ -122,6 +122,14 @@ The environment variables can be configured and changed via the .env file.
 For port forwarding only the ports "KLAROS_PORT" and "DATABASE_PORT" in the .env file have to be changed.
 
 When creating the image, all values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (restart required).
+
+If required, you can add the environment variable JAVA_OPTS to the Dockerfile of the klaros directory for additional settings of the Tomcat server.
+
+.Example to set the time zone
+[options="footer"]
+|=======================
+|ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
+|=======================
 
 .Configuration via the .env file
 The .env file is located in the same directory as the docker-compose.yml file and can be opened with your preferred text editor.
@@ -186,7 +194,7 @@ docker-compose up
 docker-compose up -d
 ----
 
-You can find further information in the https://docs.docker.com/compose/reference/up/[Official Docker-Compose Documentation.]
+You can find further information in the https://docs.docker.com/compose/reference/up/[official Docker-Compose Documentation.]
 
 After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
 
