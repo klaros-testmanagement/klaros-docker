@@ -8,8 +8,6 @@ endif::[]
 
 = Klaros Test Management
 
-== Table
-
 :toc:
 :toc-title: 
 
