@@ -98,33 +98,31 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 .Configurable environment variables before the first server start via the Dockerfile
 [options="header,footer"]
 |=======================
-|Variable |Default |Description
+|Variable |Default(Example) |Description
 |ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd  |P@ssw0rd  |Password for login 127.0.0.1:18080/monitoring
 |ENV TOMCAT_MEMORY_MIN 128           |128 |Minimum available RAM in MB
 |ENV TOMCAT_MEMORY_MAX 768           |768   |Maximum available RAM in MB
 |ENV JAVA_OPTS -Duser.timezone=Europe/Berlin  |-Duser.timezone=Europe/Berlin  | With JAVA_OPTS additional settings can be transferred to the TomCat server. In this example the time zone is set to Europe/Berlin.
-|ENV KLAROS_VER ${KLAROS_VER:-4.12.1}         |${KLAROS_VER:-4.12.1} |Klaros version used during installation. Versions can be found on the Official https://www.klaros-testmanagement.com/de_DE/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
+|ENV KLAROS_VER ${KLAROS_VER:-4.12.1}         |${KLAROS_VER:-4.12.1} |Klaros version used during installation. Versions can be found on the Official https://www.klaros-testmanagement.com/en_US/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
 .Modifiable variables after the first server start via the Dockerfile
 [options="footer"]
 |=======================
-|TOMCAT_MEMORY_MAX 768
-|TOMCAT_MEMORY_MIN 128
-|JAVA_OPTS -Duser.timezone=Europe/Berlin
+|TOMCAT_MEMORY_MAX
+|TOMCAT_MEMORY_MIN
+|JAVA_OPTS
 |=======================
 
-.Configuration via the Dockerfile
-[%collapsible]
-====
+=== Configuration via the Dockerfile
+
 Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. In the Dockerfile is a list of different ENV variables available, which can be adapted and changed as desired. See Table 1 for more information.
 
 The image must then be recreated.
-====
 
-.Configuration at server startup
-[%collapsible]
-====
+
+=== Configuration at server startup
+
 Changeable variables can be found in Table 2.
 The environment variables can be changed with the -e parameter.
 
@@ -133,11 +131,8 @@ The environment variables can be changed with the -e parameter.
 sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Other Variables> klaros
 ----
 
-====
+=== Configuration via a file
 
-.Configuration via a file
-[%collapsible]
-=====
 To specify the configurations via a file, any text file can be created in the ApacheDerby directory. Modifiable variables can be found in Table 2. When creating the container, add the --env-file parameter.
 
 .Windows Example
@@ -159,7 +154,6 @@ echo "TOMCAT_MEMORY_MAX=1024" > env-list
 docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ----
 ====
-=====
 
 == How to use an older version
 Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
