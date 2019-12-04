@@ -6,10 +6,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-
 = Klaros Test Management
 :toc:
-== Introduction
+
+== 1. Introduction
 
 IMPORTANT: The Apache Derby database is only supported for testing purposes. Instructions for installing Klaros Test Management with Apache Derby can be found under (Still in progress).
 
@@ -30,7 +30,7 @@ An adjustment of the configurations is described in the section "Configuring Doc
 
 You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management]
 
-== Prerequisites
+== 2. Prerequisites
 
 .Windows
 [%collapsible]
@@ -84,7 +84,8 @@ Output: git version 2.20.1
 This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.
 ====
 
-== Configuring Docker Environment Variables
+== 3. Configuring Docker Environment Variables
+
 .Configurable environment variables before the first server start via .env
 [options="header,footer"]
 |=======================
@@ -128,7 +129,7 @@ The .env file is located in the same directory as the docker-compose.yml file an
 vi .env
 ----
 
-== How to use an older version
+== 4. How to use an older version
 Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
 
 All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
@@ -140,8 +141,8 @@ git tag
 git checkout tags/<tag_name> -b klaros
 ----
 
-== Installation
-=== Clone
+== 5. Installation
+=== 5.1. Clone
 Once you are in the directory you want, you can start downloading the Dockerfile.
 ----
 git init
@@ -154,7 +155,7 @@ ls
 Output: klaros-docker
 ----
 
-=== Build
+=== 5.2. Build
 The image is needed to create the Klaros container and start the server.
 
 .PostgreSQL
@@ -169,8 +170,8 @@ cd ~/klaros-docker/MySQL
 docker-compose build
 ----
 
-== Usage
-=== How to start an instance
+== 6. Usage
+=== 6.1. How to start an instance
 For the successful start of Klaros Test Management, two Docker-Containers are automatically created for the server and the database. The configurations can be found in the .env file.
 
 .Starting the server
@@ -199,7 +200,7 @@ Example: 127.0.0.1:18080
 
 ====
 
-=== How to start multiple instances
+=== 6.2. How to start multiple instances
 
 Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
 
@@ -256,14 +257,14 @@ The second instance is then started in the same way as the first instance.
 docker-compose up
 ----
 
-=== How to shut down your instance
+=== 6.3. How to shut down your instance
 In detached mode, the server must be shut down via "docker-compose stop".
 If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. If this is not the case, the server must be shut down with "docker-compose stop".
 ----
 docker-compose stop
 ----
 
-== Create and restore a backup
+== 7. Create and restore a backup
 
 A distinction is made between SQL backup (dump) and volume backup. 
 With a SQL backup, the database can be backed up while the system is running, while a volume requires the server to be shut down beforehand.
@@ -303,7 +304,7 @@ BACKUP_DIR=~/klaros-docker/Path/backup
 ----
 ====
 
-=== Creating a SQL backup
+=== 7.1. Creating a SQL backup
 An SQL backup can only be created while the system is running.
 
 .Windows
@@ -358,7 +359,7 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 
 ====
 
-=== Creating a volume backup
+=== 7.2. Creating a volume backup
 For a volume backup, the server must be shut down.
 
 .Windows
@@ -420,7 +421,7 @@ cd -
 
 ====
 
-=== Creating a volume and SQL backup
+=== 7.3. Creating a volume and SQL backup
 The first step is to create an SQL backup while the system is running. Then the server will be shut down to perform the volume backup.
 
 .Windows
@@ -489,7 +490,7 @@ cd -
 
 ====
 
-=== Restore a backup from SQL
+=== 7.4. Restore a backup from SQL
 Restoring via a .sql file also works using the backup archive "backup_klaros<Date>.tar.gz" if a "backup<Date>.sql" file exists. Please note that the database must continue to run while the server is shut down. After that the container will be stopped via "docker-compose stop".
 
 .Windows
@@ -558,7 +559,7 @@ cd -
 
 ====
 
-=== Restore a backup from volume
+=== 7.5. Restore a backup from volume
 IMPORTANT: The container must be shut down before restoration.
 
 .Windows
@@ -617,7 +618,7 @@ cd -
 
 ====
 
-== How and where can I find the logfiles?
+== 8. How and where can I find the logfiles?
 Log files may be required for error detection. In this case it is possible to open a shell directly in the Docker-Container to read the logs in the container or to display the logs directly from the backup.
 
 Important logs can be found below:
@@ -625,7 +626,7 @@ Important logs can be found below:
 _/data/catalina-base/logs_ +
 _/data/mysql-data_ ← Additional for MySQL
 
-=== Show logs via the Docker shell
+=== 8.1. Show logs via the Docker shell
 Open a shell with "docker exec" in the Klaros container to get access to the logs.
 
 NOTE: Please note that the container must be started during access via the shell and must not be shut down.
@@ -635,7 +636,7 @@ NOTE: Please note that the container must be started during access via the shell
 docker exec -it klaros_db sh
 ----
 
-=== Show logs from backup
+=== 8.2. Show logs from backup
 
 .Windows
 [%collapsible]
@@ -657,17 +658,17 @@ Then you can display the Klaros Test Management logs in the "logs" folder of cat
 
 ====
 
-== Update
+== 9. Update
 IMPORTANT: If the update is only for testing purposes, do not use its original branch (klaros). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing.
 
-=== Update via master branch
+=== 9.1. Update via master branch
 
 Klaros can be updated to the latest version with "git pull".
 ----
 git pull origin master
 ----
 
-=== Update via tags
+=== 9.2. Update via tags
 
 To perform an update from an older to a newer version, the first step is to check for new updates in the GitHub repository. Current versions can be displayed via "git tag". Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.
 ----
@@ -679,7 +680,7 @@ git merge update
 git branch -D update
 ----
 
-=== Refresh image
+=== 9.3. Refresh image
 
 After downloading the update from the Git repository, a new image will be created and all "dangling" images will be removed.
 
@@ -695,7 +696,7 @@ After the new image has been created, the container is started as usual.
 docker-compose up
 ----
 
-== Uninstallation
+== 10. Uninstallation
 
 To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
 
@@ -718,11 +719,11 @@ rm -rf ~/klaros-docker/
 ----
 
 
-== Documentation
+== 11. Documentation
 Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases. You can also read our documentation in our blog.
 
-== License
+== 12. License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
-== Contact
+== 13. Contact
 We thank you for your attention and hope to meet the interests of many users with our documentation. We look forward to your feedback at support@verit.de
