@@ -28,17 +28,19 @@ ARG KLAROS_LANG=eng
 ARG TOMCAT_HTTP_PORT
 ARG TOMCAT_SERVER_PORT
 ARG TOMCAT_AJP_PORT
-ARG KLAROS_VER
+ARG KLAROS_VERSION
 
 ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd
 ENV TOMCAT_SESSION_TIMEOUT 60
 ENV TOMCAT_MEMORY_MAX 768
 ENV TOMCAT_MEMORY_MIN 128
-ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
+
+ENV JAVA_OPTS -Duser.timezone=
+
 ENV TOMCAT_HTTP_PORT ${TOMCAT_HTTP_PORT:-18080}
 ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
-ENV KLAROS_VER ${KLAROS_VER:-4.12.3}
+ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.1}
 ENV KLAROS_HOME /data/klaros-home
 ENV CATALINA_BASE /data/catalina-base
 
@@ -46,8 +48,8 @@ ENV CATALINA_BASE /data/catalina-base
 EXPOSE ${TOMCAT_HTTP_PORT}
 
 ADD files/auto-install.xml /tmp/auto-install.xml
-ADD https://www.klaros-testmanagement.com/files/${KLAROS_VER}/Klaros-${KLAROS_VER}-Setup.jar /tmp/Klaros-Setup.jar
-ADD start.sh /
+ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
+ADD .start.sh /
 
 
 RUN set -xe \
@@ -65,8 +67,8 @@ RUN set -ex \
     && mv /root/klaros-testmanagement/webapps/klaros-web.war \
         /root/klaros-testmanagement/webapps/ROOT.war
 
-RUN chmod +x /start.sh
+RUN chmod +x /.start.sh
 
 VOLUME /data
 
-CMD [ "/start.sh", "run" ]
+CMD [ "/.start.sh", "run" ]
