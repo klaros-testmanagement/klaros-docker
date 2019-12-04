@@ -340,7 +340,7 @@ docker rm -v Klaros-test
 
 == How and where can I find the logfiles?
 
-It may happen that log files are required for error detection. In this case, it is possible to open a shell directly in the Docker container in order to read the logs in the container, or to display the logs directly from the backup.
+It may happen that log files are required for error detection. In this case, it is possible to open a shell directly in the Docker-Container in order to read the logs in the container, or to display the logs directly from the backup.
 
 If an error occurs while creating the backup, the log file provides useful hints.
 
@@ -358,19 +358,25 @@ docker exec -it Klaros /bin/sh
 The log files can then be read using cat or head and tail.
 
 === Show logs from backup
-==== Windows
+
+.Windows
+[%collapsible]
+====
 Windows users can use the https://www.winrar.de/downld.php[WinRAR] archive program to extract .tar.gz archives.
 
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
+====
 
-==== Linux
-
+.Linux
+[%collapsible]
+====
 To read the logs from the backup, use tar to unpack the archive.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
 
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
+====
 
 == Update
 IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros). Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
