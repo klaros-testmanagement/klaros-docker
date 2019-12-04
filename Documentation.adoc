@@ -125,10 +125,10 @@ When creating the image, all values in table 1 can be changed before the first s
 
 If required, you can add the environment variable JAVA_OPTS to the Dockerfile of the klaros directory for additional settings of the Tomcat server.
 
-.Example to set the time zone with JAVA_OPTS
+.Example to set the time zone via JAVA_OPTS
 [%collapsible]
 ====
-IMPORTANT: Please consider to set the time zone in the env file and not the Dockerfile.
+IMPORTANT: Please consider to set the time zone in the .env file and not the Dockerfile.
 
 [options="footer"]
 |=======================
