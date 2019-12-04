@@ -658,13 +658,66 @@ Then you can display the Klaros Test Management logs in the "logs" folder of cat
 
 ====
 
-
 == Update
+IMPORTANT: If the update is only for testing purposes, do not use its original branch (klaros). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing.
+
 === Update via master branch
+
+Klaros can be updated to the latest version with "git pull".
+----
+git pull origin master
+----
+
 === Update via tags
+
+To perform an update from an older to a newer version, the first step is to check for new updates in the GitHub repository. Current versions can be displayed via "git tag". Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.
+----
+git checkout master
+git pull origin master
+git checkout tags/<tag_name> -b update
+git checkout klaros
+git merge update
+git branch -D update
+----
+
 === Refresh image
 
+After downloading the update from the Git repository, a new image will be created and all "dangling" images will be removed.
+
+----
+docker-compose down
+docker-compose build
+docker image prune
+----
+
+After the new image has been created, the container is started as usual.
+
+----
+docker-compose up
+----
+
 == Uninstallation
+
+To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
+
+Then remove the _~/klaros-docker_ directory and the image.
+
+.PostgreSQL
+----
+docker-compose down --volume
+docker rmi klaros-postgresql
+docker rmi postgres-klaros_db
+rm -rf ~/klaros-docker/
+----
+
+.MySQL
+----
+docker-compose down --volume
+docker rmi klaros-mysql
+docker rmi mysql-klaros_db
+rm -rf ~/klaros-docker/
+----
+
 
 == Documentation
 Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases. You can also read our documentation in our blog.
