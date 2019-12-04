@@ -27,7 +27,13 @@ https://www.docker.com/[Docker] is a free container-based software that allows a
 
 This installation documentation shows step by step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
-You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management]
+With the download you receive the free Community Edition and you can start immediately.
+
+The Community Edition can be used without restrictions and has a reduced range of functions.
+
+With no limitation on the number of projects, test cases or users, it is ideal for getting started in a small team.
+
+You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US[Klaros Test Management]
 
 == 2. Prerequisites
 
@@ -709,7 +715,6 @@ docker-compose up
 ----
 
 == 10. Uninstallation
-
 To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
 
 Then remove the _~/klaros-docker_ directory and the image.
@@ -732,10 +737,27 @@ rm -rf ~/klaros-docker/
 
 
 == 11. Documentation
-Our documentation includes the installation of Klaros Test Management under Docker for the Apache Derby, MySQL, and PostgreSQL databases. You can also read our documentation in our blog.
 
-== 12. License
+If you are interested in our software, then you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] or for advanced, the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.]
+
+Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MySQL and PostgreSQL databases.
+
+== 12. Enterprise Edition
+
+The Enterprise Edition offers you the full range of functions, including one year of support and free access to all software updates. Take a look at the Community and Enterprise Edition comparison https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[here.]
+
+You can upgrade the Community Edition to the Enterprise Edition at any time by uploading a license file.
+
+To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
+
+IMPORTANT: Keep in mind that data from the additional features will no longer be available after expiration.
+
+== 13. License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
-== 13. Contact
+Please also have a look at our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
+
+== 14. Contact
 We thank you for your attention and hope to meet the interests of many users with our documentation. We look forward to your feedback at support@verit.de
+
+You can also create an issue or pull request for problems or suggestions.
