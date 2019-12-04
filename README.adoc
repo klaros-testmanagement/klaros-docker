@@ -102,7 +102,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd  |P@ssw0rd  |Password for login 127.0.0.1:18080/monitoring
 |ENV TOMCAT_MEMORY_MIN 128           |128 |Minimum available RAM in MB
 |ENV TOMCAT_MEMORY_MAX 768           |768   |Maximum available RAM in MB
-|ENV JAVA_OPTS -Duser.timezone=Europe/Berlin  |-Duser.timezone=Europe/Berlin  | With JAVA_OPTS additional settings can be transferred to the Tomcat server. In this example the time zone is set to Europe/Berlin.
+|ENV JAVA_OPTS -Duser.timezone=  |-Duser.timezone=  | With JAVA_OPTS additional settings can be transferred to the Tomcat server. In this example the time zone is set to empty
 |ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.1}         |${KLAROS_VERSION:-4.12.1} |Klaros version used during installation. Versions can be found on the official https://www.klaros-testmanagement.com/en_US/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
