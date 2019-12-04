@@ -95,7 +95,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 
 == Configuring Docker Environment Variables
 
-.Configurable environment variables via the Dockerfile
+.Configurable environment variables before the first server start via the Dockerfile
 [options="header,footer"]
 |=======================
 |Variable|Description
@@ -106,7 +106,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |ENV KLAROS_VER ${KLAROS_VER:-4.12.1}           |Current Klarosversion. Versions can be found on the Official https://www.klaros-testmanagement.com/de_DE/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
-.Modifiable variables after the first server start
+.Modifiable variables after the first server start via the Dockerfile
 [options="footer"]
 |=======================
 |TOMCAT_MEMORY_MAX 768
