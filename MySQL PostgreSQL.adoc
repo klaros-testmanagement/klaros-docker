@@ -237,15 +237,24 @@ vi .env
 ----
 
 ====
-//// In Arbeit ////
+
 For a second instance to run independently of the first instance, the instances must differ in name, port, and volume.
 
-.Configurable environment variables via .env
+.Values to be changed per instance
 [options="header,footer"]
 |=======================
-|
+|Current value |New value  |Description
+|KLAROS_PORT=18080 |KLAROS_PORT=18081 |Public port for later access to the website
+|DATABASE_PORT=10001 |DATABASE_PORT=10002 |Public port for accessing the database from the outside.
+|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Database container name
+|KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros Test Management Containername
+|VOLUME_NAME=klaros-data |VOLUME_NAME=klaros-data2 |Volume name. The data is stored here
 |=======================
 
+The second instance is then started in the same way as the first instance.
+----
+docker-compose up
+----
 
 === How to shut down your instance
 In detached mode, the server must be shut down via "docker-compose stop".
@@ -254,29 +263,401 @@ If the container has been started in the foreground, press CTRL + C to return to
 docker-compose stop
 ----
 
-
-
-
 == Create and restore a backup
-=== Creating a backup
-.Under Windows
+
+A distinction is made between SQL backup (dump) and volume backup. 
+With a SQL backup, the database can be backed up while the system is running, while a volume requires the server to be shut down beforehand.
+A SQL backup also requires less storage than a volume backup. However, an SQL backup only stores the database in a .sql file, while the volume backs up the logs and data in its original state.
+
+Individual SQL backups can be found under the name „backup_sql_klaros<Date>.tar.gz“.
+
+Volumes or SQL with volume backups are marked with the name "backup_klaros<Date>.tar.gz". If you create multiple backups a day, it is recommended to specify a time (hours, minutes, and seconds) when creating backups. To do this, add %H(hour), %M(minute) and %S(second) in date/Get-Date.
+
+.Windows Example
+----
+$(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
 ----
 
+.Linux Example
+----
+$(date '+%y-%m-%d-%H:%M:%S')
 ----
 
-.Under Linux
+.More details
+[%collapsible]
+====
+This would give the backup the following name:
+
+Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz
+Linux: backup_klaros19-10-28-11:34:33.tar.gz
+
+To change the backup path, the variable "BACKUP_DIR" can be changed to any other path.
+
+.Windows Example
+----
+BACKUP_DIR="~/klaros-docker/Path/backup"
 ----
 
+.Linux Example
+----
+BACKUP_DIR=~/klaros-docker/Path/backup
+----
+====
+
+=== Creating a SQL backup
+An SQL backup can only be created while the system is running.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
 ----
 
-=== Restore a Backup
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+====
 
 
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
 
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker
+/backup
+mkdir -p ${BACKUP_DIR}
+sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+====
+
+=== Creating a Volume backup
+For a volume backup, the server must be shut down.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine /bin/sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data"
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data"
+cd -
+----
+
+====
+
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data"
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data"
+cd -
+----
+
+====
+
+=== Creating a Volume and SQL backup
+The first step is to create an SQL backup while the system is running. Then the server will be shut down to perform the volume backup.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "pg_dump -c  -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /$BACKUP_DIR:/backup alpine sh -c "tar cvzf /backup/$BACKUP_NAME /data/klaros-home /data/catalina-base/logs /data/mysql-data -C /backup backup$DATE.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+====
+
+=== Restore a backup from SQL
+Restoring via a .sql file also works using the backup archive "backup_klaros<Date>.tar.gz" if a "backup<Date>.sql" file exists. Please note that the database must continue to run while the server is shut down. After that the container will be stopped via "docker-compose stop".
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+docker stop klaros_postgresql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | docker exec -i klaros_db bash -c "psql -U \${DATABASE_USER} -d \${DATABASE_NAME}"
+rm backup${DATE}.sql
+docker-compose stop
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+docker stop klaros_mysql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+docker-compose stop
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+sudo docker stop klaros_postgresql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "psql -U \${DATABASE_USER} -d \${DATABASE_NAME}"
+rm backup${DATE}.sql
+sudo docker-compose stop
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+sudo docker stop klaros_mysql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+sudo docker-compose stop
+cd -
+----
+
+====
+
+=== Restore a backup from volume
+IMPORTANT: The container must be shut down before restoration.
+
+.Windows
+[%collapsible]
+====
+
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+====
 
 == How and where can I find the logfiles?
+Log files may be required for error detection. In this case it is possible to open a shell directly in the Docker-Container to read the logs in the container or to display the logs directly from the backup.
+
+Important logs can be found below:
+
+_/data/catalina-base/logs_
+_/data/mysql-data_ ← Additional for MySQL
+
 === Show logs via the Docker shell
+Open a shell with "docker exec" in the Klaros container to get access to the logs.
+
+NOTE: Please note that the container must be started during access via the shell and must not be shut down.
+
+.The log files can then be read using cat or head and tail
+----
+docker exec -it klaros_db sh
+----
+
 === Show logs from backup
+
+.Windows
+[%collapsible]
+====
+Windows users can use the https://www.winrar.de/downld.php[WinRAR] archive program to extract .tar.gz archives.
+
+Then you can display the Klaros Test Management logs in the "logs" folder of catalina-base and the MySQL logs in the "mysql-data" folder.
+====
+
+.Linux
+[%collapsible]
+====
+To read the logs from the backup, use tar to unpack the archive.
+----
+sudo tar -xzf backup_klaros19-10-28.tar.gz
+----
+
+Then you can display the Klaros Test Management logs in the "logs" folder of catalina-base and the MySQL logs in the "mysql-data" folder.
+
+====
+
 
 == Update
 === Update via master branch
