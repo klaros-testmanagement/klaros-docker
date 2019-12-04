@@ -9,10 +9,7 @@ endif::[]
 = Klaros Test Management
 
 .Table of Contents
-[%collapsible]
-====
 :toc:
-====
 
 == 1. Introduction
 
