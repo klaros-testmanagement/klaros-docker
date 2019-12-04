@@ -374,8 +374,7 @@ sudo tar -xzf backup_klaros19-10-28.tar.gz
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
 
 == Update
-IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros).
-Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
+IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros). Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 
 Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
 
