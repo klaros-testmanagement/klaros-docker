@@ -1,0 +1,55 @@
+---
+version: '3.4'
+services:
+    db:
+        image: mysql-klaros_db
+        build: db
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        container_name: ${DATABASE_CONTAINER_NAME}
+        hostname: db
+        env_file:
+            ./.env
+        environment:
+            MYSQL_DATABASE: ${DATABASE_NAME}
+            MYSQL_USER: ${DATABASE_USER}
+            MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+            TZ: ${TIMEZONE}
+        ports:
+            - "${DATABASE_PORT}:3306"
+        networks:
+            - mysql-net
+        volumes:
+            - klaros-data:/data
+
+    klaros:
+        image: klaros-mysql
+        build: 
+            context: ./klaros
+            args:
+                TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
+        restart: always
+        container_name: ${KLAROS_CONTAINER_NAME}
+        hostname: klaros
+        environment:
+            DATABASE_NAME: ${DATABASE_NAME}
+            DATABASE_USER: ${DATABASE_USER}
+            DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+            JAVA_OPTS: -Duser.timezone=${TIMEZONE}
+            TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
+            TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
+        ports:
+            - "${KLAROS_PORT}:18080"
+        depends_on:
+            - db
+        networks:
+            - mysql-net
+        volumes:
+            - klaros-data:/data
+
+networks:
+    mysql-net:
+volumes:
+    klaros-data:
+        name: ${VOLUME_NAME}
