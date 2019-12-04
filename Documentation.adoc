@@ -742,7 +742,11 @@ If you are interested in our software, then you can read our https://www.klaros-
 
 Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MySQL and PostgreSQL databases.
 
-== 12. Enterprise Edition
+== 12. FAQ
+
+Please take a look at our https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true[Pricing-FAQ] and https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true[Support-FAQ] before you ask any questions.
+
+== 13. Enterprise Edition
 
 IMPORTANT: Keep in mind that data from the additional features will no longer be available after expiration.
 
@@ -752,12 +756,17 @@ You can upgrade the Community Edition to the Enterprise Edition at any time by u
 
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
 
-== 13. License
+== 14. License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
 Please also have a look at our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
 
-== 14. Contact
-We thank you for your attention and hope to meet the interests of many users with our documentation. We look forward to your feedback at support@verit.de
+== 15. Contact
 
-You can also create an issue or pull request for problems or suggestions.
+We thank you for your attention and hope to meet the interests of many users with our documentation. We are continuously working on improving Klaros-Testmanagement
+
+So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de oder use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
+
+== 16. Acknowledgements
+
+* https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
