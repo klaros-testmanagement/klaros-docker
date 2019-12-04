@@ -7,7 +7,11 @@ ifdef::env-github[]
 endif::[]
 
 = Klaros Test Management
-:toc:
+:toc: macro
+:toc-title: 
+
+= Table of Contents
+toc::[]
 
 == 1. Introduction
 
