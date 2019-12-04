@@ -744,13 +744,13 @@ Our installation documentation includes the installation of Klaros Test Manageme
 
 == 12. Enterprise Edition
 
+IMPORTANT: Keep in mind that data from the additional features will no longer be available after expiration.
+
 The Enterprise Edition offers you the full range of functions, including one year of support and free access to all software updates. Take a look at the Community and Enterprise Edition comparison https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[here.]
 
 You can upgrade the Community Edition to the Enterprise Edition at any time by uploading a license file.
 
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
-
-IMPORTANT: Keep in mind that data from the additional features will no longer be available after expiration.
 
 == 13. License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
