@@ -1,0 +1,16 @@
+Quelle der Originalen Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
+Alle Unterschiede des Dockerfiles sind in .diff markiert.
+
++ .start.sh um die fehlenden Verzeichnisse zu erstellen (Docker gibt eine Meldung aus, welche Dateien fehlen)
+	CA_DIR_DATA=/data
+	CA_DIR_BASE=$CA_DIR_DATA/catalina-base
+	CA_DIR_TEMP=$CA_DIR_BASE/temp
+	CA_DIR_LOGS=$CA_DIR_BASE/logs
+	CA_DIR_CONF=$CA_DIR_BASE/conf
+	CA_DIR_WEB=$CA_DIR_BASE/webapps
+	KT_DIR_WEB=/root/klaros-testmanagement/webapps
+	KT_DIR_CONF=/root/klaros-testmanagement/conf
+	
++ .start.sh Hinzufügen von "trap "ctrl_c" SIGTERM 2" damit Catalina korrekt heruntergefahren werden kann.
+
++ Verändern der auto-install.xml Datei -> Siehe .diff unter files für mehr Informationen
