@@ -11,6 +11,7 @@ endif::[]
 
 image:https://img.shields.io/badge/version-4.12.3-green.svg[]
 image:https://img.shields.io/badge/License-MIT-green[]
+image:https://img.shields.io/badge/Community%20Edition-FREE-green[]
 
 toc::[]
 
