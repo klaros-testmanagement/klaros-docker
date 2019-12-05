@@ -18,7 +18,7 @@ toc::[]
 == 1. Introduction
 
 IMPORTANT: The Apache Derby database is only supported for testing purposes. Instructions for installing Klaros Test Management with Apache Derby can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.] 
-The database systems: MySQL, PostgreSQL and MariaDB are supported by Klaros Test Management under Docker and are ready for production.
+The database systems: MariaDB, MySQL and PostgreSQL are supported by Klaros Test Management under Docker and are ready for production.
 An adjustment of the configurations is described in the section "Configuring Docker Environment Variables".
 
 Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
@@ -113,7 +113,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |DATABASE_USER            |klaros            |Database User
 |DATABASE_CONTAINER_NAME  |klaros_db         |Database container name
 |DATABASE_PASSWORD        |P@ssw0rd          |Database Password
-|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MySQL/MariaDB Only] Root password for the "root" user
+|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MariaDB/MySQL Only] Root password for the "root" user
 |DATABASE_PORT            |10001             |Public Database Port
 |KLAROS_CONTAINER_NAME    |klaros_postgresql |Klaros Test Management Containername
 |KLAROS_PORT              |18080             |Public Klaros Test Management Port
@@ -642,7 +642,6 @@ docker-compose stop
 cd -
 ----
 
-
 ====
 
 .Linux
@@ -689,8 +688,6 @@ rm backup${DATE}.sql
 sudo docker-compose stop
 cd -
 ----
-
-
 
 ====
 
@@ -886,7 +883,7 @@ rm -rf ~/klaros-docker/
 
 If you are interested in our software, then you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] or for advanced, the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.]
 
-Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MySQL, PostgreSQL and MariaDB databases.
+Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
 == 12. FAQ
 

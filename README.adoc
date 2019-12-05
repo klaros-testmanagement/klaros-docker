@@ -17,7 +17,7 @@ toc::[]
 
 == 1. Introduction
 
-IMPORTANT: The Apache Derby database is only supported for testing purposes. An adjustment of the configurations is described in the section "Configuring Docker Environment Variables". The database systems: MySQL, PostgreSQL and MariaDB are supported by Klaros Test Management under Docker and are ready for production. Instructions for installing Klaros Test Management with MySQL, PostgreSQL or MariaDB can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation.adoc[here.] 
+IMPORTANT: The Apache Derby database is only supported for testing purposes. An adjustment of the configurations is described in the section "Configuring Docker Environment Variables". The database systems: MariaDB, MySQL and PostgreSQL are supported by Klaros Test Management under Docker and are ready for production. Instructions for installing Klaros Test Management with MariaDB, MySQL or PostgreSQL can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation.adoc[here.] 
 
 Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
 
@@ -448,7 +448,7 @@ rm -rf ~/klaros-docker
 
 If you are interested in our software, then you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] or for advanced, the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.]
 
-Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MySQL, PostgreSQL and MariaDB databases.
+Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
 == 12. FAQ
 
