@@ -762,7 +762,7 @@ Please take a look at our https://www.klaros-testmanagement.com/en_US/faq?inheri
 == 13. License
 Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
-Please also have a look at our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
+By installing our software through Docker, you also agree to our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
 
 == 14. Contact
 
