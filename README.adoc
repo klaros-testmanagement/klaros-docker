@@ -7,8 +7,11 @@ ifdef::env-github[]
 endif::[]
 
 = Klaros Test Management Docker-Integration
+:toc: macro
+
 image:https://img.shields.io/badge/version-4.12.3-green.svg[]
-:toc:
+
+toc::[]
 
 == 1. Introduction
 
