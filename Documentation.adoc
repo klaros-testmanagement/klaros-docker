@@ -763,7 +763,7 @@ Please also have a look at our https://www.klaros-testmanagement.com/files/curre
 
 == 15. Contact
 
-We thank you for your attention and hope to meet the interests of many users with our documentation. We are continuously working on improving Klaros-Testmanagement
+We thank you for your attention and hope to meet the interests of many users with our documentation. We are continuously working on improving Klaros-Testmanagement.
 
 So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de oder use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
 
