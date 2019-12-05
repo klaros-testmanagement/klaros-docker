@@ -381,8 +381,7 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 .MySQL
 ----
 DATE=$(date '+%y-%m-%d')
-BACKUP_DIR=~/klaros-docker
-/backup
+BACKUP_DIR=~/klaros-docker/backup
 mkdir -p ${BACKUP_DIR}
 sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
 tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
