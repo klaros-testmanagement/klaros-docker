@@ -94,33 +94,33 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 .Configurable environment variables before the first server start via .env
 [options="header,footer"]
 |=======================
-|Variable                               |Description
-|DATABASE_NAME=klaros                   |Database Name
-|DATABASE_USER=klaros                   |Database User
-|DATABASE_CONTAINER_NAME=klaros_db      |Database container name
-|DATABASE_PASSWORD=P@ssw0rd             |Database Password
-|DATABASE_ROOT_PASSWORD=P@ssw0rd        |[MySQL Only] Root password for the "root" user
-|DATABASE_PORT=10001                    |Public Database Port
-|KLAROS_CONTAINER_NAME=klaros_postgresql|Klaros Test Management Containername
-|KLAROS_PORT=18080                      |Public Klaros Test Management Port
-|TOMCAT_PASSWORD=P@ssw0rd               |Password for login to 127.0.0.1:18080/monitoring
-|TIMEZONE=                              |Time zone
-|MEMORY_MAX=786                         |Maximum available RAM in MB
-|MEMORY_MIN=128                         |Minimum available RAM in MB
-|VOLUME_NAME=klaros-data                |The volume will be automatically created by Compose with the name "klaros-data" if it does not exist.
+|Variable                 |Default           |Description
+|DATABASE_NAME            |klaros            |Database Name
+|DATABASE_USER            |klaros            |Database User
+|DATABASE_CONTAINER_NAME  |klaros_db         |Database container name
+|DATABASE_PASSWORD        |P@ssw0rd          |Database Password
+|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MySQL Only] Root password for the "root" user
+|DATABASE_PORT            |10001             |Public Database Port
+|KLAROS_CONTAINER_NAME    |klaros_postgresql |Klaros Test Management Containername
+|KLAROS_PORT              |18080             |Public Klaros Test Management Port
+|TOMCAT_PASSWORD          |P@ssw0rd          |Password for login to 127.0.0.1:18080/monitoring
+|TIMEZONE                 |                  |Time zone
+|MEMORY_MAX               |786               |Maximum available RAM in MB
+|MEMORY_MIN               |128               |Minimum available RAM in MB
+|VOLUME_NAME              | klaros-data      |The volume will be automatically created by Compose with the name "klaros-data" if it does not exist.
 |=======================
 
 .Modifiable variables after the first server start via .env
 [options="footer"]
 |=======================
-|DATABASE_CONTAINER_NAME=klaros_db
-|DATABASE_PORT=10001
-|KLAROS_CONTAINER_NAME=klaros_postgresql
-|KLAROS_PORT=18080
-|TIMEZONE=
-|MEMORY_MAX=786
-|MEMORY_MIN=128
-|VOLUME_NAME=klaros-data
+|DATABASE_CONTAINER_NAME
+|DATABASE_PORT
+|KLAROS_CONTAINER_NAME
+|KLAROS_PORT
+|TIMEZONE
+|MEMORY_MAX
+|MEMORY_MIN
+|VOLUME_NAME
 |=======================
 
 The environment variables can be configured and changed via the .env file.
