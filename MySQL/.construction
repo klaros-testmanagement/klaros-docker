@@ -1,0 +1,10 @@
+Quelle des Originalen MySQL Dockerfile: https://github.com/docker-library/mysql/blob/6659750146b7a6b91a96c786729b4d482cf49fe6/5.7/Dockerfile
+Quelle des Originalen Docker Compose file: https://github.com/akaer/Dockerfiles/blob/master/klaros/sqlserver2017/docker-compose.yml
+Quelle des Originalen Klaros Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
+Quelle des Originalen Entrypoint Datei: https://github.com/docker-library/mysql/blob/6659750146b7a6b91a96c786729b4d482cf49fe6/5.7/docker-entrypoint.sh
+
+Alle Unterschiede des Dockerfiles sind in .diff markiert.
+
++ catalina-wrapper.sh unter klaros -> files verändert (siehe .diff)
++ Verändern der auto-install.xml Datei -> Siehe .diff unter files für mehr Informationen
++ Verändern der Compose Datei -> Siehe .diff
