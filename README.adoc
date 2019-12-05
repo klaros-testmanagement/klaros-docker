@@ -10,6 +10,7 @@ endif::[]
 :toc: macro
 
 image:https://img.shields.io/badge/version-4.12.3-green.svg[]
+image:https://img.shields.io/badge/License-MIT-green[]
 
 toc::[]
 
