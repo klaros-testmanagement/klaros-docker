@@ -3,22 +3,7 @@
 #
 # Klaros Testmanagement (Community Edition) (https://www.klaros-testmanagement.com)
 #
-#
-# Create:
-#
-# sudo docker build --rm -t akaer/klaros . 2>&1 |awk '{ print strftime("%Y-%m-%d %H:%M:%S:"), $0; fflush(); }' |tee docker_build.log
-#
-# Add '--build-arg KLAROS_LANG=eng' to change languages.
-#
-# Run:
-#
-# sudo docker run --rm=true -it \
-#   --name klaros \
-#   -v /etc/localtime:/etc/localtime:ro \
-#   -v $(pwd)/data:/klaros-data \
-#   -p 18080:18080 \
-#   akaer/klaros
-#
+
 
 FROM openjdk:8u212-alpine
 LABEL maintainer "André Raabe <andre.raabe@gmail.com>"
