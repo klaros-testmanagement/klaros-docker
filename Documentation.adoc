@@ -18,7 +18,7 @@ toc::[]
 == 1. Introduction
 
 IMPORTANT: The Apache Derby database is only supported for testing purposes. Instructions for installing Klaros Test Management with Apache Derby can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.] 
-The database systems: MySQL and PostgreSQL are supported by Klaros Test Management under Docker and are ready for production.
+The database systems: MySQL, PostgreSQL and MariaDB are supported by Klaros Test Management under Docker and are ready for production.
 An adjustment of the configurations is described in the section "Configuring Docker Environment Variables".
 
 Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
@@ -113,7 +113,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |DATABASE_USER            |klaros            |Database User
 |DATABASE_CONTAINER_NAME  |klaros_db         |Database container name
 |DATABASE_PASSWORD        |P@ssw0rd          |Database Password
-|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MySQL Only] Root password for the "root" user
+|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MySQL/MariaDB Only] Root password for the "root" user
 |DATABASE_PORT            |10001             |Public Database Port
 |KLAROS_CONTAINER_NAME    |klaros_postgresql |Klaros Test Management Containername
 |KLAROS_PORT              |18080             |Public Klaros Test Management Port
@@ -202,6 +202,12 @@ cd ~/klaros-docker/MySQL
 docker-compose build
 ----
 
+.MariaDB
+----
+cd ~/klaros-docker/MariaDB
+docker-compose build
+----
+
 == 6. Usage
 === 6.1. How to start an instance
 For the successful start of Klaros Test Management, two Docker-Containers are automatically created for the server and the database. The configurations can be found in the .env file.
@@ -268,7 +274,23 @@ Open the .env file with your preferred text editor. Under Windows Notepad++ can 
 cd ~/klaros-docker/MySQL2
 vi .env
 ----
+====
 
+.MariaDB
+[%collapsible]
+====
+Copy the directory under a different name.
+
+----
+cp -r MariaDB/  MariaDB2
+----
+
+Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+
+----
+cd ~/klaros-docker/MariaDB2
+vi .env
+----
 ====
 
 To run a second instance independently of the first instance, the instances must differ in name, port, and volume.
@@ -352,7 +374,7 @@ tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${
 rm ${BACKUP_DIR}/backup${DATE}.sql
 ----
 
-.MySQL
+.MySQL/MariaDB
 ----
 DATE=$(date '+%y-%m-%d')
 BACKUP_DIR=~/klaros-docker/backup
@@ -378,7 +400,7 @@ tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${
 rm ${BACKUP_DIR}/backup${DATE}.sql
 ----
 
-.MySQL
+.MySQL/MariaDB
 ----
 DATE=$(date '+%y-%m-%d')
 BACKUP_DIR=~/klaros-docker/backup
@@ -420,8 +442,19 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -
 ----
 
-====
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -
+----
 
+====
 
 .Linux
 [%collapsible]
@@ -447,6 +480,18 @@ cd ~/klaros-docker/MySQL
 mkdir -p ${BACKUP_DIR}
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data"
+cd -
+----
+
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
 cd -
 ----
 
@@ -486,6 +531,20 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 cd -
 ----
 
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
 ====
 
 .Linux
@@ -515,6 +574,20 @@ mkdir -p ${BACKUP_DIR}
 sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /$BACKUP_DIR:/backup alpine sh -c "tar cvzf /backup/$BACKUP_NAME /data/klaros-home /data/catalina-base/logs /data/mysql-data -C /backup backup$DATE.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /$BACKUP_DIR:/backup alpine sh -c "tar cvzf /backup/$BACKUP_NAME /data/klaros-home /data/catalina-base/logs /data/mariadb-data -C /backup backup$DATE.sql"
 rm ${BACKUP_DIR}/backup${DATE}.sql
 cd -
 ----
@@ -555,6 +628,21 @@ docker-compose stop
 cd -
 ----
 
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+docker stop klaros_mariadb
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+docker-compose stop
+cd -
+----
+
+
 ====
 
 .Linux
@@ -588,6 +676,22 @@ sudo docker-compose stop
 cd -
 ----
 
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+sudo docker stop klaros_mariadb
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+sudo docker-compose stop
+cd -
+----
+
+
+
 ====
 
 === 7.5. Restore a backup from volume
@@ -619,6 +723,17 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -
 ----
 
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
 ====
 
 .Linux
@@ -642,6 +757,17 @@ DATE=19-11-28
 BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd ~/klaros-docker/MySQL
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
 cd -
@@ -748,12 +874,19 @@ docker rmi mysql-klaros_db
 rm -rf ~/klaros-docker/
 ----
 
+.MariaDB
+----
+docker-compose down --volume
+docker rmi klaros-mariadb
+docker rmi mariadb-klaros_db
+rm -rf ~/klaros-docker/
+----
 
 == 11. Documentation
 
 If you are interested in our software, then you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] or for advanced, the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.]
 
-Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MySQL and PostgreSQL databases.
+Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MySQL, PostgreSQL and MariaDB databases.
 
 == 12. FAQ
 

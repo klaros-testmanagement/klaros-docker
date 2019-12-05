@@ -1,0 +1,35 @@
+[mysqld]
+pid-file	= /var/run/mysqld/mysqld.pid
+socket		= /var/run/mysqld/mysqld.sock
+datadir		= /data/mariadb-data
+# By default we only accept connections from localhost
+#bind-address	= 127.0.0.1
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+#Anpassung fuer Installation
+default-storage-engine=INNODB #Kommentar
+max_allowed_packet=256M #War nicht enthalten
+innodb_log_file_size=2G #Kommentar
+wait_timeout=604800
+#Ende Anpassung 
+
+# Anpassung verit 2017-11-16
+# Allow enough connections
+max_connections=150
+# This is very important to raise
+innodb_buffer_pool_size=1G
+# Was set too large in the config above
+innodb_log_file_size=512M
+# No need for such large values as above
+max_allowed_packet = 16M
+# We are not using clustering so this safe
+sync_binlog=0
+# Linux knows how to handle this
+innodb_flush_method=O_DIRECT
+# Query caching should speed up common queries
+query_cache_type=ON
+query_cache_size=256M
+# Support hardware checksum where available
+innodb_checksum_algorithm=crc32
+# Ende Anpassung verit
