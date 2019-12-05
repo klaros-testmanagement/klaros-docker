@@ -1,0 +1,20 @@
+11c11
+< <pack index="1" name="Klaros-Testmanagement 4.12.1" selected="true"/>
+---
+> <pack index="1" name="Klaros-Testmanagement @@KLAROS_VER@@" selected="true"/>
+17d16
+< <entry key="tomcat_ajp_port" value="@@TOMCAT_AJP_PORT@@"/>
+19,21c18
+< <entry key="tomcat_memory_max" value="${TOMCAT_MEMORY_MAX:-@@TOMCAT_MEMORY_MAX@@}"/>
+< <entry key="tomcat_memory_min" value="${TOMCAT_MEMORY_MIN:-@@TOMCAT_MEMORY_MIN@@}"/>
+< <entry key="tomcat_admin_password" value="@@TOMCAT_ADMIN_PASSWORD@@"/>
+---
+> <entry key="tomcat_memory_max" value="@@TOMCAT_MEMORY_MAX@@"/>
+23a21
+> <entry key="tomcat_ajp_port" value="@@TOMCAT_AJP_PORT@@"/>
+25,26c23,24
+< 
+< 
+---
+> <entry key="tomcat_memory_min" value="@@TOMCAT_MEMORY_MIN@@"/>
+> <entry key="tomcat_admin_password" value="@@TOMCAT_ADMIN_PASSWORD@@"/>
