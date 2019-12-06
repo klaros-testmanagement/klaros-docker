@@ -18,21 +18,18 @@ toc::[]
 
 == Introduction
 
-IMPORTANT: The Apache Derby database is only supported for testing purposes. An adjustment of the configurations is described in the section "Configuring Docker Environment Variables". The database systems: MariaDB, MySQL and PostgreSQL are supported by Klaros Test Management under Docker and are ready for production. Instructions for installing Klaros Test Management with MariaDB, MySQL or PostgreSQL can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation.adoc[here.] 
-
-Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
-
-Klaros can be configured in a multitude of ways and reduces maintenance costs through reusable test procedures.
-
-Manual and automated test cases are consolidated and evaluated collectively. Workload, progress and success of test activities can be tracked at any time.
-
-You can checkout our demo version https://www.klaros-testmanagement.com/demo/pages/login.seam[here.]
-
-https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux without a great deal of additional effort.
+IMPORTANT: This quickstart documentation only covers the Klaros Test Management installation with the Apache Derby database and is only supported for test installations. Do not use it for production systems.
+The database systems MariaDB, MySQL and PostgreSQL are freely available to use Klaros Test Management for production.
 
 This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
-With the download you receive the free Community Edition and you can start immediately.
+.About Docker
+https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux.
+
+.About Klaros-Testmanagement
+Klaros Test Management is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
+
+Klaros Test Management is available free of charge in the Community Edition.
 
 The Community Edition can be used without restrictions and has a reduced range of functions.
 
@@ -44,9 +41,7 @@ The Enterprise Edition offers you the full range of functions, including one yea
 
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
 
-IMPORTANT: Keep in mind that data from the additional features will no longer be available after expiration.
-
-You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management]
+You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
 
 == Prerequisites
 
@@ -120,7 +115,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |TOMCAT_MEMORY_MIN           |128       |Minimum available RAM in MB
 |TOMCAT_MEMORY_MAX           |768       |Maximum available RAM in MB
 |JAVA_OPTS  |  | With JAVA_OPTS additional settings can be transferred to the Tomcat server. For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
-|KLAROS_VERSION         |${KLAROS_VERSION:-4.12.1} |Klaros version used during installation. Versions can be found on the official https://www.klaros-testmanagement.com/en_US/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
+|KLAROS_VERSION         |${KLAROS_VERSION:-4.12.1} |Klaros release version, which is used during installation. A list of available releases can be found on the official https://www.klaros-testmanagement.com/en_US/download[Klaros Test Management] website or on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
 .Modifiable variables after the first server start via the Dockerfile
@@ -133,14 +128,15 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 
 === Configuration via the Dockerfile
 
+Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. The Dockerfile contains a list of the configurable ENV variables. See Table 1 for more information.
+
 Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. In the Dockerfile is a list of different ENV variables available, which can be adapted and changed as desired. See Table 1 for more information.
 
-The image must then be recreated.
+NOTE: Please make sure that you recreate the image after changing the Dockerfile.
 
 === Configuration at server startup
 
-Changeable variables can be found in Table 2.
-The environment variables can be changed with the -e parameter.
+Changeable variables can be found in Table 2. The environment variables can be changed with the -e parameter.
 
 .Example
 ----
@@ -149,7 +145,8 @@ sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Oth
 
 === Configuration via a file
 
-To specify the configurations via a file, any text file can be created in the ApacheDerby directory. Modifiable variables can be found in Table 2. When creating the container, add the --env-file parameter.
+To specify the configurations via a file, a text file can be created in the ApacheDerby directory. 
+Modifiable variables can be found in Table 2. When creating the container, add the --env-file parameter.
 
 .Windows Example
 [%collapsible]
@@ -171,12 +168,14 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ----
 ====
 
+
 == How to use an older version
-Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
 
-All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
+NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
 
-After the Dockerfile has been downloaded via Git together with the configurations, a version list can be listed with "git tag" and selected as local branch via "git checkout".
+You can view currently supported versions on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+
+After the repository has been cloned, the tags can be listed with "git tag" and selected as local branch with "git checkout".
 
 ----
 git tag
@@ -206,8 +205,12 @@ cd ~/klaros-docker/ApacheDerby
 docker build -t klaros .
 ----
 
+//// In Arbeit ////
 == Usage
 === How to start an instance
+
+
+
 For the successful start of Klaros Test Management, a Docker-Container with the name "Klaros" will be created.
 
 IMPORTANT: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
