@@ -1,0 +1,73 @@
+6c6,21
+< 
+---
+> #
+> # Create:
+> #
+> # sudo docker build --rm -t akaer/klaros . 2>&1 |awk '{ print strftime("%Y-%m-%d %H:%M:%S:"), $0; fflush(); }' |tee docker_build.log
+> #
+> # Add '--build-arg KLAROS_LANG=eng' to change languages.
+> #
+> # Run:
+> #
+> # sudo docker run --rm=true -it \
+> #   --name klaros \
+> #   -v /etc/localtime:/etc/localtime:ro \
+> #   -v $(pwd)/data:/klaros-data \
+> #   -p 18080:18080 \
+> #   akaer/klaros
+> #
+8a24
+> LABEL maintainer "André Raabe <andre.raabe@gmail.com>"
+15,16c31
+< ARG KLAROS_VERSIONSION
+< ARG TOMCAT_ADMIN_PASSWORD
+---
+> ARG KLAROS_VER
+18c33
+< ENV TOMCAT_ADMIN_PASSWORD $TOMCAT_ADMIN_PASSWORD
+---
+> ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd
+20,22c35,37
+< 
+< ENV JAVA_OPTS -Duser.timezone=
+< 
+---
+> ENV TOMCAT_MEMORY_MAX 768
+> ENV TOMCAT_MEMORY_MIN 128
+> ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
+26,29c41,42
+< ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.3}
+< ENV KLAROS_HOME /data/klaros-home
+< ENV CATALINA_BASE /data/catalina-base
+< 
+---
+> ENV KLAROS_VER ${KLAROS_VER:-4.12.3}
+> ENV KLAROS_HOME /klaros-data
+34,35c47
+< ADD files/catalina-wrapper.sh /root/catalina-wrapper.sh
+< ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
+---
+> ADD https://www.klaros-testmanagement.com/files/${KLAROS_VER}/Klaros-${KLAROS_VER}-Setup.jar /tmp/Klaros-Setup.jar
+37c49
+< RUN set -ex \
+---
+> RUN set -xe \
+41,42c53,54
+< 	ghostscript-fonts \
+<     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
+---
+>     ghostscript-fonts \
+>     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g;s/@@KLAROS_VER@@/${KLAROS_VER}/g" /tmp/auto-install.xml \
+50,51c62
+<         /root/klaros-testmanagement/webapps/ROOT.war \
+<     && chmod +x /root/catalina-wrapper.sh
+---
+>         /root/klaros-testmanagement/webapps/ROOT.war
+52a64
+> VOLUME /klaros-data
+54c66
+< CMD [ "/root/catalina-wrapper.sh" ]
+---
+> CMD [ "/root/klaros-testmanagement/bin/catalina.sh", "run" ]
+\ No newline at end of file

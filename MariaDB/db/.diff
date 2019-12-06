@@ -1,0 +1,14 @@
+38c38
+< 	gpg --batch --keyserver hkp://keyserver.ubuntu.com --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
+---
+> 	gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
+123,127c123
+< COPY docker-entrypoint.sh /usr/local/bin/
+< COPY *.cnf /etc/mysql/mariadb.conf.d
+< 
+< RUN chmod 444 /etc/mysql/mariadb.conf.d/mysqld.cnf
+< RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
+---
+> VOLUME /var/lib/mysql
+128a125
+> COPY docker-entrypoint.sh /usr/local/bin/

@@ -1,0 +1,10 @@
+Quelle des Originalen PostgreSQL Dockerfiles: https://github.com/docker-library/postgres/blob/0d0485cb02e526f5a240b7740b46c35404aaf13f/12/alpine/Dockerfile
+Quelle des Originalen Docker Compose file: https://github.com/akaer/Dockerfiles/blob/master/klaros/sqlserver2017/docker-compose.yml
+Quelle des Originalen Klaros Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
+Quelle des Originalen Entrypoint Datei: https://github.com/docker-library/postgres/blob/0d0485cb02e526f5a240b7740b46c35404aaf13f/12/alpine/docker-entrypoint.sh
+
+Alle Unterschiede der Dockerfiles sind in .diff markiert.
+
++ catalina-wrapper.sh unter klaros -> files verändert (siehe .diff)
++ Verändern der Compose Datei und aller Dockerfiles -> Siehe .diff
++ Unterschiede der auto-install.xml sind unter Apache Derby .diff zu finden
