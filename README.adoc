@@ -50,7 +50,7 @@ You can find further information at https://www.docker.com/why-docker[Why-Docker
 
 == Prerequisites
 
-Windows
+.Windows
 [%collapsible]
 ====
 
@@ -124,7 +124,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |=======================
 
 .Modifiable variables after the first server start via the Dockerfile
-[options="footer"]
+[options=""]
 |=======================
 |TOMCAT_MEMORY_MAX
 |TOMCAT_MEMORY_MIN
