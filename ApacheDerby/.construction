@@ -1,4 +1,5 @@
-Quelle der Originalen Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
+Quelle des Originalen Apache Derby Dockerfiles: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
+
 Alle Unterschiede des Dockerfiles sind in .diff markiert.
 
 + .start.sh um die fehlenden Verzeichnisse zu erstellen (Docker gibt eine Meldung aus, welche Dateien fehlen)
