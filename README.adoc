@@ -113,7 +113,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 == Configuring Docker Environment Variables
 
 .Configurable environment variables before the first server start via the Dockerfile
-[options="header,footer"]
+[options="header"]
 |=======================
 |Variable |Default |Description
 |TOMCAT_ADMIN_PASSWORD  |P@ssw0rd  |Password for login 127.0.0.1:18080/monitoring
