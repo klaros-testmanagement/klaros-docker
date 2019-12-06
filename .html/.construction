@@ -8,3 +8,4 @@
 	endif::[]
 
 + Benutze zum Konvertieren asciidoctor und nicht asciidoc
+	Befehl: asciidoctor README.adoc
