@@ -6,7 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-= Klaros Test Management Docker-Integration
+= Klaros-Testmanagement Docker-Integration
 :toc: macro
 :sectnums:
 
@@ -308,7 +308,7 @@ docker-compose stop
 
 Hierbei wird zwischen SQL-Backup (Dump) und Volume-Backup unterschieden. Mithilfe eines SQL Backups kann die Datenbank im laufenden Betrieb gesichert werden. Bei einem Volume Backup muss der Server zuvor heruntergefahren werden. Ein SQL Backup erfordert ebenfalls einen geringeren Speicherbedarf als ein Volume Backup, es fehlen jedoch wichtige Daten, wie z.B.: die Konfigurations- und Protokolldateien sowie binäre Anhänge. Beide Sicherungsstrategien haben ihre Vorteile, daher ist es wünschenswert, sie zu kombinieren.
 
-Einzelne SQL Backups finden sich unter dem Namen "backup_sql_klaros<Date>.tar.gz".
+Einzelne SQL Backups finden sich unter dem Namen "backup_sql_klaros<Datum>.tar.gz".
 
 Volumes oder SQL mit Volume Backups sind unter dem Namen „backup_klaros<Datum>.tar.gz“ gekennzeichnet. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
 
