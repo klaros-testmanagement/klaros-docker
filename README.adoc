@@ -191,7 +191,6 @@ cd ~/klaros-docker/ApacheDerby
 docker build -t klaros .
 ----
 
-//// In Arbeit ////
 == Usage
 === How to start an instance
 
