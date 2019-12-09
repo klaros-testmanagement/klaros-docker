@@ -9,6 +9,7 @@ endif::[]
 = Klaros-Testmanagement Docker-Integration
 :toc: macro
 :sectnums:
+:toc-title: Inhaltsverzeichnis
 
 image:https://img.shields.io/badge/Version-4.12.3-green.svg[]
 image:https://img.shields.io/badge/License-MIT-green[]
