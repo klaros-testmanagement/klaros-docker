@@ -198,96 +198,96 @@ Beim Starten wird ein Docker-Container mit dem Namen „Klaros“ angelegt.
 
 IMPORTANT: Beim Erstellen des Containers wird ein anonymes Volume erstellt. Wenn ein benanntes Volume gewünscht wird, muss -v als zusätzlicher Parameter hinzugefügt werden.
 
-.One-time execution: Create a Klaros container (anonymous volume)
+.Einmalige Ausführung: Erstelle ein Klaros-Container (Anonymes Volume)
 ----
 docker create --name Klaros -p 18080:18080 klaros
 ----
 
-.One-time execution: Create a Klaros container (named volume)
+.Einmalige Ausführung: Erstelle ein Klaros-Container (Benanntes Volume)
 ----
 docker create --name Klaros -p 18080:18080 -v klaros-data:/data klaros
 ----
 
-.Once the container has been created, the server can be booted with "docker start".
+.Sobald der Container erstellt wurde, kann der Server mit „docker start“ hochgefahren werden.
 ----
 docker start -a Klaros
 ----
 
-.To execute the container in detached mode, the -a parameter must be removed.
+.Um den Container im detached mode auszuführen, muss der -a Paramter entfernt werden.
 ----
 docker start Klaros
 ----
 
 [%collapsible]
 ====
-You can find further information in the https://docs.docker.com/engine/reference/commandline/start/[official Docker Documentation.]
+Weitere Informationen finden Sie in der https://docs.docker.com/engine/reference/commandline/start/[official Docker Documentation.]
 
-After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.
+Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
 
 ----
-Username: admin
-Password: admin
+Benutzername: admin
+Passwort: admin
 ----
 
-Example: 127.0.0.1:18080
+Beispiel: 127.0.0.1:18080
 
 ====
 
-Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
-To create another instance, simply change the containername and port.
+Eine weitere Klaros-Instanz kann verwendet werden, um Sicherungen auf Vollständigkeit zu prüfen oder eine neuere Klaros-Version zu testen.
+Um eine weitere Instanz zu erstellen, muss lediglich der Containernamen und Port geändert werden.
 
-.Create a second Klaros instance with its own database
+.Erstellen einer zweiten Klaros-Instanz mit eigener Datenbank
 ----
 docker create --name Klaros2 -p 18081:18080 klaros
 ----
 
-=== How to shut down your instance
+=== Wie man seine Instanz herunterfährt
 
-In detached mode, the server must be shut down via "docker stop".
-If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. Windows is considered as an exception and the container must be closed via "docker stop".
+Im abgetrennten Modus muss der Server über "Docker Stop" heruntergefahren werden.
+Wenn der Container im Vordergrund gestartet wurde, gelangt man mit der Tastenkombination STRG + C zurück in das Terminal, wodurch der Container automatisch heruntergefahren wird. Windows gilt hierbei als Ausnahme und der Container muss über „docker stop“ beendet werden.
 
 ----
 docker stop Klaros
 ----
 
-== Create, restore and test a backup
-Backups are labeled with the name "backup_klaros<date>.tar.gz". If you create several backups per day, it is recommended to specify a time (hours, minutes and seconds) when creating the backups. To do this, add %H(hour), %M(minute), and %S(second) in date/Get-Date.
+== Erstellen, Wiederherstellen und Testen eines Backups
+Backups sind unter dem Namen „backup_klaros<Datum>.tar.gz“ gekennzeichnet. Falls mehrere Backups am Tag erstellt werden, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügt man in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
 
-If an error occurs while creating the backup, the log file provides useful hints.
+Wenn bei der Erstellung des Backups ein Fehler auftritt, enthalten die Logfiles nützliche Hinweise.
 
-.Windows Example
+.Windows Beispiel
 ----
 $(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
 ----
 
-.Linux Example
+.Linux Beispiel
 ----
 $(date '+%y-%m-%d-%H:%M:%S')
 ----
 
 [%collapsible]
 ====
-This would give the backup the following name:
+Damit würde das Backup den folgenden Namen tragen:
 
 Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
 Linux: backup_klaros19-10-28-11:34:33.tar.gz
 
-You can change the backup path using the code section behind -v: "~/klaros-docker/backup"
+Um den Backup-Pfad zu wechseln, kann der Codeabschnitt hinter -v: "~/klaros-docker/backup" geändert werden.
 
-.Windows Example
+.Windows Beispiel
 ----
 mkdir ~/klaros-docker/Path/backup
 docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backup alpine tar cvzf /backup/backup_klaros$(Get-Date -UFormat "%y-%m-%d").tar.gz /data/klaros-home /data/catalina-base/logs
 ----
 
-.Linux Example
+.Linux Beispiel
 ----
 mkdir ~/klaros-docker/Path/backup
 sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backup alpine tar cvzf /backup/backup_klaros$(date '+%y-%m-%d').tar.gz /data/klaros-home /data/catalina-base/logs
 ----
 ====
 
-=== Creating a backup
+=== Backup erstellen
 
 .Windows
 ----
@@ -305,85 +305,86 @@ sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alp
 sudo docker start -a Klaros
 ----
 
-=== Restore a Backup
+=== Backup wiederherstellen
 
-.Note to adjust the date of the respective backups.
+.Beachte, das Datum der jeweiligen Backups anzupassen.
 ----
 docker stop Klaros
 docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
 docker start -a Klaros
 ----
 
-=== Test a Backup
+=== Backup testen
 
-To test a backup, you can create a second Klaros instance to play the backup on. The second instance must be fully booted once before the backup can be installed.
+Zum Testen eines Backups kann eine zweite Klaros-Instanz erstellt werden, um darauf das Backup aufzuspielen. Die Zweite Instanz muss einmal vollständig hochgefahren werden, bevor das Backup aufgespielt werden kann.
 
 ----
 docker run --name Klaros-test -p 18081:18080 klaros
 ----
 
-The server is then stopped with CTRL + C or with "docker stop".
+Der Server wird dann mit STRG + C oder mit "Docker Stop" beendet.
 ----
 docker stop Klaros-test
 ----
 
-.Note to adjust the date of the respective backups.
+.Beachte, das Datum der jeweiligen Backups anzupassen.
 ----
 docker run --rm --volumes-from Klaros-test -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
 docker start -a Klaros-test
 ----
 
-If the backup has been successfully tested, the server can be stopped and removed.
+Wenn das Backup erfolgreich getestet wurde, kann der Server gestoppt und entfernt werden.
 ----
 docker stop Klaros-test
 docker rm -v Klaros-test
 ----
 
-== How and where can I find the log files?
+== Wie und wo finde ich die Logfiles?
 
-Log files may be required for troubleshooting. To access log files, a shell can be opened directly in the Docker-Container or they can be taken from the backup.
+Für die Fehlerbehebung können Logfiles erforderlich sein. Um auf Logfiles zuzugreifen, kann eine Shell direkt im Docker-Container geöffnet werden oder sie können aus dem Backup entnommen werden.
 
-Relevant log files can be found here:
+Wichtige Logs finden sich unter:
 
 _/data/catalina-base/logs_
 
-=== Show log files via Docker shell
-Open a shell with "docker exec" in the Klaros container to get access to the logs.
+=== Logs über die Docker shell anzeigen
+Öffne im Klaros-Container eine Shell mit „docker exec“, um Zugriff auf die Logs zu bekommen.
 
-NOTE: Please note that the server must be started when accessing via the shell and is not shut down.
+NOTE: Bitte beachte, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
 
-.The log files can then be read using more
+.Die Logfiles können dann mit "more" gelesen werden.
 ----
 docker exec -it Klaros /bin/sh
 more /data/catalina-base/logs/catalina.2019-12-09.log
 ----
 
-=== Show logs from backup
+=== Logs aus dem Backupverzeichnis anzeigen
 
 .Windows
 [%collapsible]
 ====
-Windows users can use the https://www.winrar.de/downld.php[WinRAR] archive program to extract .tar.gz archives.
 
-Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
+Windows-Nutzer können das Archivprogramm https://www.winrar.de/downld.php[WinRAR] verwenden, um .tar.gz Archive zu entpacken.
+
+Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base anzeigen.
 ====
 
 .Linux
 [%collapsible]
 ====
-To read the logs from the backup, use tar to unpack the archive.
+Um die Logs aus dem Backup auszulesen, lässt sich mit tar das Archive entpacken.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
 
-Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
+Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base anzeigen.
 ====
 
 == Update
 
-IMPORTANT: If the update is only for testing purposes, do not use its original branch (klaros or master), otherwise the configurations for the previous version will be lost(You can clone the directory for this). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing, so that your original version is not accidentally updated.
+IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
 
-Before an update of Klaros Test Management is executed, a temporary container with the volumes of Klaros must be created.
+Bevor ein Update von Klaros-Testmanagement durchgeführt werden kann, muss ein temporärer Container mit den Volumes von Klaros erstellt werden.
 
 ----
 docker stop Klaros
@@ -391,16 +392,17 @@ docker create --name Klaros-tmp --volumes-from Klaros alpine
 docker rm Klaros
 ----
 
-=== Update via master branch
+=== Update über master branch
 
-Klaros can be updated to the latest version with "git pull".
+Klaros kann mit "git pull" auf die neueste Version aktualisiert werden.
 ----
 git pull origin master
 ----
 
-=== Update via tags
+=== Update über tags
 
-To perform an update from an older to a newer version, the first step is to check for new updates in the GitHub repository. Current versions can be displayed via "git tag". Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.
+Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen. 
+
 ----
 git checkout master
 git pull origin master
@@ -410,39 +412,39 @@ git merge update
 git branch -D update
 ----
 
-=== Refresh image
+=== Image aktualisieren
 
-After downloading the update from the Git repository, the next step is to remove the old image and create a new one.
+Nachdem das Update vom Git Repository heruntergeladen wurde, wird als nächstes das alte Image entfernt und ein neues Image erstellt.
 ----
 docker rmi klaros
 docker build -t klaros .
 ----
 
-After the new image has been created, the server will be created with the volumes of Klaros-tmp and the temporary container will be removed. Afterwards the server can be started as usual.
+Nachdem das neue Image erstellt wurde, wird der Server mit den Volumes von Klaros-tmp erstellt und der temporäre Container wird anschließend entfernt. Danach kann der Server wie gewohnt gestartet werden.
 ----
 docker create --name Klaros --volumes-from Klaros-tmp -p 18080:18080 klaros
 docker rm Klaros-tmp
 docker start -a Klaros
 ----
 
-== How to use a previous version
+== Wie man eine frühere Version verwendet
 
-NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
+NOTE: Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
 
-You can view currently supported versions on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+Die aktuell unterstützten Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
 
-After the repository has been cloned, the tags can be listed with "git tag" and selected as local branch with "git checkout".
+Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokalen branch mit "git checkout" ausgewählt werden.
 
 ----
 git tag
 git checkout tags/<tag_name> -b klaros
 ----
 
-== Uninstallation
+== Deinstallation
 
-To completely remove Klaros Test Management from Docker, the container must be stopped first, before the container and volume can be removed.
+Um Klaros Test Management vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volumen entfernt werden können.
 
-Then remove the _~/klaros-docker_ directory and the image.
+Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image.
 ----
 docker stop Klaros
 docker rm -v Klaros
@@ -450,7 +452,9 @@ docker rmi klaros
 rm -rf ~/klaros-docker
 ----
 
-== Documentation
+== Dokumentation
+
+Um mit dem Klaros-Testmanagement zu beginnen, lesen Sie bitte unser Tutorial und das Benutzerhandbuch. Beide sind auch in der Anwendung selbst nach erfolgreicher Anmeldung verfügbar. 
 
 To get started with Klaros Test Managment please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
 
