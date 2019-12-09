@@ -19,7 +19,7 @@ toc::[]
 == Einführung
 
 IMPORTANT: Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der Apache Derby Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für die Produktion.
-Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MySQL und PostgreSQL finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation.adoc[hier.]
+Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MySQL und PostgreSQL finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc[hier.]
 
 In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
@@ -40,11 +40,11 @@ Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es idea
 
 Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.
 
-Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
+Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
 
-Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/en_US/trial[hier] Ihren Lizenzschlüssel anfordern.
+Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] Ihren Lizenzschlüssel anfordern.
 
-Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/en_US/[Klaros-Testmanagement.]
+Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
 
 == Voraussetzungen
 
@@ -117,7 +117,7 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installati
 |TOMCAT_MEMORY_MIN           |128       |Minimal verfübarer Arbeitsspeicher in MB
 |TOMCAT_MEMORY_MAX           |768       |Maximal verfügbarer Arbeitsspeicher in MB
 |JAVA_OPTS  |  | Mit JAVA_OPTS können zusätzliche Einstellungen an den Tomcat-Server übertragen werden. Beispielsweise kann die Zeitzone mit JAVA_OPTS -Duser.timezone=Europe/Berlin auf Europa/Berlin eingestellt werden.
-|KLAROS_VERSION         |${KLAROS_VERSION:-4.12.1} |Klaros-Release-Version, die während der Installation verwendet wird.  Eine Liste der verfügbaren Releases finden Sie auf der offiziellen https://www.klaros-testmanagement.com/en_US/download[Klaros-Testmanagement] Webseite oder auf https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
+|KLAROS_VERSION         |${KLAROS_VERSION:-4.12.1} |Klaros-Release-Version, die während der Installation verwendet wird.  Eine Liste der verfügbaren Releases finden Sie auf der offiziellen https://www.klaros-testmanagement.com/de_DE/download[Klaros-Testmanagement] Webseite oder auf https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
 .Veränderbare Variablen nach dem ersten Serverstart über das Dockerfile
@@ -472,7 +472,7 @@ Durch die Installation unserer Software über Docker stimmen Sie auch unserer Li
 
 Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros-Testmanagement.
 
-Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/en_US/forum[Forum.]
+Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
 
 == Danksagung
 

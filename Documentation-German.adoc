@@ -18,7 +18,7 @@ toc::[]
 
 == Einführung
 
-IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[hier.]
+IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
 
 In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
@@ -39,11 +39,11 @@ Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es idea
 
 Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.
 
-Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
+Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
 
-Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/en_US/trial[hier] Ihren Lizenzschlüssel anfordern.
+Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] Ihren Lizenzschlüssel anfordern.
 
-Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/en_US/[Klaros-Testmanagement.]
+Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
 
 == Voraussetzungen
 
@@ -906,7 +906,7 @@ Durch die Installation unserer Software über Docker stimmen Sie auch unserer Li
 
 Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros-Testmanagement.
 
-Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/en_US/forum[Forum.]
+Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
 
 == Danksagung
 
