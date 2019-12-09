@@ -18,23 +18,18 @@ toc::[]
 
 == Introduction
 
-IMPORTANT: The Apache Derby database is only supported for testing purposes. Instructions for installing Klaros Test Management with Apache Derby can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.] 
-The database systems: MariaDB, MySQL and PostgreSQL are supported by Klaros Test Management under Docker and are ready for production.
-An adjustment of the configurations is described in the section "Configuring Docker Environment Variables".
+IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MySQL or PostgreSQL database.
+The instructions for test installations with Apache Derby as a database can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.]
 
-Plan, control and document your entire test process with https://www.klaros-testmanagement.com/en_US/[Klaros Test Management] and integrate it seamlessly with leading tools for test automation, defect management and requirements management.
+This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
-Klaros can be configured in a multitude of ways and reduces maintenance costs through reusable test procedures.
+.About Docker
+https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux.
 
-Manual and automated test cases are consolidated and evaluated collectively. Workload, progress and success of test activities can be tracked at any time.
+.About Klaros-Testmanagement
+Klaros Test Management is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
 
-You can checkout our demo version https://www.klaros-testmanagement.com/demo/pages/login.seam[here.]
-
-https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux without a great deal of additional effort.
-
-This installation documentation shows step by step how to install and configure Klaros Test Management under Docker for Windows and Linux.
-
-With the download you receive the free Community Edition and you can start immediately.
+Klaros Test Management is available free of charge in the Community Edition.
 
 The Community Edition can be used without restrictions and has a reduced range of functions.
 
@@ -46,9 +41,7 @@ The Enterprise Edition offers you the full range of functions, including one yea
 
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
 
-IMPORTANT: Keep in mind that data from the additional features will no longer be available after expiration.
-
-You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US[Klaros Test Management]
+You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
 
 == Prerequisites
 
@@ -112,7 +105,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |Variable                 |Default           |Description
 |DATABASE_NAME            |klaros            |Database Name
 |DATABASE_USER            |klaros            |Database User
-|DATABASE_CONTAINER_NAME  |klaros_db         |Database container name
+|DATABASE_CONTAINER_NAME  |klaros_db         |Database Containername
 |DATABASE_PASSWORD        |P@ssw0rd          |Database Password
 |DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MariaDB/MySQL Only] Root password for the "root" user
 |DATABASE_PORT            |10001             |Public Database Port
@@ -141,7 +134,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 The environment variables can be configured and changed via the .env file.
 For port forwarding only the ports "KLAROS_PORT" and "DATABASE_PORT" in the .env file have to be changed.
 
-When creating the image, all values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (restart required).
+When creating the image, all values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (All changes require a restart.).
 
 If required, you can add the environment variable JAVA_OPTS to the Dockerfile of the klaros directory for additional settings of the Tomcat server.
 
@@ -162,17 +155,6 @@ The .env file is located in the same directory as the docker-compose.yml file an
 vi .env
 ----
 
-== How to use an older version
-Since it is not possible to switch from a newer to an older version, a new installation of Klaros has to be created in order to use an older Klaros Test Management version.
-
-All available Klaros Test Management versions for Docker can be found under https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub.] 
-
-After the Dockerfile has been downloaded via Git together with the configurations, a version list can be listed with "git tag" and selected as local branch via "git checkout".
-
-----
-git tag
-git checkout tags/<tag_name> -b klaros
-----
 
 == Installation
 === Clone
@@ -211,7 +193,8 @@ docker-compose build
 
 == Usage
 === How to start an instance
-For the successful start of Klaros Test Management, two Docker-Containers are automatically created for the server and the database. The configurations can be found in the .env file.
+
+During startup, two Docker-Containers are automatically created for the server and the database. The configurations can be found in the .env file.
 
 .Starting the server
 ----
@@ -241,9 +224,11 @@ Example: 127.0.0.1:18080
 
 === How to start multiple instances
 
+For testing or validation purposes it may be desirable to have multiple instances of Klaros running simultaneously in the same docker environment. This section describes the configuration changes needed to accommodate this.
+
 Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
 
-To start an independent Klaros instance, some configuration must be done. In order to save your existing configurations, it is recommended to create single instances in separate file paths.
+To start an independent Klaros instance, some configuration changes must be done. In order to save your existing configurations, it is recommended to store each instance’s configuration in it’s own directory.
 
 .PostgreSQL
 [%collapsible]
@@ -302,7 +287,7 @@ To run a second instance independently of the first instance, the instances must
 |Current value |New value  |Description
 |KLAROS_PORT=18080 |KLAROS_PORT=18081 |Public port for later access to the website
 |DATABASE_PORT=10001 |DATABASE_PORT=10002 |Public port for accessing the database from the outside.
-|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Database container name
+|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Database Containername
 |KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros Test Management Containername
 |VOLUME_NAME=klaros-data |VOLUME_NAME=klaros-data2 |Volume name. The data is stored here
 |=======================
@@ -313,21 +298,22 @@ docker-compose up
 ----
 
 === How to shut down your instance
-In detached mode, the server must be shut down via "docker-compose stop".
-If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. If this is not the case, the server must be shut down with "docker-compose stop".
+
+If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. In detached mode, the server must be shut down via "docker-compose stop".
+
 ----
 docker-compose stop
 ----
 
 == Create and restore a backup
 
-A distinction is made between SQL backup (dump) and volume backup. 
-With a SQL backup, the database can be backed up while the system is running, while a volume requires the server to be shut down beforehand.
-A SQL backup also requires less storage than a volume backup. However, an SQL backup only stores the database in a .sql file, while the volume backs up the logs and data in its original state.
+A distinction is made here between SQL backup (dump) and volume backup. Using an SQL backup, a database can be backed up while the system is running, while a volume backup requires the server to be shut down beforehand. An SQL backup requires less storage than a volume backup, but is missing vital data as e.g. the configuration and log files as well as binary attachments.  Both backup strategies have their advantages, so it is desirable to combine them.
 
-Individual SQL backups can be found under the name „backup_sql_klaros<Date>.tar.gz“.
+Individual SQL backups will be named "backup_sql_klaros<Date>.tar.gz".
 
 Volumes or SQL with volume backups are marked with the name "backup_klaros<Date>.tar.gz". If you create multiple backups a day, it is recommended to specify a time (hours, minutes, and seconds) when creating backups. To do this, add %H(hour), %M(minute) and %S(second) in date/Get-Date.
+
+If an error occurs while creating the backup, the log file provides useful hints.
 
 .Windows Example
 ----
@@ -346,7 +332,7 @@ This would give the backup the following name:
 Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
 Linux: backup_klaros19-10-28-11:34:33.tar.gz
 
-To change the backup path, the variable "BACKUP_DIR" can be changed to any other path.
+You can change the backup path using the variable "BACKUP_DIR".
 
 .Windows Example
 ----
@@ -773,22 +759,24 @@ cd -
 
 ====
 
-== How and where can I find the logfiles?
-Log files may be required for error detection. In this case it is possible to open a shell directly in the Docker-Container to read the logs in the container or to display the logs directly from the backup.
+== How and where can I find the log files?
 
-Important logs can be found below:
+Log files may be required for troubleshooting. To access log files, a shell can be opened directly in the Docker-Container or they can be taken from the backup.
+
+Relevant log files can be found here:
 
 _/data/catalina-base/logs_ +
 _/data/mysql-data_ ← Additional for MySQL
 
-=== Show logs via the Docker shell
+=== Show log files via Docker shell
 Open a shell with "docker exec" in the Klaros container to get access to the logs.
 
-NOTE: Please note that the container must be started during access via the shell and must not be shut down.
+NOTE: Please note that the server must be started when accessing via the shell and is not shut down.
 
-.The log files can then be read using cat or head and tail
+.The log files can then be read using more
 ----
 docker exec -it klaros_db sh
+more /data/catalina-base/logs/catalina.2019-12-09.log
 ----
 
 === Show logs from backup
@@ -814,7 +802,8 @@ Then you can display the Klaros Test Management logs in the "logs" folder of cat
 ====
 
 == Update
-IMPORTANT: If the update is only for testing purposes, do not use its original branch (klaros). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing.
+
+IMPORTANT: If the update is only for testing purposes, do not use its original branch (klaros or master), otherwise the configurations for the previous version will be lost(You can clone the directory for this). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing, so that your original version is not accidentally updated.
 
 === Update via master branch
 
@@ -851,8 +840,22 @@ After the new image has been created, the container is started as usual.
 docker-compose up
 ----
 
+== How to use a previous version
+
+ NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
+
+You can view currently supported versions on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+
+After the repository has been cloned, the tags can be listed with "git tag" and selected as local branch with "git checkout".
+
+----
+git tag
+git checkout tags/<tag_name> -b klaros
+----
+
 == Uninstallation
-To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
+
+To completely remove Klaros Test Management from Docker, the container must be stopped first, before the container and volume can be removed.
 
 Then remove the _~/klaros-docker_ directory and the image.
 
@@ -882,21 +885,22 @@ rm -rf ~/klaros-docker/
 
 == Documentation
 
-If you are interested in our software, then you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] or for advanced, the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.]
+To get started with Klaros Test Managment please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
 
 Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
 == FAQ
-If you have further questions about Klaros Test Management and the Enterprise Edition, please have a look at our https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true[Pricing-FAQ] and https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true[Support-FAQ.]
+
+If you have further questions about Klaros Test Management and the Enterprise Edition, do not miss our https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true[Pricing-FAQ] and https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true[Support-FAQ.]
 
 == License
-Klaros Test Management for Docker is licensed under the terms of https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
+Klaros Test Management for Docker is licensed under the terms of the https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
 By installing our software through Docker, you also agree to our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
 
 == Contact
 
-We thank you for your attention and hope to meet the interests of many users with our documentation. We are continuously working on improving Klaros-Testmanagement.
+We thank you for your attention and hope to meet the interests of many users with this documentation. We are continuously working on improving Klaros Test Management.
 
 So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de oder use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
 
