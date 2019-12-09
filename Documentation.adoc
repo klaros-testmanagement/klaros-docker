@@ -60,7 +60,7 @@ During the installation you can select whether and how the line endings of files
 .Configuration of the line end conversion
 image::images/ConfigurationOfTheLineEndConversion.png[Configuration of the line end conversion]
 
-This completes the preparations for Windows. The chapter "Download the Dockerfile from Klaros Test Management via GitHub" describes how to use Git Bash to download the Dockerfile and prepare it for future updates.
+This completes the preparations for Windows. The chapter "Installation" describes how to use Git Bash to download the Dockerfile and prepare it for future updates.
 ====
 
 .Linux
