@@ -16,57 +16,58 @@ image:https://img.shields.io/badge/Community%20Edition-FREE-green[]
 
 toc::[]
 
-== Introduction
+== Einführung
 
-IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MySQL or PostgreSQL database.
-The instructions for test installations with Apache Derby as a database can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.]
+IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[hier.]
 
-This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
+In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
-=== About Docker
-https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux.
+=== Über Docker
+https://www.docker.com/[Docker] ist eine freie, containerbasierte Software, die eine sichere Installation von Anwendungen auf verschiedenen Betriebssystemen wie Windows und Linux ermöglicht.
 
-You can find further information at https://www.docker.com/why-docker[Why-Docker]
+Weitere Informationen finden Sie unter https://www.docker.com/why-docker[Why-Docker]
 
-=== About Klaros Test Management
-Klaros Test Management is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
+=== Über Klaros-Testmanagement
 
-Klaros Test Management is available free of charge in the Community Edition.
+Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Es enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
 
-The Community Edition can be used without restrictions and has a reduced range of functions.
+Klaros-Testmanagement ist in der Community Edition kostenlos verfügbar.
 
-With no limitation on the number of projects, test cases or users, it is ideal for getting started in a small team.
+Die Community Edition ist uneingeschränkt nutzbar und verfügt über einen reduzierten Funktionsumfang.
 
-You can upgrade the Community Edition to the Enterprise Edition at any time by uploading a license file.
+Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es ideal für den Einstieg in ein kleines Team.
 
-The Enterprise Edition offers you the full range of functions, including one year of support and free access to all software updates. Take a look at the Community and Enterprise Edition comparison https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[here.]
+Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.
 
-To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
+Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
 
-You can find further information at https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
+Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/en_US/trial[hier] Ihren Lizenzschlüssel anfordern.
 
-== Prerequisites
+Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/en_US/[Klaros-Testmanagement.]
+
+== Voraussetzungen
 
 .Windows
 [%collapsible]
 ====
-The current hardware requirements and installation steps are described in the https://docs.docker.com/docker-for-windows/install/[official Docker documentation.] The Docker Desktop installation requires a login.
 
-To make it easier to update Klaros Test Management later, it is recommended to download the Dockerfile using Git from GitHub.
-Git can be downloaded and installed from the https://git-scm.com[official site.]
+Die aktuellen Hardwareanforderungen und Installationsschritte sind in der https://docs.docker.com/docker-for-windows/install/[offiziellen Docker-Dokumentation] beschrieben. Für die Installation von Docker Desktop ist eine Anmeldung erforderlich.
 
-During the installation you can select whether and how the line endings of files should be converted. Since the server is running on Linux inside the container, and the line endings differ from Windows (\r) and Linux (\n), we recommend to select the option "Checkout as-is, commit Unix-style line endings" or "Checkout as-is, commit as-is".
+Um die spätere Aktualisierung von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile mit Git von GitHub herunterzuladen.
+Git kann von der https://git-scm.com[offiziellen Webseite] heruntergeladen und installiert werden.
 
-.Configuration of the line end conversion
-image::images/ConfigurationOfTheLineEndConversion.png[Configuration of the line end conversion]
+Während der Installation kann ausgewählt werden, ob und wie die Zeilenendungen von Dateien konvertiert werden soll. Da der Server innerhalb des Containers über Linux betrieben wird, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, empfehlen wir die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ auszuwählen.
 
-This completes the preparations for Windows. The chapter "Download the Dockerfile from Klaros Test Management via GitHub" describes how to use Git Bash to download the Dockerfile and prepare it for future updates.
+.Konfiguration der Zeilenenden-Konvertierung
+image::images/ConfigurationOfTheLineEndConversion.png[Konfiguration der Zeilenenden-Konvertierung]
+
+Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel „Download des Dockerfiles von Klaros-Testmanagement über GitHub“ wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.
 ====
 
 .Linux
 [%collapsible]
 ====
-See the official Docker documentation for the latest hardware requirements and installation steps.
+Auf der offiziellen Docker-Dokumentation sind die aktuellen Hardwareanforderungen und Installationsschritte zu finden.
 
 https://docs.docker.com/install/linux/docker-ce/ubuntu/[Ubuntu Docker]
 
@@ -78,25 +79,26 @@ https://www.cyberciti.biz/faq/install-use-setup-docker-on-rhel7-centos7-linux/[R
 
 https://docs.docker.com/compose/install/[Docker Compose]
 
-.Git installation via Ubuntu/Debian:
+.Git-Installation über Ubuntu/Debian:
 ----
 sudo apt-get update
 sudo apt-get install git
 ----
 
-.Git installation via CentOS/RHEL:
+.Git-Installation über CentOS/RHEL:
 ----
 sudo yum check-update
 sudo yum install git-core
 ----
 
-The following command can be used to check whether the installation was successful:
+
+Ob die Installation erfolgreich war, lässt sich mit folgendem Kommando überprüfen:
 ----
 git --version
 Output: git version 2.20.1
 ----
 
-This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.
+Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Download des Dockerfiles von Klaros-Testmanagement über GitHub“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
 ====
 
 == Configuring Docker Environment Variables
