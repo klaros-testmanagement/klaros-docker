@@ -31,7 +31,7 @@ Weitere Informationen finden Sie unter https://www.docker.com/why-docker[Why-Doc
 
 === Über Klaros-Testmanagement
 
-Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Es enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
+Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Sie enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
 
 Klaros-Testmanagement ist in der Community Edition kostenlos verfügbar.
 
