@@ -23,10 +23,12 @@ The instructions for the production installation with the database systems Maria
 
 This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
-.About Docker
+=== About Docker
 https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux.
 
-.About Klaros-Testmanagement
+You can find further information at https://www.docker.com/why-docker[Why-Docker]
+
+=== About Klaros Test Management
 Klaros Test Management is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
 
 Klaros Test Management is available free of charge in the Community Edition.
@@ -41,7 +43,7 @@ The Enterprise Edition offers you the full range of functions, including one yea
 
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
 
-You can find further information at https://www.docker.com/why-docker[Why-Docker] and https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
+You can find further information at https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
 
 == Prerequisites
 
