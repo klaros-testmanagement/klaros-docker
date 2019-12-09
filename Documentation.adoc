@@ -887,7 +887,7 @@ rm -rf ~/klaros-docker/
 
 == Documentation
 
-To get started with Klaros Test Managment please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
+To get started with Klaros Test Management please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
 
 Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
