@@ -19,7 +19,7 @@ toc::[]
 == Introduction
 
 IMPORTANT: This quickstart documentation only covers the Klaros Test Management installation with the Apache Derby database and is only supported for test installations. Do not use it for production systems.
-The database systems MariaDB, MySQL and PostgreSQL are freely available to use Klaros Test Management for production.
+The instructions for the production installation with the database systems MariaDB, MySQL and PostgreSQL can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation.adoc[here.]
 
 This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
@@ -168,20 +168,6 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ----
 ====
 
-
-== How to use an older version
-
-NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
-
-You can view currently supported versions on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
-
-After the repository has been cloned, the tags can be listed with "git tag" and selected as local branch with "git checkout".
-
-----
-git tag
-git checkout tags/<tag_name> -b klaros
-----
-
 == Installation
 === Clone
 Once you are in the directory you want, you can start downloading the Dockerfile.
@@ -208,8 +194,6 @@ docker build -t klaros .
 //// In Arbeit ////
 == Usage
 === How to start an instance
-
-
 
 For the successful start of Klaros Test Management, a Docker-Container with the name "Klaros" will be created.
 
@@ -250,7 +234,8 @@ Example: 127.0.0.1:18080
 
 ====
 
-It is also possible to create a second instance of Klaros via another port with its own database.
+Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
+To create another instance, simply change the containername and port.
 
 .Create a second Klaros instance with its own database
 ----
@@ -266,6 +251,8 @@ docker stop Klaros
 
 == Create, restore and test a backup
 Backups are labeled with the name "backup_klaros<date>.tar.gz". If you create several backups per day, it is recommended to specify a time (hours, minutes and seconds) when creating the backups. To do this, add %H(hour), %M(minute), and %S(second) in date/Get-Date.
+
+If an error occurs while creating the backup, the log file provides useful hints.
 
 .Windows Example
 ----
@@ -355,12 +342,10 @@ docker rm -v Klaros-test
 
 It may happen that log files are required for error detection. In this case, it is possible to open a shell directly in the Docker-Container in order to read the logs in the container, or to display the logs directly from the backup.
 
-If an error occurs while creating the backup, the log file provides useful hints.
-
 === Show logs via the Docker shell
 Open a shell with "docker exec" in the Klaros container to get access to the logs.
 
-Please note that the server must be started during access via the shell and must not be shut down.
+NOTE: Please note that the server must be started when accessing via the shell and is not shut down.
 
 Important logs can be found at:
 
@@ -394,7 +379,7 @@ Afterwards, the Klaros Test Management logs can be displayed in the "logs" folde
 == Update
 IMPORTANT: If the update is only for testing purposes, do not use the original branch(klaros). Also make sure to use another volume and rebuild the old image with "docker build -t klaros ." after testing.
 
-Before an update of Klaros Test Management should be executed, a temporary container with the volumes of Klaros must be created.
+Before an update of Klaros Test Management is executed, a temporary container with the volumes of Klaros must be created.
 
 ----
 docker stop Klaros
@@ -436,6 +421,19 @@ docker rm Klaros-tmp
 docker start -a Klaros
 ----
 
+== How to use a previous version
+
+NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
+
+You can view currently supported versions on https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+
+After the repository has been cloned, the tags can be listed with "git tag" and selected as local branch with "git checkout".
+
+----
+git tag
+git checkout tags/<tag_name> -b klaros
+----
+
 == Uninstallation
 
 To completely remove Klaros Test Management from Docker, the server must first be shut down and the container and volume removed.
@@ -450,7 +448,7 @@ rm -rf ~/klaros-docker
 
 == Documentation
 
-If you are interested in our software, then you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] or for advanced, the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.]
+If you are interested in our software, you can read our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] for beginners or the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual] for more advanced features.
 
 Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
