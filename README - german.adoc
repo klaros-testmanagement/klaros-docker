@@ -134,21 +134,21 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Download d
 
 NOTE: Bitte stellen Sie sicher, dass Sie das Image nach dem Ändern des Dockerfiles neu erstellen.
 
-=== Configuration at server startup
+=== Konfiguration beim Serverstart
 
 Changeable variables can be found in Table 2. The environment variables can be changed with the -e parameter.
 
-.Example
+.Beispiel
 ----
-sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Other Variables> klaros
+sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Weitere Variable> klaros
 ----
 
-=== Configuration via a file
+=== Konfiguration über eine Datei
 
-To specify the configurations via a file, a text file can be created in the ApacheDerby directory. 
-Modifiable variables can be found in Table 2. When creating the container, add the --env-file parameter.
+Um die Konfigurationen über eine Datei festzulegen, kann im ApacheDerby Verzeichnis eine Textdatei erstellt werden.
+Modifizierbare Variablen finden Sie in Tabelle 2. Fügen Sie beim Erstellen des Containers den Parameter --env-file hinzu.
 
-.Windows Example
+.Windows Beispiel
 [%collapsible]
 ====
 ----
@@ -158,7 +158,7 @@ sudo docker create --name Klaros -p 18080:18080 --env-file ./env-list.txt klaros
 ----
 ====
 
-.Linux Example
+.Linux Beispiel
 [%collapsible]
 ====
 ----
@@ -170,34 +170,33 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 
 == Installation
 === Clone
-Once you are in the directory you want, you can start downloading the Dockerfile.
+Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
 ----
 git init
 git clone https://github.com/klaros-testmanagement/klaros-docker 
 ----
 
-With "ls" you can check whether the directory was created correctly.
+Mit „ls“ können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
 ----
 ls
-Output: klaros-docker
+Ausgabe: klaros-docker
 ----
 
 === Build
-The image is needed to create the Klaros container and start the server. +
-Windows users are switching from Git Bash to Powershell.
+Das Image wird benötigt, um den Klaros-Container zu erstellen und den Server zu starten. +
+Windowsnutzer wechseln von Git Bash zur Powershell.
 
 ----
 cd ~/klaros-docker/ApacheDerby
 docker build -t klaros .
 ----
 
-//// In Arbeit ////
-== Usage
-=== How to start an instance
+== Benutzung
+=== So starten Sie eine Instanz
 
-During startup, a Docker-Container with the name "Klaros" will be created.
+Beim Starten wird ein Docker-Container mit dem Namen „Klaros“ angelegt.
 
-IMPORTANT: An anonymous volume is created when the container is created. If a named volume is desired, then -v must be added as an additional parameter.
+IMPORTANT: Beim Erstellen des Containers wird ein anonymes Volume erstellt. Wenn ein benanntes Volume gewünscht wird, muss -v als zusätzlicher Parameter hinzugefügt werden.
 
 .One-time execution: Create a Klaros container (anonymous volume)
 ----
