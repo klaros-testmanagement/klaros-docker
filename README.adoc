@@ -470,7 +470,7 @@ By installing our software through Docker, you also agree to our https://www.kla
 
 We thank you for your attention and hope to meet the interests of many users with this documentation. We are continuously working on improving Klaros Test Management.
 
-So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de oder use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
+So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de or use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
 
 == Acknowledgements
 
