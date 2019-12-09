@@ -132,8 +132,6 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 
 Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. The Dockerfile contains a list of the configurable ENV variables. See Table 1 for more information.
 
-Open the Dockerfile under _~/klaros-docker/ApacheDerby_ with the preferred text editor. In the Dockerfile is a list of different ENV variables available, which can be adapted and changed as desired. See Table 1 for more information.
-
 NOTE: Please make sure that you recreate the image after changing the Dockerfile.
 
 === Configuration at server startup
