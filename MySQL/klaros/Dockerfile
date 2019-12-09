@@ -6,6 +6,7 @@
 
 
 FROM openjdk:8u212-alpine
+LABEL maintainer "André Raabe <andre.raabe@gmail.com>"
 
 # Set Klaros language. Use 'deu' for german and 'eng' for english.
 ARG KLAROS_LANG=eng
