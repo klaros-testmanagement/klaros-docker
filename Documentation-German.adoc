@@ -119,7 +119,7 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installati
 |TIMEZONE                 |                  |Zeitzone
 |MEMORY_MAX               |786               |Maximal verfügbarer Arbeitsspeicher in MB
 |MEMORY_MIN               |128               |Minimal verfügbarer Arbeitsspeicher in MB
-|VOLUME_NAME              | klaros-data      |Das Volume wird von Compose automatisch mit dem Namen "klaros-data" erzeugt, falls es nicht vorhanden ist
+|VOLUME_NAME              |klaros-data       |Das Volume wird von Compose automatisch mit dem Namen "klaros-data" erzeugt, falls es nicht vorhanden ist
 |=======================
 
 .Veränderbare Variablen nach dem ersten Serverstart über das .env file
@@ -160,7 +160,7 @@ vi .env
 ----
 
 == Installation
-=== Clone
+=== Repository Klonen
 Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
 ----
 git init
@@ -173,7 +173,7 @@ ls
 Ausgabe: klaros-docker
 ----
 
-=== Build
+=== Image erstellen
 Das Image wird benötigt, um den Klaros-Container zu erstellen und den Server zu starten.
 
 .PostgreSQL
@@ -280,7 +280,7 @@ vi .env
 
 Um eine zweite Instanz unabhängig von der ersten Instanz auszuführen, müssen sich die Instanzen in Name, Port und Volume unterscheiden.
 
-.Values to be changed per instance
+.Werte, die pro Instanz geändert werden müssen.
 [options="header"]
 |=======================
 |Aktueller Wert    |Neuer Wert       |Beschreibung

@@ -113,10 +113,10 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installati
 [options="header"]
 |=======================
 |Variable |Voreinstellung |Beschreibung
-|TOMCAT_ADMIN_PASSWORD       |P@ssw0rd  Passwort für den Login auf 127.0.0.1:18080/monitoring
+|TOMCAT_ADMIN_PASSWORD       |P@ssw0rd  |Passwort für den Login auf 127.0.0.1:18080/monitoring
 |TOMCAT_MEMORY_MIN           |128       |Minimal verfübarer Arbeitsspeicher in MB
 |TOMCAT_MEMORY_MAX           |768       |Maximal verfügbarer Arbeitsspeicher in MB
-|JAVA_OPTS  |  | Mit JAVA_OPTS können zusätzliche Einstellungen an den Tomcat-Server übertragen werden. Beispielsweise kann die Zeitzone mit JAVA_OPTS -Duser.timezone=Europe/Berlin auf Europa/Berlin eingestellt werden.
+|JAVA_OPTS  |   |Mit JAVA_OPTS können zusätzliche Einstellungen an den Tomcat-Server übertragen werden. Beispielsweise kann die Zeitzone mit JAVA_OPTS -Duser.timezone=Europe/Berlin auf Europa/Berlin eingestellt werden.
 |KLAROS_VERSION         |${KLAROS_VERSION:-4.12.1} |Klaros-Release-Version, die während der Installation verwendet wird.  Eine Liste der verfügbaren Releases finden Sie auf der offiziellen https://www.klaros-testmanagement.com/de_DE/download[Klaros-Testmanagement] Webseite oder auf https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
 |=======================
 
@@ -169,7 +169,7 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ====
 
 == Installation
-=== Clone
+=== Repository Klonen
 Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
 ----
 git init
@@ -182,7 +182,7 @@ ls
 Ausgabe: klaros-docker
 ----
 
-=== Build
+=== Image erstellen
 Das Image wird benötigt, um den Klaros-Container zu erstellen und den Server zu starten. +
 Windowsnutzer wechseln von Git Bash zur Powershell.
 
