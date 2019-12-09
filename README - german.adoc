@@ -454,27 +454,28 @@ rm -rf ~/klaros-docker
 
 == Dokumentation
 
-Um mit dem Klaros-Testmanagement zu beginnen, lesen Sie bitte unser Tutorial und das Benutzerhandbuch. Beide sind auch in der Anwendung selbst nach erfolgreicher Anmeldung verfügbar. 
+Informationen zum Einstieg in Klaros Test Management finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
 
-To get started with Klaros Test Managment please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
-
-Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
+Unsere Installationsdokumentation beinhaltet die Installation von Klaros Test Management unter Docker für ApacheDerby, MariaDB, MySQL und PostgreSQL Datenbanken.
 
 == FAQ
 
-If you have further questions about Klaros Test Management and the Enterprise Edition, do not miss our https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true[Pricing-FAQ] and https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true[Support-FAQ.]
+Wenn Sie weitere Fragen zu Klaros Test Management und der Enterprise Edition haben, verpassen Sie nicht unsere FAQ zu https://www.klaros-testmanagement.com/de_DE/faq[Preisen] und https://www.klaros-testmanagement.com/de_DE/support[Support.]
 
-== License
-Klaros Test Management for Docker is licensed under the terms of the https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
+== Lizenz
+
+Klaros Test Management für Docker ist unter den Bedingungen der https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT-Lizenz] lizenziert.
 
 By installing our software through Docker, you also agree to our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
 
-== Contact
+Durch die Installation unserer Software über Docker stimmen Sie auch unserer Lizenzvereinbarung für https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement] zu.
 
-We thank you for your attention and hope to meet the interests of many users with this documentation. We are continuously working on improving Klaros Test Management.
+== Kontakt
 
-So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de oder use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
+Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros Test Management.
 
-== Acknowledgements
+Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/en_US/forum[Forum.]
 
-* https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
+== Danksagung
+
+* https://github.com/tuxknowledge[André Raabe] für das Bereitstellen der https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby und Microsoft SQL Server Version]
