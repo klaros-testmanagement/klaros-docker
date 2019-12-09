@@ -21,13 +21,9 @@
 < ARG KLAROS_VERSION
 ---
 > ARG KLAROS_VER
-22,24c37
-< 
-< ENV JAVA_OPTS -Duser.timezone=
-< 
----
+21a37
 > ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
-28,31c41,42
+25,28c41,42
 < ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.3}
 < ENV KLAROS_HOME /data/klaros-home
 < ENV CATALINA_BASE /data/catalina-base
@@ -35,25 +31,25 @@
 ---
 > ENV KLAROS_VER ${KLAROS_VER:-4.12.3}
 > ENV KLAROS_HOME /klaros-data
-36,38c47
+33,35c47
 < ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
 < ADD .start.sh /
 < 
 ---
 > ADD https://www.klaros-testmanagement.com/files/${KLAROS_VER}/Klaros-${KLAROS_VER}-Setup.jar /tmp/Klaros-Setup.jar
-44,45c53,54
+41,42c53,54
 < 	ghostscript-fonts \
 <     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
 ---
 >     ghostscript-fonts \
 >     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g;s/@@KLAROS_VER@@/${KLAROS_VER}/g" /tmp/auto-install.xml \
-55,57c64
+52,54c64
 < RUN chmod +x /.start.sh
 < 
 < VOLUME /data
 ---
 > VOLUME /klaros-data
-59c66
+56c66
 < CMD [ "/.start.sh", "run" ]
 ---
 > CMD [ "/root/klaros-testmanagement/bin/catalina.sh", "run" ]

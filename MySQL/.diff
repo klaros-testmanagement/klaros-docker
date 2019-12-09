@@ -1,26 +1,70 @@
-2c2
+1,55c1,53
+< ---
 < version: '3.4'
----
-> version: '3'
-5c5
+< services:
+<     db:
 <         image: mysql-klaros_db
----
->         image: mssql-2017
-8,9c8
+<         build: db
+<         restart: always
 <         command: --default-authentication-plugin=mysql_native_password
 <         container_name: ${DATABASE_CONTAINER_NAME}
----
->         container_name: db
-11,12d9
+<         hostname: db
 <         env_file:
 <             ./.env
-14,18c11,26
+<         environment:
 <             MYSQL_DATABASE: ${DATABASE_NAME}
 <             MYSQL_USER: ${DATABASE_USER}
 <             MYSQL_PASSWORD: ${DATABASE_PASSWORD}
 <             MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
 <             TZ: ${TIMEZONE}
+<         ports:
+<             - "${DATABASE_PORT}:3306"
+<         networks:
+<             - mysql-net
+<         volumes:
+<             - klaros-data:/data
+< 
+<     klaros:
+<         image: klaros-mysql
+<         build: 
+<             context: ./klaros
+<             args:
+<                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
+<         restart: always
+<         container_name: ${KLAROS_CONTAINER_NAME}
+<         hostname: klaros
+<         environment:
+<             DATABASE_NAME: ${DATABASE_NAME}
+<             DATABASE_USER: ${DATABASE_USER}
+<             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+<             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
+<             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
+<             TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
+<         ports:
+<             - "${KLAROS_PORT}:18080"
+<         depends_on:
+<             - db
+<         networks:
+<             - mysql-net
+<         volumes:
+<             - klaros-data:/data
+< 
+< networks:
+<     mysql-net:
+< volumes:
+<     klaros-data:
+<         name: ${VOLUME_NAME}
 ---
+> ---
+> version: '3'
+> services:
+>     db:
+>         image: mssql-2017
+>         build: db
+>         restart: always
+>         container_name: db
+>         hostname: db
+>         environment:
 >             DATABASE_NAME: ${DATABASE_NAME}
 >             DATABASE_USER: ${DATABASE_USER}
 >             SA_PASSWORD: ${SA_PASSWORD}
@@ -37,54 +81,31 @@
 >             - /etc/localtime:/etc/localtime:ro
 >             - ./data_db:/var/opt/mssql
 >             - ./backup:/backup
-20c28
-<             - "${DATABASE_PORT}:3306"
----
+>         ports:
 >             - "10001:1433"
-22,24c30
-<             - mysql-net
-<         volumes:
-<             - klaros-data:/data
----
+>         networks:
 >             - sqlserver-net
-27,31c33,34
-<         image: klaros-mysql
-<         build: 
-<             context: ./klaros
-<             args:
-<                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
----
+> 
+>     klaros:
 >         image: klaros-mssql2017
 >         build: klaros
-33c36
-<         container_name: ${KLAROS_CONTAINER_NAME}
----
+>         restart: always
 >         container_name: klaros_mssql2017
-38,41c41,44
-<             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-<             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
-<             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
-<             TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
----
+>         hostname: klaros
+>         environment:
+>             DATABASE_NAME: ${DATABASE_NAME}
+>             DATABASE_USER: ${DATABASE_USER}
 >             SA_PASSWORD: ${SA_PASSWORD}
 >         volumes:
 >             - /etc/localtime:/etc/localtime:ro
 >             - ./data_klaros:/klaros-data
-43c46
-<             - "${KLAROS_PORT}:18080"
----
+>         ports:
 >             - "18080:18080"
-47,49c50
-<             - mysql-net
-<         volumes:
-<             - klaros-data:/data
----
+>         depends_on:
+>             - db
+>         networks:
 >             - sqlserver-net
-52,55c53
-<     mysql-net:
-< volumes:
-<     klaros-data:
-<         name: ${VOLUME_NAME}
----
+> 
+> networks:
 >     sqlserver-net:
 \ No newline at end of file

@@ -1,70 +1,26 @@
-1,55c1,53
-< ---
+2c2
 < version: '3.4'
-< services:
-<     db:
+---
+> version: '3'
+5c5
 <         image: mariadb-klaros_db
-<         build: db
-<         restart: always
+---
+>         image: mssql-2017
+8,9c8
 <         command: --default-authentication-plugin=mysql_native_password
 <         container_name: ${DATABASE_CONTAINER_NAME}
-<         hostname: db
+---
+>         container_name: db
+11,12d9
 <         env_file:
 <             ./.env
-<         environment:
+14,18c11,26
 <             MYSQL_DATABASE: ${DATABASE_NAME}
 <             MYSQL_USER: ${DATABASE_USER}
 <             MYSQL_PASSWORD: ${DATABASE_PASSWORD}
 <             MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
 <             TZ: ${TIMEZONE}
-<         ports:
-<             - "${DATABASE_PORT}:3306"
-<         networks:
-<             - mariadb-net
-<         volumes:
-<             - klaros-data:/data
-< 
-<     klaros:
-<         image: klaros-mariadb
-<         build: 
-<             context: ./klaros
-<             args:
-<                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
-<         restart: always
-<         container_name: ${KLAROS_CONTAINER_NAME}
-<         hostname: klaros
-<         environment:
-<             DATABASE_NAME: ${DATABASE_NAME}
-<             DATABASE_USER: ${DATABASE_USER}
-<             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-<             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
-<             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
-<             TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
-<         ports:
-<             - "${KLAROS_PORT}:18080"
-<         depends_on:
-<             - db
-<         networks:
-<             - mariadb-net
-<         volumes:
-<             - klaros-data:/data
-< 
-< networks:
-<     mariadb-net:
-< volumes:
-<     klaros-data:
-<         name: ${VOLUME_NAME}
 ---
-> ---
-> version: '3'
-> services:
->     db:
->         image: mssql-2017
->         build: db
->         restart: always
->         container_name: db
->         hostname: db
->         environment:
 >             DATABASE_NAME: ${DATABASE_NAME}
 >             DATABASE_USER: ${DATABASE_USER}
 >             SA_PASSWORD: ${SA_PASSWORD}
@@ -81,31 +37,54 @@
 >             - /etc/localtime:/etc/localtime:ro
 >             - ./data_db:/var/opt/mssql
 >             - ./backup:/backup
->         ports:
+20c28
+<             - "${DATABASE_PORT}:3306"
+---
 >             - "10001:1433"
->         networks:
+22,24c30
+<             - mariadb-net
+<         volumes:
+<             - klaros-data:/data
+---
 >             - sqlserver-net
-> 
->     klaros:
+27,31c33,34
+<         image: klaros-mariadb
+<         build: 
+<             context: ./klaros
+<             args:
+<                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
+---
 >         image: klaros-mssql2017
 >         build: klaros
->         restart: always
+33c36
+<         container_name: ${KLAROS_CONTAINER_NAME}
+---
 >         container_name: klaros_mssql2017
->         hostname: klaros
->         environment:
->             DATABASE_NAME: ${DATABASE_NAME}
->             DATABASE_USER: ${DATABASE_USER}
+38,41c41,44
+<             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+<             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
+<             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
+<             TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
+---
 >             SA_PASSWORD: ${SA_PASSWORD}
 >         volumes:
 >             - /etc/localtime:/etc/localtime:ro
 >             - ./data_klaros:/klaros-data
->         ports:
+43c46
+<             - "${KLAROS_PORT}:18080"
+---
 >             - "18080:18080"
->         depends_on:
->             - db
->         networks:
+47,49c50
+<             - mariadb-net
+<         volumes:
+<             - klaros-data:/data
+---
 >             - sqlserver-net
-> 
-> networks:
+52,55c53
+<     mariadb-net:
+< volumes:
+<     klaros-data:
+<         name: ${VOLUME_NAME}
+---
 >     sqlserver-net:
 \ No newline at end of file
