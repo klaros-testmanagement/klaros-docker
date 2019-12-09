@@ -136,7 +136,7 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 The environment variables can be configured and changed via the .env file.
 For port forwarding only the ports "KLAROS_PORT" and "DATABASE_PORT" in the .env file have to be changed.
 
-When creating the image, all values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (All changes require a restart.).
+When creating the image, all values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (All changes require a restart).
 
 If required, you can add the environment variable JAVA_OPTS to the Dockerfile of the klaros directory for additional settings of the Tomcat server.
 
