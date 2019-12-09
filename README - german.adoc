@@ -62,7 +62,7 @@ Während der Installation kann ausgewählt werden, ob und wie die Zeilenendungen
 .Konfiguration der Zeilenenden-Konvertierung
 image::images/ConfigurationOfTheLineEndConversion.png[Konfiguration der Zeilenenden-Konvertierung]
 
-Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel „Download des Dockerfiles von Klaros-Testmanagement über GitHub“ wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.
+Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.
 ====
 
 .Linux
@@ -104,7 +104,7 @@ git --version
 Output: git version 2.20.1
 ----
 
-Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Download des Dockerfiles von Klaros-Testmanagement über GitHub“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
+Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
 ====
 
 == Docker-Umgebungsvariablen konfigurieren
@@ -136,7 +136,7 @@ NOTE: Bitte stellen Sie sicher, dass Sie das Image nach dem Ändern des Dockerfi
 
 === Konfiguration beim Serverstart
 
-Changeable variables can be found in Table 2. The environment variables can be changed with the -e parameter.
+Veränderbare Variablen finden sich unter Tabelle 2. Die Umgebungsvariablen können mit dem Parameter -e geändert werden.
 
 .Beispiel
 ----
@@ -192,7 +192,7 @@ docker build -t klaros .
 ----
 
 == Benutzung
-=== So starten Sie eine Instanz
+=== Eine Instanz starten
 
 Beim Starten wird ein Docker-Container mit dem Namen „Klaros“ angelegt.
 
@@ -241,7 +241,7 @@ Um eine weitere Instanz zu erstellen, muss lediglich der Containernamen und Port
 docker create --name Klaros2 -p 18081:18080 klaros
 ----
 
-=== Wie man seine Instanz herunterfährt
+=== Instanz herunterfahren
 
 Im abgetrennten Modus muss der Server über "Docker Stop" heruntergefahren werden.
 Wenn der Container im Vordergrund gestartet wurde, gelangt man mit der Tastenkombination STRG + C zurück in das Terminal, wodurch der Container automatisch heruntergefahren wird. Windows gilt hierbei als Ausnahme und der Container muss über „docker stop“ beendet werden.
@@ -363,7 +363,6 @@ more /data/catalina-base/logs/catalina.2019-12-09.log
 .Windows
 [%collapsible]
 ====
-
 Windows-Nutzer können das Archivprogramm https://www.winrar.de/downld.php[WinRAR] verwenden, um .tar.gz Archive zu entpacken.
 
 Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base anzeigen.
@@ -401,7 +400,7 @@ git pull origin master
 
 === Update über tags
 
-Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen. 
+Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.
 
 ----
 git checkout master
@@ -415,6 +414,7 @@ git branch -D update
 === Image aktualisieren
 
 Nachdem das Update vom Git Repository heruntergeladen wurde, wird als nächstes das alte Image entfernt und ein neues Image erstellt.
+
 ----
 docker rmi klaros
 docker build -t klaros .
@@ -427,11 +427,11 @@ docker rm Klaros-tmp
 docker start -a Klaros
 ----
 
-== Wie man eine frühere Version verwendet
+== Vorherige Version nutzen
 
 NOTE: Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
 
-Die aktuell unterstützten Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
 
 Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokalen branch mit "git checkout" ausgewählt werden.
 
@@ -465,8 +465,6 @@ Wenn Sie weitere Fragen zu Klaros-Testmanagement und der Enterprise Edition habe
 == Lizenz
 
 Klaros-Testmanagement für Docker ist unter den Bedingungen der https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT-Lizenz] lizenziert.
-
-By installing our software through Docker, you also agree to our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
 
 Durch die Installation unserer Software über Docker stimmen Sie auch unserer Lizenzvereinbarung für https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement] zu.
 
