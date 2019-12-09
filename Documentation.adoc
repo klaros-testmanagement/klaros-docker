@@ -289,8 +289,8 @@ To run a second instance independently of the first instance, the instances must
 |Current value |New value  |Description
 |KLAROS_PORT=18080 |KLAROS_PORT=18081 |Public port for later access to the website
 |DATABASE_PORT=10001 |DATABASE_PORT=10002 |Public port for accessing the database from the outside.
-|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Database Containername
-|KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros Test Management Containername
+|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Database container name
+|KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros Test Management container name
 |VOLUME_NAME=klaros-data |VOLUME_NAME=klaros-data2 |Volume name. The data is stored here
 |=======================
 

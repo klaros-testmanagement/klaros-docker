@@ -140,7 +140,7 @@ Changeable variables can be found in Table 2. The environment variables can be c
 
 .Example
 ----
-sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Other Variables> klaros
+sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Other Variable> klaros
 ----
 
 === Configuration via a file
@@ -235,7 +235,7 @@ Example: 127.0.0.1:18080
 ====
 
 Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.
-To create another instance, simply change the containername and port.
+To create another instance, simply change the container name and port.
 
 .Create a second Klaros instance with its own database
 ----
