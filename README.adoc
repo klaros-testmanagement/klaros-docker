@@ -384,7 +384,7 @@ Afterwards, the Klaros Test Management logs can be displayed in the "logs" folde
 
 IMPORTANT: If the update is only for testing purposes, do not use its original branch (klaros or master), otherwise the configurations for the previous version will be lost(You can clone the directory for this). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing, so that your original version is not accidentally updated.
 
-Before an update of Klaros Test Management is executed, a temporary container with the volumes of Klaros must be created.
+Before an update of Klaros Test Management can be performed, a temporary container with the volumes of Klaros must be created.
 
 ----
 docker stop Klaros
@@ -453,7 +453,7 @@ rm -rf ~/klaros-docker
 
 == Documentation
 
-To get started with Klaros Test Managment please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
+To get started with Klaros Test Management please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
 
 Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
