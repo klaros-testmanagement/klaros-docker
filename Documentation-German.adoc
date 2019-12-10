@@ -1,0 +1,914 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Klaros-Testmanagement Docker-Integration
+:toc: macro
+:sectnums:
+:toc-title: Inhaltsverzeichnis
+
+image:https://img.shields.io/badge/Version-4.12.3-green.svg[]
+image:https://img.shields.io/badge/License-MIT-green[]
+image:https://img.shields.io/badge/Community%20Edition-FREE-green[]
+
+toc::[]
+
+== Einführung
+
+IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
+
+In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
+
+=== Über Docker
+https://www.docker.com/[Docker] ist eine freie, containerbasierte Software, die eine sichere Installation von Anwendungen auf verschiedenen Betriebssystemen wie Windows und Linux ermöglicht.
+
+Weitere Informationen finden Sie unter https://www.docker.com/why-docker[Why-Docker]
+
+=== Über Klaros-Testmanagement
+
+Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Sie enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
+
+Klaros-Testmanagement ist in der Community Edition kostenlos verfügbar.
+
+Die Community Edition ist uneingeschränkt nutzbar und verfügt über einen reduzierten Funktionsumfang.
+
+Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es ideal für den Einstieg in ein kleines Team.
+
+Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.
+
+Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
+
+Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] Ihren Lizenzschlüssel anfordern.
+
+Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
+
+== Voraussetzungen
+
+.Windows
+[%collapsible]
+====
+
+Die aktuellen Hardwareanforderungen und Installationsschritte sind in der https://docs.docker.com/docker-for-windows/install/[offiziellen Docker-Dokumentation] beschrieben. Für die Installation von Docker Desktop ist eine Anmeldung erforderlich.
+
+Um die spätere Aktualisierung von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile mit Git von GitHub herunterzuladen.
+Git kann von der https://git-scm.com[offiziellen Webseite] heruntergeladen und installiert werden.
+
+Während der Installation kann ausgewählt werden, ob und wie die Zeilenendungen von Dateien konvertiert werden soll. Da der Server innerhalb des Containers über Linux betrieben wird, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, empfehlen wir die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ auszuwählen.
+
+.Konfiguration der Zeilenenden-Konvertierung
+image::images/ConfigurationOfTheLineEndConversion.png[Konfiguration der Zeilenenden-Konvertierung]
+
+Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.
+====
+
+.Linux
+[%collapsible]
+====
+Auf der offiziellen Docker-Dokumentation sind die aktuellen Hardwareanforderungen und Installationsschritte zu finden.
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/[Ubuntu Docker]
+
+https://docs.docker.com/install/linux/docker-ce/debian/[Debian Docker]
+
+https://docs.docker.com/install/linux/docker-ce/centos/[CentOS Docker]
+
+https://www.cyberciti.biz/faq/install-use-setup-docker-on-rhel7-centos7-linux/[RHEL Docker]
+
+https://docs.docker.com/compose/install/[Docker Compose]
+
+.Git-Installation über Ubuntu/Debian:
+----
+sudo apt-get update
+sudo apt-get install git
+----
+
+.Git-Installation über CentOS/RHEL:
+----
+sudo yum check-update
+sudo yum install git-core
+----
+
+
+Ob die Installation erfolgreich war, lässt sich mit folgendem Kommando überprüfen:
+----
+git --version
+Output: git version 2.20.1
+----
+
+Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
+====
+
+== Docker-Umgebungsvariablen konfigurieren
+
+.Konfigurierbare Umgebungsvariablen vor dem ersten Serverstart über das .env file
+[options="header"]
+|=======================
+|Variable                 |Voreinstellung    |Beschreibung
+|DATABASE_NAME            |klaros            |Datenbankname
+|DATABASE_USER            |klaros            |Datenbankbenutzer
+|DATABASE_CONTAINER_NAME  |klaros_db         |Datenbank Containername
+|DATABASE_PASSWORD        |P@ssw0rd          |Datenbank Passwort
+|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MariaDB/MySQL Only] Root Passwort für den "root" Nutzer.
+|DATABASE_PORT            |10001             |Öffentlicher Datenbank Port
+|KLAROS_CONTAINER_NAME    |klaros_postgresql |Klaros-Testmanagement Containername
+|KLAROS_PORT              |18080             |Öffentlicher Klaros-Testmanagement Port
+|TOMCAT_PASSWORD          |P@ssw0rd          |Passwort für den Login auf 127.0.0.1:18080/monitoring
+|TIMEZONE                 |                  |Zeitzone
+|MEMORY_MAX               |786               |Maximal verfügbarer Arbeitsspeicher in MB
+|MEMORY_MIN               |128               |Minimal verfügbarer Arbeitsspeicher in MB
+|VOLUME_NAME              |klaros-data       |Das Volume wird von Compose automatisch mit dem Namen "klaros-data" erzeugt, falls es nicht vorhanden ist
+|=======================
+
+.Veränderbare Variablen nach dem ersten Serverstart über das .env file
+[options=""]
+|=======================
+|DATABASE_CONTAINER_NAME
+|DATABASE_PORT
+|KLAROS_CONTAINER_NAME
+|KLAROS_PORT
+|TIMEZONE
+|MEMORY_MAX
+|MEMORY_MIN
+|VOLUME_NAME
+|=======================
+
+Die Umgebungsvariablen lassen sich über das .env file konfigurieren und verändern.
+Für die Portweiterleitung müssen lediglich die Ports „KLAROS_PORT" und „DATABASE_PORT“ im .env file geändert werden.
+
+Beim Erstellen des Images können alle Werte in Tabelle 1 vor dem ersten Serverstart geändert werden. Nach dem ersten Start des Servers können die Werte in Tabelle 2 beliebig oft geändert werden (Alle Änderungen erfordern einen Neustart).
+
+Bei Bedarf kann die Umgebungsvariable JAVA_OPTS in das Dockerfile vom klaros Verzeichnis hinzugefügt werden, um zusätzliche Einstellungen für den Tomcat-Server vorzunehmen.
+
+.Beispiel zum Einstellen der Zeitzone über JAVA_OPTS
+[%collapsible]
+====
+IMPORTANT: Bitte ändere bei Bedarf die Zeitzone in der .env-Datei und nicht im Dockerfile.
+
+[options=""]
+|=======================
+|ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
+|=======================
+====
+
+.Konfiguration über das .env file
+Die .env Datei befindet sich im selben Verzeichnis wie die docker-compose.yml Datei und kann mit dem bevorzugtem Textbearbeitungsprogramm geöffnet werden.
+----
+vi .env
+----
+
+== Installation
+=== Repository Klonen
+Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
+----
+git init
+git clone https://github.com/klaros-testmanagement/klaros-docker 
+----
+
+Mit „ls“ können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
+----
+ls
+Ausgabe: klaros-docker
+----
+
+=== Image erstellen
+Das Image wird benötigt, um den Klaros-Container zu erstellen und den Server zu starten.
+
+.PostgreSQL
+----
+cd ~/klaros-docker/PostgreSQL
+docker-compose build
+----
+
+.MySQL
+----
+cd ~/klaros-docker/MySQL
+docker-compose build
+----
+
+.MariaDB
+----
+cd ~/klaros-docker/MariaDB
+docker-compose build
+----
+
+== Benutzung
+=== Eine Instanz starten
+
+Beim Start werden automatisch zwei Docker-Container für den Server und die Datenbank angelegt. Die Konfigurationen sind im .env file zu finden.
+
+.Server starten
+----
+docker-compose up
+----
+
+[%collapsible]
+====
+.Um den Container im abgetrennten Modus auszuführen, muss der Parameter -d hinzugefügt werden. 
+----
+docker-compose up -d
+----
+
+Weitere Informationen finden Sie in der https://docs.docker.com/compose/reference/up/[offiziellen Docker-Compose Dokumentation.]
+
+Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
+
+----
+Benutzername: admin
+Passwort: admin
+----
+
+Beispiel: 127.0.0.1:18080
+
+
+====
+
+=== Weitere Instanzen starten
+
+Zu Test- oder Validierungszwecken kann es wünschenswert sein, mehrere Instanzen von Klaros gleichzeitig in derselben Docker-Umgebung auszuführen. In diesem Abschnitt werden die Konfigurationsänderungen beschrieben, die erforderlich sind, um dies zu berücksichtigen.
+
+Eine weitere Klaros-Instanz kann verwendet werden, um Sicherungen auf Vollständigkeit zu prüfen oder eine neuere Klaros-Version zu testen.
+
+Um eine unabhängige Klaros-Instanz zu starten, müssen einige Konfigurationsänderungen vorgenommen werden. Um Ihre vorhandenen Konfigurationen zu speichern, wird empfohlen, die Konfiguration jeder Instanz in ihrem eigenen Verzeichnis zu speichern.
+
+.PostgreSQL
+[%collapsible]
+====
+Kopieren Sie das Verzeichnis unter einem anderen Namen.
+----
+cp -r PostgreSQL/ PostgreSQL2
+----
+
+Öffne die ENV-Datei mit dem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+----
+cd ~/klaros-docker/PostgreSQL2
+vi .env
+----
+====
+
+.MySQL
+[%collapsible]
+====
+Kopieren Sie das Verzeichnis unter einem anderen Namen.
+----
+cp -r MySQL/  MySQL2
+----
+
+Öffne die ENV-Datei mit dem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+----
+cd ~/klaros-docker/MySQL2
+vi .env
+----
+====
+
+.MariaDB
+[%collapsible]
+====
+Kopieren Sie das Verzeichnis unter einem anderen Namen.
+----
+cp -r MariaDB/  MariaDB2
+----
+
+Öffne die ENV-Datei mit dem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+----
+cd ~/klaros-docker/MariaDB2
+vi .env
+----
+====
+
+Um eine zweite Instanz unabhängig von der ersten Instanz auszuführen, müssen sich die Instanzen in Name, Port und Volume unterscheiden.
+
+.Werte, die pro Instanz geändert werden müssen.
+[options="header"]
+|=======================
+|Aktueller Wert    |Neuer Wert       |Beschreibung
+|KLAROS_PORT=18080 |KLAROS_PORT=18081 |Öffentlicher Port, um später auf die Webseite zuzugreifen
+|DATABASE_PORT=10001 |DATABASE_PORT=10002 |Öffentlicher Port, um von außen auf die Datenbank zuzugreifen
+|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Datenbank Containername
+|KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros-Testmanagement Containername
+|VOLUME_NAME=klaros-data |VOLUME_NAME=klaros-data2 |Volumename. Hier werden die Daten gespeichert
+|=======================
+
+Die zweite Instanz wird dann wie die erste Instanz gestartet.
+----
+docker-compose up
+----
+
+=== Instanz herunterfahren
+
+Wenn der Container im Vordergrund gestartet wurde, drücken Sie STRG + C, um zum Terminal zurückzukehren und den Container automatisch herunterzufahren. Im abgetrennten Modus muss der Server über "Docker-Compose Stop" heruntergefahren werden.
+
+----
+docker-compose stop
+----
+
+== Erstellen, Wiederherstellen und Testen eines Backups
+
+Hierbei wird zwischen SQL-Backup (Dump) und Volume-Backup unterschieden. Mithilfe eines SQL Backups kann die Datenbank im laufenden Betrieb gesichert werden. Bei einem Volume Backup muss der Server zuvor heruntergefahren werden. Ein SQL Backup erfordert ebenfalls einen geringeren Speicherbedarf als ein Volume Backup, es fehlen jedoch wichtige Daten, wie z.B.: die Konfigurations- und Protokolldateien sowie binäre Anhänge. Beide Sicherungsstrategien haben ihre Vorteile, daher ist es wünschenswert, sie zu kombinieren.
+
+Einzelne SQL Backups finden sich unter dem Namen "backup_sql_klaros<Datum>.tar.gz".
+
+Volumes oder SQL mit Volume Backups sind unter dem Namen „backup_klaros<Datum>.tar.gz“ gekennzeichnet. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
+
+Wenn bei der Erstellung des Backups ein Fehler auftritt, enthalten die Logfiles nützliche Hinweise.
+
+.Windows Beispiel
+----
+$(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
+----
+
+.Linux Beispiel
+----
+$(date '+%y-%m-%d-%H:%M:%S')
+----
+
+[%collapsible]
+====
+Damit würde das Backup den folgenden Namen tragen:
+
+Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
+Linux: backup_klaros19-10-28-11:34:33.tar.gz
+
+Um den Backup-Pfad zu wechseln, kann die Variable "BACKUP_DIR" angepasst werden.
+
+.Windows Beispiel
+----
+BACKUP_DIR="~/klaros-docker/Path/backup"
+----
+
+.Linux Beispiel
+----
+BACKUP_DIR=~/klaros-docker/Path/backup
+----
+====
+
+=== SQL Backup erstellen
+Ein SQL Backup kann nur im laufenden Betrieb erstellt werden.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+.MySQL/MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+====
+
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+.MySQL/MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
+rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+====
+
+=== Volume Backup erstellen
+Für ein Volume Backup muss der Server heruntergefahren werden.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine /bin/sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data"
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data"
+cd -
+----
+
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data"
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data"
+cd -
+----
+
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -
+----
+
+====
+
+=== Volume und SQL Backup erstellen
+Als erstes muss im laufendem Betrieb ein SQL Backup erstellt werden. Danach wird der Server heruntergefahren, um das Backup auszuführen.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mysql-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "pg_dump -c  -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data -C /backup backup${DATE}.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MySQL
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+mkdir -p ${BACKUP_DIR}
+sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /$BACKUP_DIR:/backup alpine sh -c "tar cvzf /backup/$BACKUP_NAME /data/klaros-home /data/catalina-base/logs /data/mysql-data -C /backup backup$DATE.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.MariaDB
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+mkdir -p ${BACKUP_DIR}
+sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /$BACKUP_DIR:/backup alpine sh -c "tar cvzf /backup/$BACKUP_NAME /data/klaros-home /data/catalina-base/logs /data/mariadb-data -C /backup backup$DATE.sql"
+rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+====
+
+=== Backup wiederherstellen
+
+Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv "backup_klaros<Datum> .tar.gz", wenn eine "backup<Datum>.sql" Datei vorhanden ist. Beachten Sie, dass die Datenbank weiterhin ausgeführt werden muss, während der Server heruntergefahren wird. Danach wird der Container über "Docker-Compose Stop" gestoppt.
+
+NOTE: Beachte, das Datum der jeweiligen Backups anzupassen.
+
+.Windows
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+docker stop klaros_postgresql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | docker exec -i klaros_db bash -c "psql -U \${DATABASE_USER} -d \${DATABASE_NAME}"
+rm backup${DATE}.sql
+docker-compose stop
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+docker stop klaros_mysql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+docker-compose stop
+cd -
+----
+
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+docker stop klaros_mariadb
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+docker-compose stop
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+sudo docker stop klaros_postgresql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "psql -U \${DATABASE_USER} -d \${DATABASE_NAME}"
+rm backup${DATE}.sql
+sudo docker-compose stop
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+sudo docker stop klaros_mysql
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+sudo docker-compose stop
+cd -
+----
+
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+sudo docker stop klaros_mariadb
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
+cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
+rm backup${DATE}.sql
+sudo docker-compose stop
+cd -
+----
+
+====
+
+=== Volume wiederherstellen
+IMPORTANT: Vor der Wiederherstellung muss der Container heruntergefahren werden.
+
+.Windows
+[%collapsible]
+====
+
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+====
+
+.Linux
+[%collapsible]
+====
+
+.PostgreSQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/PostgreSQL
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MySQL
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MySQL
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.MariaDB
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/MariaDB
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+====
+
+== Wie und wo finde ich die Logfiles?
+
+Für die Fehlerbehebung können Logfiles erforderlich sein. Um auf Logfiles zuzugreifen, kann eine Shell direkt im Docker-Container geöffnet werden oder sie können aus dem Backup entnommen werden.
+
+Wichtige Logs finden sich unter:
+
+_/data/catalina-base/logs_ +
+_/data/mysql-data_ ← Additional for MySQL
+
+=== Logs über die Docker shell anzeigen
+Öffne im Klaros-Container eine Shell mit „docker exec“, um Zugriff auf die Logs zu bekommen.
+
+NOTE: Bitte beachte, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
+
+.Die Logfiles können dann mit "more" gelesen werden.
+----
+docker exec -it Klaros /bin/sh
+more /data/catalina-base/logs/catalina.2019-12-09.log
+----
+
+=== Logs aus dem Backupverzeichnis anzeigen
+
+.Windows
+[%collapsible]
+====
+Windows-Nutzer können das Archivprogramm https://www.winrar.de/downld.php[WinRAR] verwenden, um .tar.gz Archive zu entpacken.
+
+Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von catalina-base und die MySQL Logs im Ordner "mysql-data" anzeigen.
+====
+
+.Linux
+[%collapsible]
+====
+Um die Logs aus dem Backup auszulesen, lässt sich mit tar das Archive entpacken.
+----
+sudo tar -xzf backup_klaros19-10-28.tar.gz
+----
+
+Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von catalina-base und die MySQL Logs im Ordner "mysql-data" anzeigen.
+
+====
+
+== Update
+
+IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
+
+=== Update über master branch
+
+Klaros kann mit "git pull" auf die neueste Version aktualisiert werden.
+----
+git pull origin master
+----
+
+=== Update über tags
+
+Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.
+
+----
+git checkout master
+git pull origin master
+git checkout tags/<tag_name> -b update
+git checkout klaros
+git merge update
+git branch -D update
+----
+
+=== Image aktualisieren
+
+Nach dem Herunterladen des Updates aus dem Git-Repository wird ein neues Image erstellt und alle "baumelnden" Images werden entfernt.
+
+----
+docker-compose down
+docker-compose build
+docker image prune
+----
+
+Nachdem das neue Image erstellt wurde, wird der Container wie gewohnt gestartet.
+
+----
+docker-compose up
+----
+
+== Vorherige Version nutzen
+
+NOTE: Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
+
+Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+
+Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokalen branch mit "git checkout" ausgewählt werden.
+
+----
+git tag
+git checkout tags/<tag_name> -b klaros
+----
+
+== Deinstallation
+
+Um Klaros-Testmanagement vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volumen entfernt werden können.
+
+Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image.
+
+.PostgreSQL
+----
+docker-compose down --volume
+docker rmi klaros-postgresql
+docker rmi postgres-klaros_db
+rm -rf ~/klaros-docker/
+----
+
+.MySQL
+----
+docker-compose down --volume
+docker rmi klaros-mysql
+docker rmi mysql-klaros_db
+rm -rf ~/klaros-docker/
+----
+
+.MariaDB
+----
+docker-compose down --volume
+docker rmi klaros-mariadb
+docker rmi mariadb-klaros_db
+rm -rf ~/klaros-docker/
+----
+
+== Dokumentation
+
+Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
+
+Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.
+
+== FAQ
+
+Wenn Sie weitere Fragen zu Klaros-Testmanagement und der Enterprise Edition haben, verpassen Sie nicht unsere FAQ zu https://www.klaros-testmanagement.com/de_DE/faq[Preisen] und https://www.klaros-testmanagement.com/de_DE/support[Support.]
+
+== Lizenz
+
+Klaros-Testmanagement für Docker ist unter den Bedingungen der https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT-Lizenz] lizenziert.
+
+Durch die Installation unserer Software über Docker stimmen Sie auch unserer Lizenzvereinbarung für https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement] zu.
+
+== Kontakt
+
+Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros-Testmanagement.
+
+Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
+
+== Danksagung
+
+* https://github.com/tuxknowledge[André Raabe] für das Bereitstellen der https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby und Microsoft SQL Server Version]
