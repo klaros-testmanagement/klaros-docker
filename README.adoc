@@ -13,6 +13,7 @@ endif::[]
 image:https://img.shields.io/badge/Version-4.12.3-green.svg[]
 image:https://img.shields.io/badge/License-MIT-green[]
 image:https://img.shields.io/badge/Community%20Edition-FREE-green[]
+image:https://img.shields.io/twitter/follow/Klaros_TM?style=social[float="right"]
 
 toc::[]
 
