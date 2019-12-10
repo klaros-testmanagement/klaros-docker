@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AutomatedInstallation langpack="@@KLAROS_LANG@@">
+<com.izforge.izpack.panels.htmlhello.HTMLHelloPanel id="hello"/>
+<com.izforge.izpack.panels.info.InfoPanel id="info"/>
+<com.izforge.izpack.panels.licence.LicencePanel id="license"/>
+<com.izforge.izpack.panels.target.TargetPanel id="target">
+<installpath>/root/klaros-testmanagement</installpath>
+</com.izforge.izpack.panels.target.TargetPanel>
+<com.izforge.izpack.panels.packs.PacksPanel id="packs">
+<pack index="0" name="Tomcat 8 Application Server" selected="true"/>
+<pack index="1" name="Klaros-Testmanagement 4.12.1" selected="true"/>
+<pack index="2" name="PDF-Documentation" selected="false"/>
+</com.izforge.izpack.panels.packs.PacksPanel>
+<com.izforge.izpack.panels.userinput.UserInputPanel id="portselection">
+<entry key="tomcat_http_port" value="@@TOMCAT_HTTP_PORT@@"/>
+<entry key="tomcat_server_port" value="@@TOMCAT_SERVER_PORT@@"/>
+<entry key="tomcat_session_timeout" value="@@TOMCAT_SESSION_TIMEOUT@@"/>
+<entry key="tomcat_memory_max" value="@@TOMCAT_MEMORY_MAX@@"/>
+<entry key="launch_browser_flag" value="false"/>
+<entry key="start_server_flag" value="false"/>
+<entry key="tomcat_ajp_port" value="@@TOMCAT_AJP_PORT@@"/>
+<entry key="tomcat_admin_name" value="admin"/>
+<entry key="tomcat_memory_min" value="@@TOMCAT_MEMORY_MIN@@"/>
+<entry key="tomcat_admin_password" value="@@TOMCAT_ADMIN_PASSWORD@@"/>
+</com.izforge.izpack.panels.userinput.UserInputPanel>
+<com.izforge.izpack.panels.install.InstallPanel id="install"/>
+<com.izforge.izpack.panels.process.ProcessPanel id="process"/>
+<com.izforge.izpack.panels.shortcut.ShortcutPanel id="shortcuts">
+<createMenuShortcuts>false</createMenuShortcuts>
+<programGroup>Klaros-Testmanagement</programGroup>
+<createDesktopShortcuts>false</createDesktopShortcuts>
+<createStartupShortcuts>false</createStartupShortcuts>
+<shortcutType>user</shortcutType>
+</com.izforge.izpack.panels.shortcut.ShortcutPanel>
+<com.izforge.izpack.panels.finish.FinishPanel id="finish"/>
+</AutomatedInstallation>
