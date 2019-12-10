@@ -471,6 +471,18 @@ We thank you for your attention and hope to meet the interests of many users wit
 
 So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de or use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
 
+== Contributing
+
+Would you like to help us or make suggestions for improvement? Follow these steps to suggest your changes.
+
+* Create an issue and describe your idea
+* Fork the repo
+* Create a new branch (git checkout -b feature/my-idea)
+* Make your changes
+* Commit your changes (git commit -am 'Adding feature')
+* Push to your branch (git push origin feature/my-idea)
+* Create a Pull Request
+
 == Acknowledgements
 
 * https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
