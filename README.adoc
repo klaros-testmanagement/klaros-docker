@@ -11,9 +11,10 @@ endif::[]
 :toc: macro
 :sectnums:
 
-image:https://img.shields.io/badge/Version-4.12.3-green.svg[]
-image:https://img.shields.io/badge/License-MIT-green[]
-image:https://img.shields.io/badge/Community%20Edition-FREE-green[]
+image:https://img.shields.io/badge/Version-4.12.3-green.svg[link="https://github.com/klaros-testmanagement/klaros-docker/releases"]
+image:https://img.shields.io/badge/License-MIT-green[link="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE"]
+image:https://img.shields.io/badge/Community%20Edition-FREE-green[link="https://www.klaros-testmanagement.com/en_US/download"]
+image:https://img.shields.io/twitter/follow/Klaros_TM?style=social[float="right", link="https://twitter.com/intent/follow?screen_name=Klaros_TM"]
 
 toc::[]
 
@@ -497,6 +498,20 @@ By installing our software through Docker, you also agree to our https://www.kla
 We thank you for your attention and hope to meet the interests of many users with this documentation. We are continuously working on improving Klaros Test Management.
 
 So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de or use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
+
+<<Top-of-the-page,(Back to top)>>
+
+== Contributing
+
+Would you like to help us or make suggestions for improvement? Follow these steps to suggest your changes.
+
+* Create an issue and describe your idea
+* Fork the repo
+* Create a new branch (`git checkout -b feature/my-idea`)
+* Make your changes
+* Commit your changes (`git commit -am 'Adding feature`)
+* Push to your branch (`git push origin feature/my-idea`)
+* Create a Pull Request
 
 <<Top-of-the-page,(Back to top)>>
 
