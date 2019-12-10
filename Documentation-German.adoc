@@ -6,6 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+[[Top-of-the-page]]
 = Klaros-Testmanagement Docker-Integration
 :toc: macro
 :sectnums:
@@ -45,6 +46,8 @@ Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjä
 Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] Ihren Lizenzschlüssel anfordern.
 
 Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
+
+<<Top-of-the-page,Nach Oben>>
 
 == Voraussetzungen
 
@@ -101,6 +104,8 @@ Output: git version 2.20.1
 
 Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
 ====
+
+<<Top-of-the-page,Nach Oben>>
 
 == Docker-Umgebungsvariablen konfigurieren
 
@@ -160,6 +165,8 @@ Die .env Datei befindet sich im selben Verzeichnis wie die docker-compose.yml Da
 vi .env
 ----
 
+<<Top-of-the-page,Nach Oben>>
+
 == Installation
 === Repository Klonen
 Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
@@ -195,6 +202,8 @@ cd ~/klaros-docker/MariaDB
 docker-compose build
 ----
 
+<<Top-of-the-page,Nach Oben>>
+
 == Benutzung
 === Eine Instanz starten
 
@@ -222,7 +231,6 @@ Passwort: admin
 ----
 
 Beispiel: 127.0.0.1:18080
-
 
 ====
 
@@ -304,6 +312,8 @@ Wenn der Container im Vordergrund gestartet wurde, drücken Sie STRG + C, um zum
 ----
 docker-compose stop
 ----
+
+<<Top-of-the-page,Nach Oben>>
 
 == Erstellen, Wiederherstellen und Testen eines Backups
 
@@ -762,6 +772,8 @@ cd -
 
 ====
 
+<<Top-of-the-page,Nach Oben>>
+
 == Wie und wo finde ich die Logfiles?
 
 Für die Fehlerbehebung können Logfiles erforderlich sein. Um auf Logfiles zuzugreifen, kann eine Shell direkt im Docker-Container geöffnet werden oder sie können aus dem Backup entnommen werden.
@@ -804,6 +816,8 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von ca
 
 ====
 
+<<Top-of-the-page,Nach Oben>>
+
 == Update
 
 IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
@@ -844,6 +858,8 @@ Nachdem das neue Image erstellt wurde, wird der Container wie gewohnt gestartet.
 docker-compose up
 ----
 
+<<Top-of-the-page,Nach Oben>>
+
 == Vorherige Version nutzen
 
 NOTE: Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
@@ -856,6 +872,8 @@ Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet
 git tag
 git checkout tags/<tag_name> -b klaros
 ----
+
+<<Top-of-the-page,Nach Oben>>
 
 == Deinstallation
 
@@ -887,15 +905,21 @@ docker rmi mariadb-klaros_db
 rm -rf ~/klaros-docker/
 ----
 
+<<Top-of-the-page,Nach Oben>>
+
 == Dokumentation
 
 Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
 
 Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.
 
+<<Top-of-the-page,Nach Oben>>
+
 == FAQ
 
 Wenn Sie weitere Fragen zu Klaros-Testmanagement und der Enterprise Edition haben, verpassen Sie nicht unsere FAQ zu https://www.klaros-testmanagement.com/de_DE/faq[Preisen] und https://www.klaros-testmanagement.com/de_DE/support[Support.]
+
+<<Top-of-the-page,Nach Oben>>
 
 == Lizenz
 
@@ -903,12 +927,18 @@ Klaros-Testmanagement für Docker ist unter den Bedingungen der https://github.c
 
 Durch die Installation unserer Software über Docker stimmen Sie auch unserer Lizenzvereinbarung für https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement] zu.
 
+<<Top-of-the-page,Nach Oben>>
+
 == Kontakt
 
 Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros-Testmanagement.
 
 Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
 
+<<Top-of-the-page,Nach Oben>>
+
 == Danksagung
 
 * https://github.com/tuxknowledge[André Raabe] für das Bereitstellen der https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby und Microsoft SQL Server Version]
+
+<<Top-of-the-page,Nach Oben>>
