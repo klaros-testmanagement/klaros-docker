@@ -1,4 +1,6 @@
-3,93d2
+1,112c1,14
+< #!/bin/sh
+< 
 < CA_DIR_BASE=/data/catalina-base
 < CA_DIR_TEMP=$CA_DIR_BASE/temp
 < CA_DIR_LOGS=$CA_DIR_BASE/logs
@@ -90,21 +92,17 @@
 < 	ln -s $MSQL_FILE_ERRORLOG $MSQL_DIR_DATA
 < fi
 < 
-95,97c4,6
+< (
 < echo "hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect";
 < echo "hibernate.connection.driver_class=com.mysql.jdbc.Driver";
 < echo "hibernate.connection.url = jdbc:mysql://db/${DATABASE_NAME}?autoReconnect=true&useSSL=false";
----
-> echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect";
-> echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver";
-> echo "hibernate.connection.url=jdbc:sqlserver://db:1433;databaseName=${DATABASE_NAME}";
-99,100c8,9
+< echo "hibernate.connection.username=${DATABASE_USER}";
 < echo "hibernate.connection.password=${DATABASE_PASSWORD}";
 < )> /data/klaros-home/hibernate.properties
----
-> echo "hibernate.connection.password=${SA_PASSWORD}";
-> )> /klaros-data/hibernate.properties
-105,112c14
+< 
+< # Wait for SQL Server
+< sleep 60
+< 
 < trap "ctrl_c" SIGTERM 2
 < 
 < ./root/klaros-testmanagement/bin/catalina.sh run &
@@ -114,5 +112,18 @@
 < child=$!
 < wait "$child"
 ---
+> #!/bin/sh
+> 
+> (
+> echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect";
+> echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver";
+> echo "hibernate.connection.url=jdbc:sqlserver://db:1433;databaseName=${DATABASE_NAME}";
+> echo "hibernate.connection.username=${DATABASE_USER}";
+> echo "hibernate.connection.password=${SA_PASSWORD}";
+> )> /klaros-data/hibernate.properties
+> 
+> # Wait for SQL Server
+> sleep 60
+> 
 > /root/klaros-testmanagement/bin/catalina.sh run
 \ No newline at end of file
