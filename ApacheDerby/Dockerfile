@@ -3,7 +3,14 @@
 #
 # Klaros Testmanagement (Community Edition) (https://www.klaros-testmanagement.com)
 #
-
+# With JAVA_OPTS additional settings can be transferred to the Tomcat server. 
+# For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
+#
+# docker build -t klaros .
+# docker run --name Klaros -p 18080:18080 klaros
+# 
+# Do not use it for production systems. Please take a look at the documentation.
+# 
 
 FROM openjdk:8u212-alpine
 LABEL maintainer "André Raabe <andre.raabe@gmail.com>"
@@ -15,17 +22,26 @@ ARG TOMCAT_SERVER_PORT
 ARG TOMCAT_AJP_PORT
 ARG KLAROS_VERSION
 
+# Password for login 127.0.0.1:18080/monitoring
 ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd
 ENV TOMCAT_SESSION_TIMEOUT 60
-ENV TOMCAT_MEMORY_MAX 768
+
+# Minimum available RAM in MB
 ENV TOMCAT_MEMORY_MIN 128
+
+# Maximum available RAM in MB
+ENV TOMCAT_MEMORY_MAX 768
+
+# You can set the port by creating a container: docker create --name Klaros -p 18080:18080 klaros
 ENV TOMCAT_HTTP_PORT ${TOMCAT_HTTP_PORT:-18080}
 ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
+
+# Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
 ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.3}
+
 ENV KLAROS_HOME /data/klaros-home
 ENV CATALINA_BASE /data/catalina-base
-
 
 EXPOSE ${TOMCAT_HTTP_PORT}
 

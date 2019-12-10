@@ -1,24 +1,70 @@
-2c2
+1,55c1,53
+< ---
 < version: '3.4'
----
-> version: '3'
-5c5
+< services:
+<     db:
 <         image: postgres-klaros_db
----
->         image: mssql-2017
-8c8
+<         build: db
+<         restart: always
 <         container_name: ${DATABASE_CONTAINER_NAME}
----
->         container_name: db
-10,11d9
+<         hostname: db
 <         env_file:
 <             ./.env
-13,16c11,26
+<         environment:
 <             POSTGRES_DB: ${DATABASE_NAME}
 <             POSTGRES_USER: ${DATABASE_USER}
 <             POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
 <             TZ: ${TIMEZONE}
+<         ports:
+<             - "${DATABASE_PORT}:5432"
+<         networks:
+<             - postgresql-net
+<         volumes:
+<             - klaros-data:/data
+< 
+<     klaros:
+<         image: klaros-postgresql
+<         build: 
+<             context: ./klaros
+<             args:
+<                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
+<         restart: always
+<         container_name: ${KLAROS_CONTAINER_NAME}
+<         hostname: klaros
+<         env_file:
+<             ./.env
+<         environment:
+<             DATABASE_NAME: ${DATABASE_NAME}
+<             DATABASE_USER: ${DATABASE_USER}
+<             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+<             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
+<             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
+<             TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
+<         ports:
+<             - "${KLAROS_PORT}:18080"
+<         depends_on:
+<             - db
+<         networks:
+<             - postgresql-net
+<         volumes:
+<             - klaros-data:/data
+< 
+< networks:
+<     postgresql-net:
+< volumes:
+<     klaros-data:
+<         name: ${VOLUME_NAME}
 ---
+> ---
+> version: '3'
+> services:
+>     db:
+>         image: mssql-2017
+>         build: db
+>         restart: always
+>         container_name: db
+>         hostname: db
+>         environment:
 >             DATABASE_NAME: ${DATABASE_NAME}
 >             DATABASE_USER: ${DATABASE_USER}
 >             SA_PASSWORD: ${SA_PASSWORD}
@@ -35,57 +81,31 @@
 >             - /etc/localtime:/etc/localtime:ro
 >             - ./data_db:/var/opt/mssql
 >             - ./backup:/backup
-18c28
-<             - "${DATABASE_PORT}:5432"
----
+>         ports:
 >             - "10001:1433"
-20,22c30
-<             - postgresql-net
-<         volumes:
-<             - klaros-data:/data
----
+>         networks:
 >             - sqlserver-net
-25,29c33,34
-<         image: klaros-postgresql
-<         build: 
-<             context: ./klaros
-<             args:
-<                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
----
+> 
+>     klaros:
 >         image: klaros-mssql2017
 >         build: klaros
-31c36
-<         container_name: ${KLAROS_CONTAINER_NAME}
----
+>         restart: always
 >         container_name: klaros_mssql2017
-33,34d37
-<         env_file:
-<             ./.env
-38,41c41,44
-<             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-<             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
-<             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
-<             TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
----
+>         hostname: klaros
+>         environment:
+>             DATABASE_NAME: ${DATABASE_NAME}
+>             DATABASE_USER: ${DATABASE_USER}
 >             SA_PASSWORD: ${SA_PASSWORD}
 >         volumes:
 >             - /etc/localtime:/etc/localtime:ro
 >             - ./data_klaros:/klaros-data
-43c46
-<             - "${KLAROS_PORT}:18080"
----
+>         ports:
 >             - "18080:18080"
-47,49c50
-<             - postgresql-net
-<         volumes:
-<             - klaros-data:/data
----
+>         depends_on:
+>             - db
+>         networks:
 >             - sqlserver-net
-52,55c53
-<     postgresql-net:
-< volumes:
-<     klaros-data:
-<         name: ${VOLUME_NAME}
----
+> 
+> networks:
 >     sqlserver-net:
 \ No newline at end of file

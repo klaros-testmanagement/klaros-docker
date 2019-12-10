@@ -1,7 +1,13 @@
-6c6,21
-< 
+6,7d5
+< # With JAVA_OPTS additional settings can be transferred to the Tomcat server. 
+< # For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
+9,13c7,21
+< # docker build -t klaros .
+< # docker run --name Klaros -p 18080:18080 klaros
+< # 
+< # Do not use it for production systems. Please take a look at the documentation.
+< # 
 ---
-> #
 > # Create:
 > #
 > # sudo docker build --rm -t akaer/klaros . 2>&1 |awk '{ print strftime("%Y-%m-%d %H:%M:%S:"), $0; fflush(); }' |tee docker_build.log
@@ -17,43 +23,53 @@
 > #   -p 18080:18080 \
 > #   akaer/klaros
 > #
-16c31
+23c31
 < ARG KLAROS_VERSION
 ---
 > ARG KLAROS_VER
-22,24c37
+25d32
+< # Password for login 127.0.0.1:18080/monitoring
+28,32d34
 < 
-< ENV JAVA_OPTS -Duser.timezone=
+< # Minimum available RAM in MB
+< ENV TOMCAT_MEMORY_MIN 128
 < 
+< # Maximum available RAM in MB
+34,35c36,37
+< 
+< # You can set the port by creating a container: docker create --name Klaros -p 18080:18080 klaros
 ---
+> ENV TOMCAT_MEMORY_MIN 128
 > ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
-28,31c41,42
+39,44c41,42
+< 
+< # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
 < ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.3}
+< 
 < ENV KLAROS_HOME /data/klaros-home
 < ENV CATALINA_BASE /data/catalina-base
-< 
 ---
 > ENV KLAROS_VER ${KLAROS_VER:-4.12.3}
 > ENV KLAROS_HOME /klaros-data
-36,38c47
+49,51c47
 < ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
 < ADD .start.sh /
 < 
 ---
 > ADD https://www.klaros-testmanagement.com/files/${KLAROS_VER}/Klaros-${KLAROS_VER}-Setup.jar /tmp/Klaros-Setup.jar
-44,45c53,54
+57,58c53,54
 < 	ghostscript-fonts \
 <     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
 ---
 >     ghostscript-fonts \
 >     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g;s/@@KLAROS_VER@@/${KLAROS_VER}/g" /tmp/auto-install.xml \
-55,57c64
+68,70c64
 < RUN chmod +x /.start.sh
 < 
 < VOLUME /data
 ---
 > VOLUME /klaros-data
-59c66
+72c66
 < CMD [ "/.start.sh", "run" ]
 ---
 > CMD [ "/root/klaros-testmanagement/bin/catalina.sh", "run" ]
