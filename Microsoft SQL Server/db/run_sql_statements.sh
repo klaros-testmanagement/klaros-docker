@@ -5,7 +5,7 @@ declare -r MAXDELAY=20
 run_sql() {
     local -r CMD="${1}"; shift
 
-    /opt/mssql-tools/bin/sqlcmd -S 0.0.0.0 -U "${DATABASE_USER}" -P "${SA_PASSWORD}" -i "${CMD}"
+    /opt/mssql-tools/bin/sqlcmd -S 0.0.0.0 -U "${DATABASE_USER}" -P "${DATABASE_PASSWORD}" -i "${CMD}"
 }
 
 replace_vars() {

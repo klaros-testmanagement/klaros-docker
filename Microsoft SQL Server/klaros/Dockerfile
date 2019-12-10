@@ -3,21 +3,12 @@
 #
 # Klaros Testmanagement (Community Edition) (https://www.klaros-testmanagement.com)
 #
+# With JAVA_OPTS additional settings can be transferred to the Tomcat server. 
+# For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
 #
-# Create:
+# docker-compose up
 #
-# sudo docker build --rm -t akaer/klaros . 2>&1 |awk '{ print strftime("%Y-%m-%d %H:%M:%S:"), $0; fflush(); }' |tee docker_build.log
-#
-# Add '--build-arg KLAROS_LANG=eng' to change languages.
-#
-# Run:
-#
-# sudo docker run --rm=true -it \
-#   --name klaros \
-#   -v /etc/localtime:/etc/localtime:ro \
-#   -v $(pwd)/data:/klaros-data \
-#   -p 18080:18080 \
-#   akaer/klaros
+# The .env file contains all possible configuration options. Further information can be found in the documentation.
 #
 
 FROM openjdk:8u212-alpine
@@ -28,27 +19,28 @@ ARG KLAROS_LANG=eng
 ARG TOMCAT_HTTP_PORT
 ARG TOMCAT_SERVER_PORT
 ARG TOMCAT_AJP_PORT
-ARG KLAROS_VER
+ARG KLAROS_VERSION
+ARG TOMCAT_ADMIN_PASSWORD
 
-ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd
+# Password for login 127.0.0.1:18080/monitoring. Take a look at the .env file.
+ENV TOMCAT_ADMIN_PASSWORD $TOMCAT_ADMIN_PASSWORD
 ENV TOMCAT_SESSION_TIMEOUT 60
-ENV TOMCAT_MEMORY_MAX 768
-ENV TOMCAT_MEMORY_MIN 128
-ENV JAVA_OPTS -Duser.timezone=Europe/Berlin
+
+# You can specify the port(KLAROS_PORT) in the .env file.
 ENV TOMCAT_HTTP_PORT ${TOMCAT_HTTP_PORT:-18080}
 ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
-ENV KLAROS_VER ${KLAROS_VER:-4.12.1}
-ENV KLAROS_HOME /klaros-data
-ENV DATABASE_USER sa
-ENV SA_PASSWORD P@ssw0rd
-ENV DATABASE_NAME klaros
+
+# Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
+ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.3}
+ENV KLAROS_HOME /data/klaros-home
+ENV CATALINA_BASE /data/catalina-base
 
 EXPOSE ${TOMCAT_HTTP_PORT}
 
 ADD files/auto-install.xml /tmp/auto-install.xml
 ADD files/catalina-wrapper.sh /root/catalina-wrapper.sh
-ADD https://www.klaros-testmanagement.com/files/${KLAROS_VER}/Klaros-${KLAROS_VER}-Setup.jar /tmp/Klaros-Setup.jar
+ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
 
 RUN set -ex \
     && apk update \
@@ -64,9 +56,7 @@ RUN set -ex \
     && rm -rf /root/klaros-testmanagement/webapps/ROOT \
     && mv /root/klaros-testmanagement/webapps/klaros-web.war \
         /root/klaros-testmanagement/webapps/ROOT.war \
-    && mkdir /klaros-data \
     && chmod +x /root/catalina-wrapper.sh
 
-VOLUME /klaros-data
 
 CMD [ "/root/catalina-wrapper.sh" ]

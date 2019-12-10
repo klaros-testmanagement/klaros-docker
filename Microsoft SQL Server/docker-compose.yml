@@ -1,53 +1,60 @@
 ---
-version: '3'
+version: '3.4'
 services:
     db:
         image: mssql-2017
         build: db
         restart: always
-        container_name: db
+        container_name: ${DATABASE_CONTAINER_NAME}
         hostname: db
+        env_file:
+            ./.env
         environment:
             DATABASE_NAME: ${DATABASE_NAME}
             DATABASE_USER: ${DATABASE_USER}
-            SA_PASSWORD: ${SA_PASSWORD}
+            SA_PASSWORD: ${DATABASE_PASSWORD}
             MSSQL_PID: Developer
             ACCEPT_EULA: Y
             MSSQL_AGENT_ENABLED: 'true'
             MSSQL_ENABLE_HADR: 1
             MSSQL_BACKUP_DIR: '/backup'
-            TZ: Europe/Berlin
+            TZ: ${TIMEZONE}
             LANG: en_US.UTF-8
             LANGUAGE: en_US:en
             LC_ALL: en_US.UTF-8
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - ./data_db:/var/opt/mssql
-            - ./backup:/backup
         ports:
-            - "10001:1433"
+            - "${DATABASE_PORT}:1433"
         networks:
-            - sqlserver-net
-
+            - mssql-net
+        volumes:
+              - klaros-data:/data
     klaros:
         image: klaros-mssql2017
-        build: klaros
+        build: 
+            context: ./klaros
+            args:
+                TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
         restart: always
-        container_name: klaros_mssql2017
+        container_name: ${KLAROS_CONTAINER_NAME}
         hostname: klaros
         environment:
             DATABASE_NAME: ${DATABASE_NAME}
             DATABASE_USER: ${DATABASE_USER}
-            SA_PASSWORD: ${SA_PASSWORD}
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - ./data_klaros:/klaros-data
+            DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+            JAVA_OPTS: -Duser.timezone=${TIMEZONE}
+            TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
+            TOMCAT_MEMORY_MIN: ${MEMORY_MIN}
         ports:
-            - "18080:18080"
+            - "${KLAROS_PORT}:18080"
         depends_on:
             - db
         networks:
-            - sqlserver-net
+            - mssql-net
+        volumes:
+            - klaros-data:/data
 
 networks:
-    sqlserver-net:
+    mssql-net:
+volumes:
+    klaros-data:
+        name: ${VOLUME_NAME}
