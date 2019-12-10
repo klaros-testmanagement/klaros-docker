@@ -123,8 +123,8 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 .Modifiable variables after the first server start via the Dockerfile
 [options=""]
 |=======================
-|TOMCAT_MEMORY_MAX
 |TOMCAT_MEMORY_MIN
+|TOMCAT_MEMORY_MAX
 |JAVA_OPTS
 |=======================
 

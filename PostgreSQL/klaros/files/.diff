@@ -1,4 +1,6 @@
-3,72d2
+1,91c1,14
+< #!/bin/sh
+< 
 < CA_DIR_BASE=/data/catalina-base
 < CA_DIR_TEMP=$CA_DIR_BASE/temp
 < CA_DIR_LOGS=$CA_DIR_BASE/logs
@@ -69,21 +71,17 @@
 < fi
 < 
 < 
-74,76c4,6
+< (
 < echo "hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect";
 < echo "hibernate.connection.driver_class=org.postgresql.Driver";
 < echo "hibernate.connection.url = jdbc:postgresql://db/${DATABASE_NAME}";
----
-> echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect";
-> echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver";
-> echo "hibernate.connection.url=jdbc:sqlserver://db:1433;databaseName=${DATABASE_NAME}";
-78,79c8,9
+< echo "hibernate.connection.username=${DATABASE_USER}";
 < echo "hibernate.connection.password=${DATABASE_PASSWORD}";
 < )> /data/klaros-home/hibernate.properties
----
-> echo "hibernate.connection.password=${SA_PASSWORD}";
-> )> /klaros-data/hibernate.properties
-84,91c14
+< 
+< # Wait for SQL Server
+< sleep 60
+< 
 < trap "ctrl_c" SIGTERM 2
 < 
 < ./root/klaros-testmanagement/bin/catalina.sh run &
@@ -93,5 +91,18 @@
 < child=$!
 < wait "$child"
 ---
+> #!/bin/sh
+> 
+> (
+> echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect";
+> echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver";
+> echo "hibernate.connection.url=jdbc:sqlserver://db:1433;databaseName=${DATABASE_NAME}";
+> echo "hibernate.connection.username=${DATABASE_USER}";
+> echo "hibernate.connection.password=${SA_PASSWORD}";
+> )> /klaros-data/hibernate.properties
+> 
+> # Wait for SQL Server
+> sleep 60
+> 
 > /root/klaros-testmanagement/bin/catalina.sh run
 \ No newline at end of file
