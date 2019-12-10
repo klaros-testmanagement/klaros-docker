@@ -115,8 +115,8 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |KLAROS_PORT              |18080             |Public Klaros Test Management Port
 |TOMCAT_PASSWORD          |P@ssw0rd          |Password for login to 127.0.0.1:18080/monitoring
 |TIMEZONE                 |                  |Time zone
-|MEMORY_MAX               |786               |Maximum available RAM in MB
 |MEMORY_MIN               |128               |Minimum available RAM in MB
+|MEMORY_MAX               |786               |Maximum available RAM in MB
 |VOLUME_NAME              | klaros-data      |The volume will be automatically created by Compose with the name "klaros-data" if it does not exist.
 |=======================
 
@@ -128,8 +128,8 @@ This completes the preparations for Linux. The chapter "Installation" describes 
 |KLAROS_CONTAINER_NAME
 |KLAROS_PORT
 |TIMEZONE
-|MEMORY_MAX
 |MEMORY_MIN
+|MEMORY_MAX
 |VOLUME_NAME
 |=======================
 
