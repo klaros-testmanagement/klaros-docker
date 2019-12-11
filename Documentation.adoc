@@ -915,7 +915,7 @@ Would you like to help us or make suggestions for improvement? Follow these step
 * Fork the repo
 * Create a new branch (`git checkout -b feature/my-idea`)
 * Make your changes
-* Commit your changes (`git commit -am 'Adding feature`)
+* Commit your changes (`git commit -am 'Adding feature'`)
 * Push to your branch (`git push origin feature/my-idea`)
 * Create a Pull Request
 
