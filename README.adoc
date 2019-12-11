@@ -6,6 +6,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+[[Top-of-the-page]]
 = Klaros Test Management Docker-Integration
 :toc: macro
 :sectnums:
@@ -45,6 +46,8 @@ The Enterprise Edition offers you the full range of functions, including one yea
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
 
 You can find further information at https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
+
+<<Top-of-the-page,(Back to top)>>
 
 == Prerequisites
 
@@ -108,6 +111,8 @@ Output: git version 2.20.1
 This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.
 ====
 
+<<Top-of-the-page,(Back to top)>>
+
 == Configuring Docker Environment Variables
 
 .Configurable environment variables before the first server start via the Dockerfile
@@ -169,6 +174,8 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 ----
 ====
 
+<<Top-of-the-page,(Back to top)>>
+
 == Installation
 === Clone
 Once you are in the directory you want, you can start downloading the Dockerfile.
@@ -191,6 +198,8 @@ Windows users are switching from Git Bash to Powershell.
 cd ~/klaros-docker/ApacheDerby
 docker build -t klaros .
 ----
+
+<<Top-of-the-page,(Back to top)>>
 
 == Usage
 === How to start an instance
@@ -250,6 +259,8 @@ If the container has been started in the foreground, press CTRL + C to return to
 ----
 docker stop Klaros
 ----
+
+<<Top-of-the-page,(Back to top)>>
 
 == Create, restore and test a backup
 Backups are labeled with the name "backup_klaros<date>.tar.gz". If you create several backups per day, it is recommended to specify a time (hours, minutes and seconds) when creating the backups. To do this, add %H(hour), %M(minute), and %S(second) in date/Get-Date.
@@ -340,6 +351,8 @@ docker stop Klaros-test
 docker rm -v Klaros-test
 ----
 
+<<Top-of-the-page,(Back to top)>>
+
 == How and where can I find the log files?
 
 Log files may be required for troubleshooting. To access log files, a shell can be opened directly in the Docker-Container or they can be taken from the backup.
@@ -379,6 +392,8 @@ sudo tar -xzf backup_klaros19-10-28.tar.gz
 
 Afterwards, the Klaros Test Management logs can be displayed in the "logs" folder of catalina-base.
 ====
+
+<<Top-of-the-page,(Back to top)>>
 
 == Update
 
@@ -426,6 +441,8 @@ docker rm Klaros-tmp
 docker start -a Klaros
 ----
 
+<<Top-of-the-page,(Back to top)>>
+
 == How to use a previous version
 
 NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
@@ -439,6 +456,8 @@ git tag
 git checkout tags/<tag_name> -b klaros
 ----
 
+<<Top-of-the-page,(Back to top)>>
+
 == Uninstallation
 
 To completely remove Klaros Test Management from Docker, the container must be stopped first, before the container and volume can be removed.
@@ -451,26 +470,36 @@ docker rmi klaros
 rm -rf ~/klaros-docker
 ----
 
+<<Top-of-the-page,(Back to top)>>
+
 == Documentation
 
 To get started with Klaros Test Management please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
 
 Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
 
+<<Top-of-the-page,(Back to top)>>
+
 == FAQ
 
 If you have further questions about Klaros Test Management and the Enterprise Edition, do not miss our https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true[Pricing-FAQ] and https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true[Support-FAQ.]
+
+<<Top-of-the-page,(Back to top)>>
 
 == License
 Klaros Test Management for Docker is licensed under the terms of the https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT License.]
 
 By installing our software through Docker, you also agree to our https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement.]
 
+<<Top-of-the-page,(Back to top)>>
+
 == Contact
 
 We thank you for your attention and hope to meet the interests of many users with this documentation. We are continuously working on improving Klaros Test Management.
 
 So if you have any questions or requests or simply want to give feedback, please write to us at support@verit.de or use our https://www.klaros-testmanagement.com/en_US/forum[User Forum.]
+
+<<Top-of-the-page,(Back to top)>>
 
 == Contributing
 
@@ -484,6 +513,10 @@ Would you like to help us or make suggestions for improvement? Follow these step
 * Push to your branch (`git push origin feature/my-idea`)
 * Create a Pull Request
 
+<<Top-of-the-page,(Back to top)>>
+
 == Acknowledgements
 
 * https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
+
+<<Top-of-the-page,(Back to top)>>
