@@ -300,12 +300,12 @@ Um eine zweite Instanz unabhängig von der ersten Instanz auszuführen, müssen 
 .Werte, die pro Instanz geändert werden müssen.
 [options="header"]
 |=======================
-|Aktueller Wert    |Neuer Wert       |Beschreibung
-|KLAROS_PORT=18080 |KLAROS_PORT=18081 |Öffentlicher Port, um später auf die Webseite zuzugreifen
-|DATABASE_PORT=10001 |DATABASE_PORT=10002 |Öffentlicher Port, um von außen auf die Datenbank zuzugreifen
-|DATABASE_CONTAINER_NAME=klaros_db |DATABASE_CONTAINER_NAME=klaros_db2 |Datenbank Containername
+|Aktueller Wert                          |Neuer Wert                               |Beschreibung
+|KLAROS_PORT=18080                       |KLAROS_PORT=18081                        |Öffentlicher Port, um später auf die Webseite zuzugreifen
+|DATABASE_PORT=10001                     |DATABASE_PORT=10002                      |Öffentlicher Port, um von außen auf die Datenbank zuzugreifen
+|DATABASE_CONTAINER_NAME=klaros_db       |DATABASE_CONTAINER_NAME=klaros_db2       |Datenbank Containername
 |KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros-Testmanagement Containername
-|VOLUME_NAME=klaros-data |VOLUME_NAME=klaros-data2 |Volumename. Hier werden die Daten gespeichert
+|VOLUME_NAME=klaros-data                 |VOLUME_NAME=klaros-data2                 |Volumename. Hier werden die Daten gespeichert
 |=======================
 
 Die zweite Instanz wird dann wie die erste Instanz gestartet.
@@ -829,7 +829,12 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von ca
 
 == Update
 
-IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, verwenden Sie nicht den Original branch (klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht (Hierfür kann das Verzeichnis kopiert werden). Achten Sie ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem Testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird. 
+//Ausprobieren was passiert, wenn ich beim wechseln nicht docker-compose build benutze
+
+IMPORTANT: Falls beim Update das Wiederaufspielen der vorherigen Version geplant ist, dann muss hierfür eine zweite Instanz erstellt werden. Achte darauf, das Image beim wechseln der Instanzen mit `docker-compose build` neu zu erstellen, da
+
+
+//IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, verwenden Sie nicht den Original branch (klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht (Hierfür kann das Verzeichnis kopiert werden). Achten Sie ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem Testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird. 
 
 //IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
 
