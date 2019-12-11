@@ -450,6 +450,18 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -
 ----
 
+.Microsoft SQL Database
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data"
+cd -
+----
+
 ====
 
 .Linux
@@ -488,6 +500,18 @@ cd ~/klaros-docker/MariaDB
 mkdir -p ${BACKUP_DIR}
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -
+----
+
+.Microsoft SQL Database
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data"
 cd -
 ----
 
@@ -590,7 +614,7 @@ cd -
 
 ====
 
-=== Backup wiederherstellen
+=== Backup über SQL wiederherstellen
 
 Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv "backup_klaros<Datum> .tar.gz", wenn eine "backup<Datum>.sql" Datei vorhanden ist. Beachten Sie, dass die Datenbank weiterhin ausgeführt werden muss, während der Server heruntergefahren wird. Danach wird der Container über "Docker-Compose Stop" gestoppt.
 
@@ -690,7 +714,7 @@ cd -
 
 ====
 
-=== Volume wiederherstellen
+=== Backup über Volume wiederherstellen
 IMPORTANT: Vor der Wiederherstellung muss der Container heruntergefahren werden.
 
 .Windows
@@ -730,6 +754,17 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -
 ----
 
+.Microsoft SQL Database
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
 ====
 
 .Linux
@@ -764,6 +799,17 @@ DATE=19-11-28
 BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd ~/klaros-docker/MariaDB
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.Microsoft SQL Database
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
 cd -

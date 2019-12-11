@@ -21,7 +21,7 @@ toc::[]
 == Einführung
 
 IMPORTANT: Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der Apache Derby Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für die Produktion.
-Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MySQL und PostgreSQL finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc[hier.]
+Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MSSQL, MySQL und PostgreSQL finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc[hier.]
 
 In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
@@ -478,7 +478,7 @@ rm -rf ~/klaros-docker
 
 Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
 
-Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.
+Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MSSQL-, MySQL- und PostgreSQL-Datenbanken.
 
 <<Top-of-the-page,(Nach Oben)>>
 
