@@ -2,7 +2,7 @@
 version: '3.4'
 services:
     db:
-        image: mssql-2017
+        image: mssql2017-klaros_db
         build: db
         restart: always
         container_name: ${DATABASE_CONTAINER_NAME}
