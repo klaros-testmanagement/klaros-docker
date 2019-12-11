@@ -20,7 +20,7 @@ toc::[]
 
 == Introduction
 
-IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MySQL or PostgreSQL database.
+IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MSSQL, MySQL or PostgreSQL database.
 The instructions for test installations with Apache Derby as a database can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.]
 
 This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
@@ -200,6 +200,12 @@ cd ~/klaros-docker/MariaDB
 docker-compose build
 ----
 
+.Microsoft SQL Database
+----
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose build
+----
+
 <<Top-of-the-page,(Back to top)>>
 
 == Usage
@@ -286,6 +292,23 @@ Open the .env file with your preferred text editor. Under Windows Notepad++ can 
 
 ----
 cd ~/klaros-docker/MariaDB2
+vi .env
+----
+====
+
+.Microsoft SQL Database
+[%collapsible]
+====
+Copy the directory under a different name.
+
+----
+cp -r Microsoft\ SQL\ Server/ Microsoft\ SQL\ Server2/
+----
+
+Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+
+----
+cd ~/klaros-docker/Microsoft\ SQL\ Server2/
 vi .env
 ----
 ====
@@ -385,7 +408,6 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 ----
 
 ====
-
 
 .Linux
 [%collapsible]
@@ -619,6 +641,7 @@ cd -
 ====
 
 === Restore a backup from SQL
+
 Restoring via a .sql file also works using the backup archive "backup_klaros<Date>.tar.gz" if a "backup<Date>.sql" file exists. Please note that the database must continue to run while the server is shut down. After that the container will be stopped via "docker-compose stop".
 
 .Windows
@@ -950,13 +973,21 @@ docker rmi mariadb-klaros_db
 rm -rf ~/klaros-docker/
 ----
 
+.Microsoft SQL Server
+----
+docker-compose down --volume
+docker rmi klaros-mssql2017
+docker rmi mssql2017-klaros_db
+rm -rf ~/klaros-docker/
+----
+
 <<Top-of-the-page,(Back to top)>>
 
 == Documentation
 
 To get started with Klaros Test Management please refer to our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual.] Both are also available in the application itself after a successful login.
 
-Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.
+Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MSSQL, MySQL and PostgreSQL databases.
 
 <<Top-of-the-page,(Back to top)>>
 

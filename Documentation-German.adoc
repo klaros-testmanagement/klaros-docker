@@ -20,7 +20,7 @@ toc::[]
 
 == Einführung
 
-IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
+IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MSSQL-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
 
 In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
@@ -202,6 +202,13 @@ cd ~/klaros-docker/MariaDB
 docker-compose build
 ----
 
+.Microsoft SQL Database
+----
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose build
+----
+
+
 <<Top-of-the-page,(Nach Oben)>>
 
 == Benutzung
@@ -283,6 +290,23 @@ cp -r MariaDB/  MariaDB2
 Öffne die ENV-Datei mit dem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
 ----
 cd ~/klaros-docker/MariaDB2
+vi .env
+----
+====
+
+.Microsoft SQL Database
+[%collapsible]
+====
+Copy the directory under a different name.
+
+----
+cp -r Microsoft\ SQL\ Server/ Microsoft\ SQL\ Server2/
+----
+
+Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+
+----
+cd ~/klaros-docker/Microsoft\ SQL\ Server2/
 vi .env
 ----
 ====
@@ -950,13 +974,21 @@ docker rmi mariadb-klaros_db
 rm -rf ~/klaros-docker/
 ----
 
+.Microsoft SQL Server
+----
+docker-compose down --volume
+docker rmi klaros-mssql2017
+docker rmi mssql2017-klaros_db
+rm -rf ~/klaros-docker/
+----
+
 <<Top-of-the-page,(Nach Oben)>>
 
 == Dokumentation
 
 Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
 
-Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.
+Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MSSQL-, MySQL- und PostgreSQL-Datenbanken.
 
 <<Top-of-the-page,(Nach Oben)>>
 
