@@ -1,14 +1,9 @@
 FROM mcr.microsoft.com/mssql/server:2017-latest
 LABEL maintainer "André Raabe <andre.raabe@gmail.com>"
 
-#ENV DATABASE_USER ${DATABASE_USER}
-#ENV DATABASE_NAME ${DATABASE_NAME}
-#ENV SA_PASSWORD ${DATABASE_PASSWORD}
-ENV MSSQL_PID Developer
-ENV ACCEPT_EULA Y
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV MSSQL_DATA_DIR /data/mssql-data
+ENV MSSQL_LOG_DIR /data/mssql-data
+ENV MSSQL_DUMP_DIR /data/mssql-data
 
 COPY ./*.sh /
 COPY ./*.sql /
