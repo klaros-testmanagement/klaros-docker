@@ -1,0 +1,525 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+[[Top-of-the-page]]
+= Klaros-Testmanagement Docker-Integration
+:toc: macro
+:sectnums:
+:toc-title: Inhaltsverzeichnis
+
+image:https://img.shields.io/badge/Version-4.12.3-green.svg[]
+image:https://img.shields.io/badge/License-MIT-green[]
+image:https://img.shields.io/badge/Community%20Edition-FREE-green[]
+
+toc::[]
+
+== Einführung
+
+IMPORTANT: Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der Apache Derby Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für die Produktion.
+Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MySQL und PostgreSQL finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc[hier.]
+
+In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
+
+=== Über Docker
+https://www.docker.com/[Docker] ist eine freie, containerbasierte Software, die eine sichere Installation von Anwendungen auf verschiedenen Betriebssystemen wie Windows und Linux ermöglicht.
+
+Weitere Informationen finden Sie unter https://www.docker.com/why-docker[Why-Docker]
+
+=== Über Klaros-Testmanagement
+
+Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Sie enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
+
+Klaros-Testmanagement ist in der Community Edition kostenlos verfügbar.
+
+Die Community Edition ist uneingeschränkt nutzbar und verfügt über einen reduzierten Funktionsumfang.
+
+Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es ideal für den Einstieg in ein kleines Team.
+
+Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.
+
+Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
+
+Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] Ihren Lizenzschlüssel anfordern.
+
+Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Voraussetzungen
+
+.Windows
+[%collapsible]
+====
+
+Die aktuellen Hardwareanforderungen und Installationsschritte sind in der https://docs.docker.com/docker-for-windows/install/[offiziellen Docker-Dokumentation] beschrieben. Für die Installation von Docker Desktop ist eine Anmeldung erforderlich.
+
+Um die spätere Aktualisierung von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile mit Git von GitHub herunterzuladen.
+Git kann von der https://git-scm.com[offiziellen Webseite] heruntergeladen und installiert werden.
+
+Während der Installation kann ausgewählt werden, ob und wie die Zeilenendungen von Dateien konvertiert werden soll. Da der Server innerhalb des Containers über Linux betrieben wird, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, empfehlen wir die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ auszuwählen.
+
+.Konfiguration der Zeilenenden-Konvertierung
+image::images/ConfigurationOfTheLineEndConversion.png[Konfiguration der Zeilenenden-Konvertierung]
+
+Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.
+====
+
+.Linux
+[%collapsible]
+====
+
+Auf der offiziellen Docker-Dokumentation sind die aktuellen Hardwareanforderungen und Installationsschritte zu finden.
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/[Ubuntu Docker]
+
+https://docs.docker.com/install/linux/docker-ce/debian/[Debian Docker]
+
+https://docs.docker.com/install/linux/docker-ce/centos/[CentOS Docker]
+
+https://www.cyberciti.biz/faq/install-use-setup-docker-on-rhel7-centos7-linux/[RHEL Docker]
+
+Unter CentOS und RHEL ist Podman eine beliebte Alternative gegenüber Docker. Da Podman ähnliche Funktionen wie Docker zur Verfügung stellt, müssen die Codeabschnitte mit „docker“ lediglich durch „podman“ ersetzt werden.
+
+Unterstützte https://podman.io/getting-started/installation.html[Podman]-Version: 1.4.4
+
+https://git-scm.com/[Git] ist erforderlich, um das Klaros-Testmanagement Dockerfile erfolgreich von GitHub herunterzuladen.
+
+.Git-Installation über Ubuntu/Debian:
+----
+sudo apt-get update
+sudo apt-get install git
+----
+
+.Git-Installation über CentOS/RHEL:
+----
+sudo yum check-update
+sudo yum install git-core
+----
+
+
+Ob die Installation erfolgreich war, lässt sich mit folgendem Kommando überprüfen:
+----
+git --version
+Output: git version 2.20.1
+----
+
+Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
+====
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Docker-Umgebungsvariablen konfigurieren
+
+.Konfigurierbare Umgebungsvariablen vor dem ersten Serverstart über das Dockerfile
+[options="header"]
+|=======================
+|Variable |Voreinstellung |Beschreibung
+|TOMCAT_ADMIN_PASSWORD       |P@ssw0rd  |Passwort für den Login auf 127.0.0.1:18080/monitoring
+|TOMCAT_MEMORY_MIN           |128       |Minimal verfübarer Arbeitsspeicher in MB
+|TOMCAT_MEMORY_MAX           |768       |Maximal verfügbarer Arbeitsspeicher in MB
+|JAVA_OPTS  |   |Mit JAVA_OPTS können zusätzliche Einstellungen an den Tomcat-Server übertragen werden. Beispielsweise kann die Zeitzone mit JAVA_OPTS -Duser.timezone=Europe/Berlin auf Europa/Berlin eingestellt werden.
+|KLAROS_VERSION         |${KLAROS_VERSION:-4.12.1} |Klaros-Release-Version, die während der Installation verwendet wird.  Eine Liste der verfügbaren Releases finden Sie auf der offiziellen https://www.klaros-testmanagement.com/de_DE/download[Klaros-Testmanagement] Webseite oder auf https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub]
+|=======================
+
+.Veränderbare Variablen nach dem ersten Serverstart über das Dockerfile
+[options=""]
+|=======================
+|TOMCAT_MEMORY_MAX
+|TOMCAT_MEMORY_MIN
+|JAVA_OPTS
+|=======================
+
+=== Konfiguration über das Dockerfile
+
+Öffne das Dockerfile unter _~/klaros-docker/ApacheDerby_ mit dem bevorzugten Texteditor. das Dockerfile enthält eine Liste der konfigurierbaren ENV-Variablen. Weitere Informationen finden Sie in Tabelle 1.
+
+NOTE: Bitte stellen Sie sicher, dass Sie das Image nach dem Ändern des Dockerfiles neu erstellen.
+
+=== Konfiguration beim Serverstart
+
+Veränderbare Variablen finden sich unter Tabelle 2. Die Umgebungsvariablen können mit dem Parameter -e geändert werden.
+
+.Beispiel
+----
+sudo docker run --name Klaros -p 18080:18080 -e TOMCAT_MEMORY_MAX='1024' -e <Weitere Variable> klaros
+----
+
+=== Konfiguration über eine Datei
+
+Um die Konfigurationen über eine Datei festzulegen, kann im ApacheDerby Verzeichnis eine Textdatei erstellt werden.
+Modifizierbare Variablen finden Sie in Tabelle 2. Fügen Sie beim Erstellen des Containers den Parameter --env-file hinzu.
+
+.Windows Beispiel
+[%collapsible]
+====
+----
+New-Item <Path/env-list.txt> -ItemType file
+echo "TOMCAT_MEMORY_MAX=1024" > env-list.txt
+sudo docker create --name Klaros -p 18080:18080 --env-file ./env-list.txt klaros
+----
+====
+
+.Linux Beispiel
+[%collapsible]
+====
+----
+touch env-list
+echo "TOMCAT_MEMORY_MAX=1024" > env-list
+docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
+----
+====
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Installation
+=== Repository Klonen
+Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
+----
+git init
+git clone https://github.com/klaros-testmanagement/klaros-docker 
+----
+
+Mit „ls“ können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
+----
+ls
+Ausgabe: klaros-docker
+----
+
+=== Image erstellen
+Das Image wird benötigt, um den Klaros-Container zu erstellen und den Server zu starten. +
+Windowsnutzer wechseln von Git Bash zur Powershell.
+
+----
+cd ~/klaros-docker/ApacheDerby
+docker build -t klaros .
+----
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Benutzung
+=== Eine Instanz starten
+
+Beim Starten wird ein Docker-Container mit dem Namen „Klaros“ angelegt.
+
+IMPORTANT: Beim Erstellen des Containers wird ein anonymes Volume erstellt. Wenn ein benanntes Volume gewünscht wird, muss -v als zusätzlicher Parameter hinzugefügt werden.
+
+.Einmalige Ausführung: Erstelle ein Klaros-Container (Anonymes Volume)
+----
+docker create --name Klaros -p 18080:18080 klaros
+----
+
+.Einmalige Ausführung: Erstelle ein Klaros-Container (Benanntes Volume)
+----
+docker create --name Klaros -p 18080:18080 -v klaros-data:/data klaros
+----
+
+.Sobald der Container erstellt wurde, kann der Server mit „docker start“ hochgefahren werden.
+----
+docker start -a Klaros
+----
+
+.Um den Container im detached mode auszuführen, muss der -a Paramter entfernt werden.
+----
+docker start Klaros
+----
+
+[%collapsible]
+====
+Weitere Informationen finden Sie in der https://docs.docker.com/engine/reference/commandline/start/[official Docker Documentation.]
+
+Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
+
+----
+Benutzername: admin
+Passwort: admin
+----
+
+Beispiel: 127.0.0.1:18080
+
+====
+
+Eine weitere Klaros-Instanz kann verwendet werden, um Sicherungen auf Vollständigkeit zu prüfen oder eine neuere Klaros-Version zu testen.
+Um eine weitere Instanz zu erstellen, muss lediglich der Containernamen und Port geändert werden.
+
+.Erstellen einer zweiten Klaros-Instanz mit eigener Datenbank
+----
+docker create --name Klaros2 -p 18081:18080 klaros
+----
+
+=== Instanz herunterfahren
+
+Im abgetrennten Modus muss der Server über "Docker Stop" heruntergefahren werden.
+Wenn der Container im Vordergrund gestartet wurde, gelangt man mit der Tastenkombination STRG + C zurück in das Terminal, wodurch der Container automatisch heruntergefahren wird. Windows gilt hierbei als Ausnahme und der Container muss über „docker stop“ beendet werden.
+
+----
+docker stop Klaros
+----
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Erstellen, Wiederherstellen und Testen eines Backups
+Backups sind unter dem Namen „backup_klaros<Datum>.tar.gz“ gekennzeichnet. Falls mehrere Backups am Tag erstellt werden, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügt man in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
+
+Wenn bei der Erstellung des Backups ein Fehler auftritt, enthalten die Logfiles nützliche Hinweise.
+
+.Windows Beispiel
+----
+$(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
+----
+
+.Linux Beispiel
+----
+$(date '+%y-%m-%d-%H:%M:%S')
+----
+
+[%collapsible]
+====
+Damit würde das Backup den folgenden Namen tragen:
+
+Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
+Linux: backup_klaros19-10-28-11:34:33.tar.gz
+
+Um den Backup-Pfad zu wechseln, kann der Codeabschnitt hinter -v: "~/klaros-docker/backup" geändert werden.
+
+.Windows Beispiel
+----
+mkdir ~/klaros-docker/Path/backup
+docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backup alpine tar cvzf /backup/backup_klaros$(Get-Date -UFormat "%y-%m-%d").tar.gz /data/klaros-home /data/catalina-base/logs
+----
+
+.Linux Beispiel
+----
+mkdir ~/klaros-docker/Path/backup
+sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backup alpine tar cvzf /backup/backup_klaros$(date '+%y-%m-%d').tar.gz /data/klaros-home /data/catalina-base/logs
+----
+====
+
+=== Backup erstellen
+
+.Windows
+----
+docker stop Klaros
+mkdir ~/klaros-docker/backup
+docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine tar cvzf /backup/backup_klaros$(Get-Date -UFormat "%y-%m-%d").tar.gz /data/klaros-home /data/catalina-base/logs
+docker start -a Klaros
+----
+
+.Linux
+----
+sudo docker ps
+sudo docker stop Klaros
+sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine tar cvzf /backup/backup_klaros$(date '+%y-%m-%d').tar.gz /data/klaros-home /data/catalina-base/logs
+sudo docker start -a Klaros
+----
+
+=== Backup wiederherstellen
+
+.Beachte, das Datum der jeweiligen Backups anzupassen.
+----
+docker stop Klaros
+docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
+docker start -a Klaros
+----
+
+=== Backup testen
+
+Zum Testen eines Backups kann eine zweite Klaros-Instanz erstellt werden, um darauf das Backup aufzuspielen. Die Zweite Instanz muss einmal vollständig hochgefahren werden, bevor das Backup aufgespielt werden kann.
+
+----
+docker run --name Klaros-test -p 18081:18080 klaros
+----
+
+Der Server wird dann mit STRG + C oder mit "Docker Stop" beendet.
+----
+docker stop Klaros-test
+----
+
+.Beachte, das Datum der jeweiligen Backups anzupassen.
+----
+docker run --rm --volumes-from Klaros-test -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data && tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
+docker start -a Klaros-test
+----
+
+Wenn das Backup erfolgreich getestet wurde, kann der Server gestoppt und entfernt werden.
+----
+docker stop Klaros-test
+docker rm -v Klaros-test
+----
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Wie und wo finde ich die Logfiles?
+
+Für die Fehlerbehebung können Logfiles erforderlich sein. Um auf Logfiles zuzugreifen, kann eine Shell direkt im Docker-Container geöffnet werden oder sie können aus dem Backup entnommen werden.
+
+Wichtige Logs finden sich unter:
+
+_/data/catalina-base/logs_
+
+=== Logs über die Docker shell anzeigen
+Öffne im Klaros-Container eine Shell mit „docker exec“, um Zugriff auf die Logs zu bekommen.
+
+NOTE: Bitte beachte, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
+
+.Die Logfiles können dann mit "more" gelesen werden.
+----
+docker exec -it Klaros /bin/sh
+more /data/catalina-base/logs/catalina.2019-12-09.log
+----
+
+=== Logs aus dem Backupverzeichnis anzeigen
+
+.Windows
+[%collapsible]
+====
+Windows-Nutzer können das Archivprogramm https://www.winrar.de/downld.php[WinRAR] verwenden, um .tar.gz Archive zu entpacken.
+
+Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base anzeigen.
+====
+
+.Linux
+[%collapsible]
+====
+Um die Logs aus dem Backup auszulesen, lässt sich mit tar das Archive entpacken.
+----
+sudo tar -xzf backup_klaros19-10-28.tar.gz
+----
+
+Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base anzeigen.
+====
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Update
+
+IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
+
+Bevor ein Update von Klaros-Testmanagement durchgeführt werden kann, muss ein temporärer Container mit den Volumes von Klaros erstellt werden.
+
+----
+docker stop Klaros
+docker create --name Klaros-tmp --volumes-from Klaros alpine
+docker rm Klaros
+----
+
+=== Update über master branch
+
+Klaros kann mit "git pull" auf die neueste Version aktualisiert werden.
+----
+git pull origin master
+----
+
+=== Update über tags
+
+Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.
+
+----
+git checkout master
+git pull origin master
+git checkout tags/<tag_name> -b update
+git checkout klaros
+git merge update
+git branch -D update
+----
+
+=== Image aktualisieren
+
+Nachdem das Update vom Git Repository heruntergeladen wurde, wird als nächstes das alte Image entfernt und ein neues Image erstellt.
+
+----
+docker rmi klaros
+docker build -t klaros .
+----
+
+Nachdem das neue Image erstellt wurde, wird der Server mit den Volumes von Klaros-tmp erstellt und der temporäre Container wird anschließend entfernt. Danach kann der Server wie gewohnt gestartet werden.
+----
+docker create --name Klaros --volumes-from Klaros-tmp -p 18080:18080 klaros
+docker rm Klaros-tmp
+docker start -a Klaros
+----
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Vorherige Version nutzen
+
+NOTE: Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
+
+Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
+
+Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokalen branch mit "git checkout" ausgewählt werden.
+
+----
+git tag
+git checkout tags/<tag_name> -b klaros
+----
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Deinstallation
+
+Um Klaros-Testmanagement vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volumen entfernt werden können.
+
+Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image.
+----
+docker stop Klaros
+docker rm -v Klaros
+docker rmi klaros
+rm -rf ~/klaros-docker
+----
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Dokumentation
+
+Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
+
+Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== FAQ
+
+Wenn Sie weitere Fragen zu Klaros-Testmanagement und der Enterprise Edition haben, verpassen Sie nicht unsere FAQ zu https://www.klaros-testmanagement.com/de_DE/faq[Preisen] und https://www.klaros-testmanagement.com/de_DE/support[Support.]
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Lizenz
+
+Klaros-Testmanagement für Docker ist unter den Bedingungen der https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE[MIT-Lizenz] lizenziert.
+
+Durch die Installation unserer Software über Docker stimmen Sie auch unserer Lizenzvereinbarung für https://www.klaros-testmanagement.com/files/current/LICENSE.txt[Limited Use Software License Agreement] zu.
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Kontakt
+
+Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros-Testmanagement.
+
+Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Mitmachen
+
+Möchten Sie uns helfen oder Verbesserungsvorschläge machen? Führen Sie diese Schritte aus, um Ihre Änderungen vorzuschlagen.
+
+* Erstellen Sie ein issue und beschreiben Sie Ihre Idee.
+* Fork des Repositorys
+* Erstelle einen neuen branch (`git checkout -b feature/my-idea`)
+* Mach deine Änderungen
+* Commite deine Änderungen (`git commit -am 'Adding feature`)
+* Push deine Änderungen in dein branch (`git push origin feature/my-idea`)
+* Erstelle ein Pull Request
+
+<<Top-of-the-page,(Nach Oben)>>
+
+== Danksagung
+
+* https://github.com/tuxknowledge[André Raabe] für das Bereitstellen der https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby und Microsoft SQL Server Version]
+
+<<Top-of-the-page,(Nach Oben)>>
