@@ -20,32 +20,26 @@ toc::[]
 
 == Einführung
 
-IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit Apache Derby als Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
+IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit der integrierten Apache Derby-Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
 
-In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
+In dieser Dokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
 === Über Docker
 https://www.docker.com/[Docker] ist eine freie, containerbasierte Software, die eine sichere Installation von Anwendungen auf verschiedenen Betriebssystemen wie Windows und Linux ermöglicht.
 
-Weitere Informationen finden Sie unter https://www.docker.com/why-docker[Why-Docker]
+Ausführliche Informationen dazu finden Sie unter https://www.docker.com/why-docker[Why-Docker.]
 
 === Über Klaros-Testmanagement
 
-Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Sie enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
+Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Sie enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Continuous Integration Servern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.
 
-Klaros-Testmanagement ist in der Community Edition kostenlos verfügbar.
+Klaros-Testmanagement ist in der Community Edition kostenlos erhältlich und uneingeschränkt auch für kommerzielle Zwecke einsetzbar.
 
-Die Community Edition ist uneingeschränkt nutzbar und verfügt über einen reduzierten Funktionsumfang.
+Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Eine Feature-Übersicht der beiden Editionen sehen Sie https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier.]
 
-Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es ideal für den Einstieg in ein kleines Team.
+Eine kostenlose 30-tägige Testlizenz für die Enterprise Edition, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] anfordern.
 
-Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.
-
-Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier] den Vergleich der Community und Enterprise Edition an.
-
-Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] Ihren Lizenzschlüssel anfordern.
-
-Weitere Informationen finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
+Ausführliche  Informationen, umfangreiche Dokumentation, Videos sowie eine frei zugängliche Online-Demo finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
 
 <<Top-of-the-page,(Nach Oben)>>
 
