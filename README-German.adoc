@@ -475,6 +475,18 @@ Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation d
 
 Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
 
+== Mitmachen
+
+Möchten Sie uns helfen oder Verbesserungsvorschläge machen? Führen Sie diese Schritte aus, um Ihre Änderungen vorzuschlagen.
+
+* Erstellen Sie ein issue und beschreiben Sie Ihre Idee.
+* Fork des Repositorys
+* Erstelle einen neuen branch (`git checkout -b feature/my-idea`)
+* Mach deine Änderungen
+* Commite deine Änderungen (`git commit -am 'Adding feature`)
+* Push deine Änderungen in dein branch (`git push origin feature/my-idea`)
+* Erstelle ein Pull Request
+
 == Danksagung
 
 * https://github.com/tuxknowledge[André Raabe] für das Bereitstellen der https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby und Microsoft SQL Server Version]
