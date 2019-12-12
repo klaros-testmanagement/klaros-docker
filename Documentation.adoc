@@ -294,7 +294,7 @@ To run a second instance independently of the first instance, the instances must
 |VOLUME_NAME=klaros-data |VOLUME_NAME=klaros-data2 |Volume name. The data is stored here
 |=======================
 
-The second instance is then started in the same way as the first instance.
+.The second instance is then started in the same way as the first instance
 ----
 docker-compose up
 ----
@@ -835,8 +835,7 @@ git branch -D update
 
 === Refresh image
 
-After downloading the update from the GitHub repository, a new image is created and all dangling images are removed.
-
+.After downloading the update from the GitHub repository, a new image is created and all dangling images are removed
 ----
 docker-compose down
 docker-compose build
