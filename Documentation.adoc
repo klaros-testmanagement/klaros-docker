@@ -75,19 +75,19 @@ https://www.cyberciti.biz/faq/install-use-setup-docker-on-rhel7-centos7-linux/[R
 
 https://docs.docker.com/compose/install/[Docker Compose]
 
-.Git installation via Ubuntu/Debian:
+.Git installation via Ubuntu/Debian
 ----
 sudo apt-get update
 sudo apt-get install git
 ----
 
-.Git installation via CentOS/RHEL:
+.Git installation via CentOS/RHEL
 ----
 sudo yum check-update
 sudo yum install git-core
 ----
 
-The following command can be used to check whether the installation was successful:
+.The following command can be used to check whether the installation was successful
 ----
 git --version
 Output: git version 2.17.1
@@ -238,12 +238,12 @@ Before the configuration changes are made, each instance must be stored in a sep
 .PostgreSQL
 [%collapsible]
 ====
-.Copy the directory and specify an appropriate target directory.
+.Copy the directory and specify an appropriate target directory
 ----
 cp -r PostgreSQL/ PostgreSQL2
 ----
 
-.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor
 ----
 cd ~/klaros-docker/PostgreSQL2
 vi .env
@@ -253,12 +253,12 @@ vi .env
 .MySQL
 [%collapsible]
 ====
-.Copy the directory and specify an appropriate target directory.
+.Copy the directory and specify an appropriate target directory
 ----
 cp -r MySQL/  MySQL2
 ----
 
-.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor
 ----
 cd ~/klaros-docker/MySQL2
 vi .env
@@ -268,12 +268,12 @@ vi .env
 .MariaDB
 [%collapsible]
 ====
-.Copy the directory and specify an appropriate target directory.
+.Copy the directory and specify an appropriate target directory
 ----
 cp -r MariaDB/  MariaDB2
 ----
 
-.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.
+.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor
 ----
 cd ~/klaros-docker/MariaDB2
 vi .env
@@ -347,7 +347,7 @@ BACKUP_DIR=~/klaros-docker/Path/backup
 ====
 
 === Creating a SQL backup
-An SQL backup can only be created while the system is running.
+IMPORTANT: An SQL backup can only be created while the system is running.
 
 .Windows
 [%collapsible]
@@ -400,7 +400,7 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 ====
 
 === Creating a volume backup
-For a volume backup, the server must be shut down.
+IMPORTANT: For a volume backup, the server must be shut down.
 
 .Windows
 [%collapsible]
@@ -796,7 +796,8 @@ Then you can display the Klaros Test Management logs in the "logs" folder of cat
 .Linux
 [%collapsible]
 ====
-To read the logs from the backup, use `tar` to unpack the archive.
+
+.To read the logs from the backup, use `tar` to unpack the archive.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
@@ -841,8 +842,7 @@ docker-compose build
 docker image prune
 ----
 
-After the new image has been created, the container is started as usual.
-
+.After the new image has been created, the container is started as usual
 ----
 docker-compose up
 ----
