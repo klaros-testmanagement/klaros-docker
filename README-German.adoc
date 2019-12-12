@@ -446,7 +446,7 @@ IMPORTANT: Wenn bereits eine neuere Version verwendet wird, dann kann eine älte
 
 Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
 
-Nachdem das Repository geklont wurde, können die Tags mit `git tag` aufgelistet werden und mit `git checkout tags/<tag_name> -b <neuer_branch>` wird „neuer_branch“ erstellt und ausgecheckt.
+Nachdem das Repository geklont wurde, können die Tags mit `git tag` aufgelistet werden und mit `git checkout tags/<tag_name> -b <neuer_branch>` wird ein neuer branch erstellt und ausgecheckt.
 
 ----
 git tag
