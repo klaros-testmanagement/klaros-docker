@@ -40,7 +40,7 @@ Die https://www.klaros-testmanagement.com/de_DE/download[Enterprise Edition] bie
 
 Eine kostenlose 30-tägige Testlizenz für die Enterprise Edition, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] anfordern.
 
-Ausführliche  Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement].
+Ausführliche Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement].
 
 <<Top-of-the-page,(Nach Oben)>>
 
@@ -546,7 +546,7 @@ BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd ~/klaros-docker/PostgreSQL
 mkdir -p ${BACKUP_DIR}
-sudo docker exec -t klaros_db bash -c "pg_dump -c  -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" > ${BACKUP_DIR}/backup${DATE}.sql
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data -C /backup backup${DATE}.sql"
 rm ${BACKUP_DIR}/backup${DATE}.sql
