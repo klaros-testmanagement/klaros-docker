@@ -110,7 +110,7 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel <<Installatio
 |DATABASE_USER            |klaros            |Datenbankbenutzer
 |DATABASE_CONTAINER_NAME  |klaros_db         |Containername für die Datenbank
 |DATABASE_PASSWORD        |P@ssw0rd          |Datenbank-Passwort
-|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MariaDB/MySQL Only] Root Passwort für den "root" Nutzer
+|DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MariaDB/MySQL Only] Root Passwort für den „root“ Nutzer
 |DATABASE_PORT            |10001             |Öffentlicher Port, um von außen auf die Datenbank zuzugreifen
 |KLAROS_CONTAINER_NAME    |klaros_postgresql |Containername für die Klaros-Testmanagement Anwendung
 |KLAROS_PORT              |18080             |Öffentlicher Port, um später auf die Webseite zuzugreifen
@@ -118,7 +118,7 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel <<Installatio
 |TIMEZONE                 |                  |Zeitzone
 |MEMORY_MIN               |128               |Minimal verfügbarer Arbeitsspeicher in MB
 |MEMORY_MAX               |786               |Maximal verfügbarer Arbeitsspeicher in MB
-|VOLUME_NAME              |klaros-data       |Das Volume wird von Docker Compose automatisch mit dem Namen "klaros-data" erzeugt, falls es nicht bereits vorhanden ist. Hier werden die Daten gespeichert
+|VOLUME_NAME              |klaros-data       |Das Volume wird von Docker Compose automatisch mit dem Namen „klaros-data“ erzeugt, falls es nicht bereits vorhanden ist. Hier werden die Daten gespeichert
 |=======================
 
 .Veränderbare Variablen nach dem ersten Serverstart über das .env file
@@ -135,7 +135,7 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel <<Installatio
 |=======================
 
 Die Umgebungsvariablen lassen sich über das .env file konfigurieren und verändern.
-Für die Portweiterleitung müssen lediglich die Ports „KLAROS_PORT" und „DATABASE_PORT“ im .env file geändert werden.
+Für die Portweiterleitung müssen lediglich die Ports „KLAROS_PORT“ und „DATABASE_PORT“ im .env file geändert werden.
 
 Beim Erstellen des Images können alle Werte in Tabelle 1 vor dem ersten Serverstart geändert werden. Nach dem ersten Start des Servers können die Werte in Tabelle 2 beliebig oft geändert werden. Alle Änderungen erfordern einen Neustart.
 
@@ -219,7 +219,7 @@ docker-compose up -d
 
 Weitere Informationen zu den `docker-compose up` Parametern finden Sie in der https://docs.docker.com/compose/reference/up/[offiziellen Docker Compose Dokumentation.]
 
-Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
+Nach dem Serverstart erscheint am Ende die Meldung „Serverstart in x ms“. Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
 
 .Beispiel: 127.0.0.1:18080
 ----
@@ -312,7 +312,7 @@ Alternativ lässt sich der Server auch über `docker-compose stop` herunterfahre
 
 Hierbei wird zwischen einem SQL-Backup (Dump) und Volume-Backup unterschieden. Mithilfe eines SQL-Backups kann die Datenbank im laufenden Betrieb gesichert werden. Bei einem Volume-Backup muss der Server zuvor heruntergefahren werden. Ein SQL-Backup erfordert ebenfalls einen geringeren Speicherbedarf als ein Volume-Backup, es fehlen jedoch wichtige Daten, wie z.B. Konfigurations- und Protokolldateien. Beide Sicherungsstrategien haben ihre Vorteile, daher ist es wünschenswert, sie zu kombinieren.
 
-Einzelne SQL-Backups finden sich unter dem Namen "backup_sql_klaros<Datum>.tar.gz".
+Einzelne SQL-Backups finden sich unter dem Namen „backup_sql_klaros<Datum>.tar.gz“.
 
 Volume oder Volume- und SQL-Backups sind mit dem Namen „backup_klaros<Datum>.tar.gz“ versehen. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
 
@@ -335,7 +335,7 @@ Damit würde das Backup den folgenden Namen tragen:
 Windows: `backup_klaros19-10-28-11h-34m-33s.tar.gz` +
 Linux: `backup_klaros19-10-28-11:34:33.tar.gz`
 
-Um den Backup-Pfad zu wechseln, kann die Variable "BACKUP_DIR" angepasst werden.
+Um den Backup-Pfad zu wechseln, kann die Variable „BACKUP_DIR“ angepasst werden.
 
 .Windows-Beispiel
 ----
@@ -585,7 +585,7 @@ cd -
 
 === Backup wiederherstellen
 
-Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv "backup_klaros<Datum> .tar.gz", wenn eine "backup<Datum>.sql" Datei vorhanden ist. Beachten Sie, dass der Datenbank-Container weiterhin ausgeführt sein muss, während der Server heruntergefahren wird. Danach wird der Container über `docker-compose stop` angehalten.
+Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv „backup_klaros<Datum> .tar.gz“, wenn eine „backup<Datum>.sql“ Datei vorhanden ist. Beachten Sie, dass der Datenbank-Container weiterhin ausgeführt sein muss, während der Server heruntergefahren wird. Danach wird der Container über `docker-compose stop` angehalten.
 
 NOTE: Beachten Sie, das Datum der jeweiligen Backups anzupassen.
 
@@ -793,7 +793,7 @@ more /data/catalina-base/logs/catalina.2019-12-09.log
 ====
 Windows-Nutzer können das Archivprogramm https://www.winrar.de/downld.php[WinRAR] verwenden, um .tar.gz Archive zu entpacken.
 
-Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von catalina-base und die MySQL Logs im Ordner "mysql-data" anzeigen.
+Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base und die MySQL Logs im Ordner „mysql-data“ anzeigen.
 ====
 
 .Linux
@@ -804,7 +804,7 @@ Um die Logs aus dem Backup auszulesen, lässt sich mit `tar` das Archive entpack
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
 
-Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von catalina-base und die MySQL Logs im Ordner "mysql-data" anzeigen.
+Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner von catalina-base und die MySQL Logs im Ordner „mysql-data“ anzeigen.
 
 ====
 
@@ -836,7 +836,7 @@ git branch -D update
 
 === Image aktualisieren
 
-Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle "dangling" Images werden entfernt.
+Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle „dangling“ Images werden entfernt.
 
 ----
 docker-compose down
@@ -858,7 +858,7 @@ IMPORTANT: Wenn bereits eine neuere Version verwendet wird, dann kann eine älte
 
 Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
 
-Nachdem das Repository geklont wurde, können die Tags mit `git tag` aufgelistet werden und mit `git checkout tags/<tag_name> -b <neuer_branch>` wird "neuer_branch" erstellt und ausgecheckt.
+Nachdem das Repository geklont wurde, können die Tags mit `git tag` aufgelistet werden und mit `git checkout tags/<tag_name> -b <neuer_branch>` wird „neuer_branch“ erstellt und ausgecheckt.
 
 ----
 git tag
