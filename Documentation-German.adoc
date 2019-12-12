@@ -238,15 +238,7 @@ Zu Test- oder Validierungszwecken kann es wünschenswert sein, mehrere Instanzen
 
 Eine weitere Klaros-Instanz kann dazu verwendet werden, eine neue Klaros-Version auszuprobieren oder um ein bestehendes Backup zu testen.
 
-//Um ein Backup auf Vollständigkeit zu prüfen, kann eine
-
-//Eine weitere Klaros-Instanz kann verwendet werden, um Sicherungen auf Vollständigkeit zu prüfen oder eine neuere Klaros-Version zu testen.
-
-Bevor die Konfigurationsänderungen vorgenommen werden, müssen die Konfigurationen für jede Instanz in einem separaten Verzeichnis gespeichert werden.
-
-//Bevor die Konfigurationsänderungen vorgenommen werden, sollte die .  vorhandenen Konfigurationen gespeichert werden.  Es wird empfohlen, die Konfiguration jeder Instanz in ihrem eigenen Verzeichnis zu speichern.
-
-//Um eine unabhängige Klaros-Instanz zu starten, müssen einige Konfigurationsänderungen vorgenommen werden. Um Ihre vorhandenen Konfigurationen zu speichern, wird empfohlen, die Konfiguration jeder Instanz in ihrem eigenen Verzeichnis zu speichern.
+Bevor die Konfigurationsänderungen vorgenommen werden, muss jede Instanz in einem separaten Verzeichnis gespeichert werden.
 
 .PostgreSQL
 [%collapsible]
@@ -256,7 +248,7 @@ Bevor die Konfigurationsänderungen vorgenommen werden, müssen die Konfiguratio
 cp -r PostgreSQL/ PostgreSQL2
 ----
 
-Öffne die ENV-Datei mit dem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
 ----
 cd ~/klaros-docker/PostgreSQL2
 vi .env
@@ -271,7 +263,7 @@ vi .env
 cp -r MySQL/  MySQL2
 ----
 
-Öffne die ENV-Datei mit dem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
 ----
 cd ~/klaros-docker/MySQL2
 vi .env
@@ -286,7 +278,7 @@ vi .env
 cp -r MariaDB/  MariaDB2
 ----
 
-Öffnen Sie die ENV-Datei mit ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
 ----
 cd ~/klaros-docker/MariaDB2
 vi .env
