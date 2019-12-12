@@ -164,13 +164,14 @@ vi .env
 [[Installation]]
 == Installation
 === Repository – klonen
-Sobald Sie sich im gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
+
+.Sobald Sie sich im gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen
 ----
 git init
 git clone https://github.com/klaros-testmanagement/klaros-docker 
 ----
 
-Mit `ls` können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
+.Mit `ls` können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde
 ----
 ls
 Ausgabe: klaros-docker
@@ -294,7 +295,7 @@ Um eine zweite Instanz unabhängig von der ersten Instanz auszuführen, müssen 
 |VOLUME_NAME=klaros-data                 |VOLUME_NAME=klaros-data2                 |Volumename. Hier werden die Daten gespeichert
 |=======================
 
-Die zweite Instanz wird dann wie die erste Instanz gestartet.
+.Die zweite Instanz wird dann wie die erste Instanz gestartet
 ----
 docker-compose up
 ----
@@ -835,8 +836,7 @@ git branch -D update
 
 === Image aktualisieren
 
-Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle „dangling“ Images werden entfernt.
-
+.Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle „dangling“ Images werden entfernt
 ----
 docker-compose down
 docker-compose build
