@@ -163,13 +163,14 @@ vi .env
 [[Installation]]
 == Installation
 === Clone
-Once you are in the directory you want, you can start downloading the Dockerfile.
+
+.Once you are in the directory you want, you can start downloading the Dockerfile
 ----
 git init
 git clone https://github.com/klaros-testmanagement/klaros-docker 
 ----
 
-With `ls` you can check whether the directory was created correctly.
+.With `ls` you can check whether the directory was created correctly
 ----
 ls
 Output: klaros-docker
