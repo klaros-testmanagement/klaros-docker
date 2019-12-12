@@ -21,7 +21,7 @@ toc::[]
 
 == Einführung
 
-IMPORTANT: Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der integrierten Apache Derby-Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für die Produktion.
+IMPORTANT: Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der integrierten Apache Derby-Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für Produktionssysteme.
 
 Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MySQL und PostgreSQL finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc[hier].
 
@@ -42,7 +42,7 @@ Die https://www.klaros-testmanagement.com/de_DE/download[Enterprise Edition] bie
 
 Eine kostenlose 30-tägige Testlizenz für die Enterprise Edition, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] anfordern.
 
-Ausführliche  Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement].
+Ausführliche Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement].
 
 <<Top-of-the-page,(Nach Oben)>>
 
@@ -172,13 +172,14 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros
 [[Installation]]
 == Installation
 === Repository – klonen
-Sobald Sie sich im gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.
+
+.Sobald Sie sich im gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen
 ----
 git init
 git clone https://github.com/klaros-testmanagement/klaros-docker 
 ----
 
-Mit `ls` können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
+.Mit `ls` können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde
 ----
 ls
 Ausgabe: klaros-docker
@@ -212,7 +213,7 @@ docker create --name Klaros -p 18080:18080 klaros
 docker create --name Klaros -p 18080:18080 -v klaros-data:/data klaros
 ----
 
-.Sobald der Container erstellt wurde, kann der Server mit „docker start“ hochgefahren werden
+.Sobald der Container erstellt wurde, kann der Server mit `docker start` hochgefahren werden
 ----
 docker start -a Klaros
 ----
@@ -275,7 +276,7 @@ Damit würde das Backup den folgenden Namen tragen:
 Windows: `backup_klaros19-10-28-11h-34m-33s.tar.gz` +
 Linux: `backup_klaros19-10-28-11:34:33.tar.gz`
 
-Um den Backup-Pfad zu wechseln, kann der Codeabschnitt hinter -v: „~/klaros-docker/backup“ geändert werden.
+Um den Backup-Pfad zu wechseln, kann der Codeabschnitt nach „-v“ geändert werden.
 
 .Windows Beispiel
 ----
@@ -423,8 +424,7 @@ git branch -D update
 
 === Image aktualisieren
 
-Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle „dangling“ Images werden entfernt.
-
+.Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle „dangling“ Images werden entfernt
 ----
 docker stop Klaros
 docker build -t klaros .
@@ -459,8 +459,7 @@ git checkout tags/<tag_name> -b klaros
 
 Um Klaros-Testmanagement vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volume entfernt werden kann.
 
-Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image.
-
+.Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image
 ----
 docker stop Klaros
 docker rm -v Klaros
