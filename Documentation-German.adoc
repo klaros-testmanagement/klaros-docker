@@ -311,17 +311,15 @@ Alternativ lässt sich der Server auch über `docker-compose stop` herunterfahre
 
 <<Top-of-the-page,(Nach Oben)>>
 
-== Erstellen, Wiederherstellen und Testen eines Backups
+== Erstellen und Wiederherstellen eines Backups
 
-Hierbei wird zwischen SQL-Backup (Dump) und Volume-Backup unterschieden. Mithilfe eines SQL-Backups kann die Datenbank im laufenden Betrieb gesichert werden. Bei einem Volume-Backup muss der Server zuvor heruntergefahren werden. Ein SQL-Backup erfordert ebenfalls einen geringeren Speicherbedarf als ein Volume-Backup, es fehlen jedoch wichtige Daten, wie z.B. die Konfigurations- und Protokolldateien sowie binäre Anhänge. Beide Sicherungsstrategien haben ihre Vorteile, daher ist es wünschenswert, sie zu kombinieren.
+Hierbei wird zwischen einem SQL-Backup (Dump) und Volume-Backup unterschieden. Mithilfe eines SQL-Backups kann die Datenbank im laufenden Betrieb gesichert werden. Bei einem Volume-Backup muss der Server zuvor heruntergefahren werden. Ein SQL-Backup erfordert ebenfalls einen geringeren Speicherbedarf als ein Volume-Backup, es fehlen jedoch wichtige Daten, wie z.B. Konfigurations- und Protokolldateien. Beide Sicherungsstrategien haben ihre Vorteile, daher ist es wünschenswert, sie zu kombinieren.
 
 Einzelne SQL-Backups finden sich unter dem Namen "backup_sql_klaros<Datum>.tar.gz".
 
-Volumes oder SQL mit Volume-Backups sind mit dem Namen „backup_klaros<Datum>.tar.gz“ versehen. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
+Volume oder Volume- und SQL-Backups sind mit dem Namen „backup_klaros<Datum>.tar.gz“ versehen. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
 
-//Wenn beim Erstellen des Backups ein Fehler auftritt, enthalten die Logfiles nützliche Hinweise.
-
-Tritt beim Erstellen eines Backups ein Fehler auf, dann geben die Logfiles nachvollziehbare Vorgänge zu den Fehlermeldungen.
+NOTE: Tritt beim Erstellen eines Backups ein Fehler auf, dann geben die Logfiles nachvollziehbare Vorgänge zu den Fehlermeldungen.
 
 .Windows-Beispiel
 ----
@@ -337,8 +335,8 @@ $(date '+%y-%m-%d-%H:%M:%S')
 ====
 Damit würde das Backup den folgenden Namen tragen:
 
-Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz +
-Linux: backup_klaros19-10-28-11:34:33.tar.gz
+Windows: `backup_klaros19-10-28-11h-34m-33s.tar.gz` +
+Linux: `backup_klaros19-10-28-11:34:33.tar.gz`
 
 Um den Backup-Pfad zu wechseln, kann die Variable "BACKUP_DIR" angepasst werden.
 
