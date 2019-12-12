@@ -76,20 +76,19 @@ https://www.cyberciti.biz/faq/install-use-setup-docker-on-rhel7-centos7-linux/[R
 
 https://docs.docker.com/compose/install/[Docker Compose]
 
-.Git-Installation über Ubuntu/Debian:
+.Git-Installation über Ubuntu/Debian
 ----
 sudo apt-get update
 sudo apt-get install git
 ----
 
-.Git-Installation über CentOS/RHEL:
+.Git-Installation über CentOS/RHEL
 ----
 sudo yum check-update
 sudo yum install git-core
 ----
 
-
-Ob die Installation erfolgreich war, lässt sich mit folgendem Kommando überprüfen:
+.Ob die Installation erfolgreich war, lässt sich mit folgendem Kommando überprüfen
 ----
 git --version
 Ausgabe: git version 2.17.1
@@ -153,7 +152,7 @@ IMPORTANT: Bitte ändern Sie bei Bedarf die Zeitzone im .env file und nicht im D
 ====
 
 .Konfiguration über das .env file
-Das .env file befindet sich im selben Verzeichnis wie das docker-compose.yml file und kann mit Ihrem bevorzugtem Textbearbeitungsprogramm geöffnet werden.
+Das .env file befindet sich im selben Verzeichnis wie das docker-compose.yml file und kann mit Ihrem bevorzugten Textbearbeitungsprogramm geöffnet werden.
 
 .Beispiel
 ----
@@ -212,7 +211,7 @@ docker-compose up
 
 [%collapsible]
 ====
-.Um den Container im detached mode auszuführen, muss der Parameter -d hinzugefügt werden. 
+.Um den Container im detached mode auszuführen, muss der Parameter -d hinzugefügt werden
 ----
 docker-compose up -d
 ----
@@ -240,12 +239,12 @@ Bevor die Konfigurationsänderungen vorgenommen werden, muss jede Instanz in ein
 .PostgreSQL
 [%collapsible]
 ====
-.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an.
+.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an
 ----
 cp -r PostgreSQL/ PostgreSQL2
 ----
 
-.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden
 ----
 cd ~/klaros-docker/PostgreSQL2
 vi .env
@@ -255,12 +254,12 @@ vi .env
 .MySQL
 [%collapsible]
 ====
-.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an.
+.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an
 ----
 cp -r MySQL/ MySQL2
 ----
 
-.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden
 ----
 cd ~/klaros-docker/MySQL2
 vi .env
@@ -270,12 +269,12 @@ vi .env
 .MariaDB
 [%collapsible]
 ====
-.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an.
+.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an
 ----
 cp -r MariaDB/ MariaDB2
 ----
 
-.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
+.Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden
 ----
 cd ~/klaros-docker/MariaDB2
 vi .env
@@ -284,7 +283,7 @@ vi .env
 
 Um eine zweite Instanz unabhängig von der ersten Instanz auszuführen, müssen sich die Instanzen im Namen, im Port und im Volume unterscheiden.
 
-.Werte, die pro Instanz geändert werden müssen.
+.Werte, die pro Instanz geändert werden müssen
 [options="header"]
 |=======================
 |Aktueller Wert                          |Neuer Wert                               |Beschreibung
@@ -349,7 +348,7 @@ BACKUP_DIR=~/klaros-docker/Path/backup
 ====
 
 === SQL-Backup erstellen
-Ein SQL-Backup kann nur im laufenden Betrieb erstellt werden.
+IMPORTANT: Ein SQL-Backup kann nur im laufenden Betrieb erstellt werden.
 
 .Windows
 [%collapsible]
@@ -402,7 +401,7 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 ====
 
 === Volume-Backup erstellen
-Für ein Volume Backup muss der Server heruntergefahren werden.
+IMPORTANT: Für ein Volume Backup muss der Server heruntergefahren werden.
 
 .Windows
 [%collapsible]
@@ -798,7 +797,8 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner vo
 .Linux
 [%collapsible]
 ====
-Um die Logs aus dem Backup auszulesen, lässt sich mit `tar` das Archive entpacken.
+
+.Um die Logs aus dem Backup auszulesen, lässt sich mit `tar` das Archive entpacken
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
@@ -811,7 +811,7 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner vo
 
 == Update
 
-IMPORTANT: Nach einem Update von Klaros-Testmanagement, ist das aufspielen der vorherigen Version nicht mehr möglich. Achte ebenfalls darauf das Image nach dem Update zu aktualisieren, da sonst weiterhin die vorherige Version verwendet wird.
+IMPORTANT: Nach einem Update von Klaros-Testmanagement, ist das Aufspielen der vorherigen Version nicht mehr möglich. Achte ebenfalls darauf das Image nach dem Update zu aktualisieren, da sonst weiterhin die vorherige Version verwendet wird.
 
 === Update über master branch
 
@@ -843,8 +843,7 @@ docker-compose build
 docker image prune
 ----
 
-Nachdem das neue Image erstellt wurde, wird der Container wie gewohnt gestartet.
-
+.Nachdem das neue Image erstellt wurde, wird der Container wie gewohnt gestartet
 ----
 docker-compose up
 ----
