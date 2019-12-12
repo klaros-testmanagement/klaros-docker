@@ -224,12 +224,11 @@ Weitere Informationen zu den `docker-compose up` Parametern finden Sie in der ht
 
 Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
 
+.Beispiel: 127.0.0.1:18080
 ----
 Benutzername: admin
 Passwort: admin
 ----
-
-Beispiel: 127.0.0.1:18080
 
 ====
 
