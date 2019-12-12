@@ -39,7 +39,7 @@ Die https://www.klaros-testmanagement.com/de_DE/download[Enterprise Edition] bie
 
 Eine kostenlose 30-tägige Testlizenz für die Enterprise Edition, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] anfordern.
 
-Ausführliche  Informationen, umfangreiche https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Dokumentation], https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos?_33_redirect=https%3A%2F%2Fwww.klaros-testmanagement.com%3A443%2Fde_DE%2Fblog-de%3Fp_p_id%3D33%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D1[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
+Ausführliche  Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos?_33_redirect=https%3A%2F%2Fwww.klaros-testmanagement.com%3A443%2Fde_DE%2Fblog-de%3Fp_p_id%3D33%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D1[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
 
 <<Top-of-the-page,(Nach Oben)>>
 
@@ -902,6 +902,7 @@ rm -rf ~/klaros-docker/
 
 <<Top-of-the-page,(Nach Oben)>>
 
+[[Documentation]]
 == Dokumentation
 
 Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
