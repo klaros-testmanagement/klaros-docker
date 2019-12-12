@@ -829,14 +829,7 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von ca
 
 == Update
 
-//Ausprobieren was passiert, wenn ich beim wechseln nicht docker-compose build benutze
-
-IMPORTANT: Falls beim Update das Wiederaufspielen der vorherigen Version geplant ist, dann muss hierfür eine zweite Instanz erstellt werden. Achte darauf, das Image beim wechseln der Instanzen mit `docker-compose build` neu zu erstellen, da
-
-
-//IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, verwenden Sie nicht den Original branch (klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht (Hierfür kann das Verzeichnis kopiert werden). Achten Sie ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem Testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird. 
-
-//IMPORTANT: Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
+IMPORTANT: Nach einem Update von Klaros-Testmanagement ist das aufspielen der vorherigen Version nicht mehr möglich. Achte ebenfalls darauf das Image nach dem Update zu aktualisieren, da sonst weiterhin die vorherige Version verwendet wird.
 
 === Update über master branch
 
@@ -878,10 +871,9 @@ docker-compose up
 
 == Vorherige Version nutzen
 
-NOTE: Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das Erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
+NOTE: Wenn bereits eine neuere Version verwendet wird, dann kann eine ältere Version nur durch das Erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
 
 Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
-
 
 //Umschreiben, da lokalen branch kein deutsch ist?
 Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokaler branch mit "git checkout" ausgewählt werden.
