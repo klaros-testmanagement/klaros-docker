@@ -933,7 +933,7 @@ Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Si
 Möchten Sie uns helfen oder Verbesserungsvorschläge machen? Führen Sie diese Schritte aus, um Ihre Änderungen vorzuschlagen.
 
 * Erstellen Sie ein issue und beschreiben Sie Ihre Idee.
-* Fork des Repositorys
+* Fork des https://github.com/klaros-testmanagement/klaros-docker[Repositorys]
 * Erstelle einen neuen branch (`git checkout -b feature/my-idea`)
 * Mach deine Änderungen
 * Commite deine Änderungen (`git commit -am 'Adding feature'`)

@@ -932,7 +932,7 @@ If you have any questions, requests or just want to give feedback, please write 
 Would you like to help us or make suggestions for improvement? Follow these steps to suggest your changes.
 
 * Create an issue and describe your idea
-* Fork the repo
+* Fork the https://github.com/klaros-testmanagement/klaros-docker[repo]
 * Create a new branch (`git checkout -b feature/my-idea`)
 * Make your changes
 * Commit your changes (`git commit -am 'Adding feature'`)
