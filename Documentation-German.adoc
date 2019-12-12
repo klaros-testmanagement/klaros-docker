@@ -174,7 +174,7 @@ git init
 git clone https://github.com/klaros-testmanagement/klaros-docker 
 ----
 
-Mit „ls“ können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
+Mit `ls` können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.
 ----
 ls
 Ausgabe: klaros-docker
@@ -317,13 +317,13 @@ Hierbei wird zwischen einem SQL-Backup (Dump) und Volume-Backup unterschieden. M
 
 Einzelne SQL-Backups finden sich unter dem Namen "backup_sql_klaros<Datum>.tar.gz".
 
-Volume oder Volume- und SQL-Backups sind mit dem Namen „backup_klaros<Datum>.tar.gz“ versehen. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
+Volume oder Volume- und SQL-Backups sind mit dem Namen „backup_klaros<Datum>.tar.gz“ versehen. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.
 
 NOTE: Tritt beim Erstellen eines Backups ein Fehler auf, dann geben die Logfiles nachvollziehbare Vorgänge zu den Fehlermeldungen.
 
 .Windows-Beispiel
 ----
-$(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")
+$(date '%y-%m-%d-%Hh-%Mm-%Ss')
 ----
 
 .Linux-Beispiel
@@ -352,7 +352,7 @@ BACKUP_DIR=~/klaros-docker/Path/backup
 ====
 
 === SQL-Backup erstellen
-Ein SQL Backup kann nur im laufenden Betrieb erstellt werden.
+Ein SQL-Backup kann nur im laufenden Betrieb erstellt werden.
 
 .Windows
 [%collapsible]
@@ -490,7 +490,7 @@ cd -
 ====
 
 === Volume- und SQL-Backup erstellen
-Als erstes muss im laufendem Betrieb ein SQL-Backup erstellt werden. Danach wird der Server heruntergefahren, um das Backup auszuführen.
+Als erstes muss im laufendem Betrieb ein SQL-Backup erstellt werden. Danach wird der Server heruntergefahren, um das Volume-Backup auszuführen.
 
 .Windows
 [%collapsible]
@@ -588,7 +588,7 @@ cd -
 
 === Backup wiederherstellen
 
-Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv "backup_klaros<Datum> .tar.gz", wenn eine "backup<Datum>.sql" Datei vorhanden ist. Beachten Sie, dass die Datenbank weiterhin ausgeführt werden muss, während der Server heruntergefahren wird. Danach wird der Container über "Docker-Compose Stop" gestoppt.
+Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv "backup_klaros<Datum> .tar.gz", wenn eine "backup<Datum>.sql" Datei vorhanden ist. Beachten Sie, dass der Datenbank-Container weiterhin ausgeführt sein muss, während der Server heruntergefahren wird. Danach wird der Container über `docker-compose stop` angehalten.
 
 NOTE: Beachten Sie, das Datum der jeweiligen Backups anzupassen.
 
@@ -687,7 +687,7 @@ cd -
 ====
 
 === Volume wiederherstellen
-IMPORTANT: Vor der Wiederherstellung muss der Container heruntergefahren werden.
+IMPORTANT: Vor der Wiederherstellung müssen die Container heruntergefahren werden.
 
 .Windows
 [%collapsible]
@@ -778,14 +778,14 @@ Wichtige Logs finden sich unter:
 _/data/catalina-base/logs_ +
 _/data/mysql-data_ ← Zusätzlich für MySQL
 
-=== Logs über die Docker shell anzeigen
-Öffnen Sie im Klaros-Container eine Shell mit „docker exec“, um Zugriff auf die Logs zu bekommen.
+=== Logs über die Docker-Shell anzeigen
+Öffnen Sie im Klaros-Container eine Shell mit `docker exec`, um Zugriff auf die Logs zu bekommen.
 
 NOTE: Bitte beachten Sie, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
 
-.Die Logfiles können dann mit "more" gelesen werden.
+.Die Logfiles können dann mit `more` gelesen werden.
 ----
-docker exec -it Klaros /bin/sh
+docker exec -it klaros_db /bin/sh
 more /data/catalina-base/logs/catalina.2019-12-09.log
 ----
 
@@ -802,7 +802,7 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im "logs" Ordner von ca
 .Linux
 [%collapsible]
 ====
-Um die Logs aus dem Backup auszulesen, lässt sich mit tar das Archive entpacken.
+Um die Logs aus dem Backup auszulesen, lässt sich mit `tar` das Archive entpacken.
 ----
 sudo tar -xzf backup_klaros19-10-28.tar.gz
 ----
@@ -819,14 +819,14 @@ IMPORTANT: Nach einem Update von Klaros-Testmanagement ist das aufspielen der vo
 
 === Update über master branch
 
-Klaros kann mit "git pull" auf die neueste Version aktualisiert werden.
+Klaros kann mit `git pull` auf die neueste Version aktualisiert werden.
 ----
 git pull origin master
 ----
 
 === Update über tags
 
-Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.
+Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub-Repository gesucht. Aktuelle Versionen lassen sich über `git tag` anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.
 
 ----
 git checkout master
@@ -839,7 +839,7 @@ git branch -D update
 
 === Image aktualisieren
 
-Nach dem Herunterladen des Updates aus dem Git-Repository wird ein neues Image erstellt und alle "dangling" Images werden entfernt.
+Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle "dangling" Images werden entfernt.
 
 ----
 docker-compose down
@@ -857,12 +857,11 @@ docker-compose up
 
 == Vorherige Version nutzen
 
-NOTE: Wenn bereits eine neuere Version verwendet wird, dann kann eine ältere Version nur durch das Erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
+IMPORTANT: Wenn bereits eine neuere Version verwendet wird, dann kann eine ältere Version nur durch das Erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
 
 Aktuell unterstützte Versionen finden Sie unter https://github.com/klaros-testmanagement/klaros-docker/releases[GitHub releases].
 
-//Umschreiben, da lokalen branch kein deutsch ist?
-Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokaler branch mit "git checkout" ausgewählt werden.
+Nachdem das Repository geklont wurde, können die Tags mit `git tag` aufgelistet werden und mit `git checkout tags/<tag_name> -b <neuer_branch>` wird "neuer_branch" erstellt und ausgecheckt.
 
 ----
 git tag
@@ -873,7 +872,7 @@ git checkout tags/<tag_name> -b klaros
 
 == Deinstallation
 
-Um Klaros-Testmanagement vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volume entfernt werden können.
+Um Klaros-Testmanagement vollständig von Docker zu entfernen, müssen die Container zuerst gestoppt werden, bevor die Container und das Volume entfernt werden kann.
 
 Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image.
 
@@ -913,7 +912,7 @@ Unsere Installationsdokumentation enthält die Beschreibung der Installation von
 
 == FAQ
 
-Eine technische FAQ sowie eine FAQ zu Preisen, Bestellung und Lieferung finden Sie auf unserer Webseite. 
+Eine https://www.klaros-testmanagement.com/de_DE/support?inheritRedirect=true[technische FAQ] sowie eine FAQ zu https://www.klaros-testmanagement.com/de_DE/faq?inheritRedirect=true[Preisen, Bestellung und Lieferung] finden Sie auf unserer Webseite. 
 
 <<Top-of-the-page,(Nach Oben)>>
 
@@ -941,7 +940,7 @@ Möchten Sie uns helfen oder Verbesserungsvorschläge machen? Führen Sie diese 
 * Fork des Repositorys
 * Erstelle einen neuen branch (`git checkout -b feature/my-idea`)
 * Mach deine Änderungen
-* Commite deine Änderungen (`git commit -am 'Adding feature`)
+* Commite deine Änderungen (`git commit -am 'Adding feature'`)
 * Push deine Änderungen in dein branch (`git push origin feature/my-idea`)
 * Erstelle ein Pull Request
 
