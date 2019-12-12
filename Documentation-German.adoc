@@ -115,14 +115,14 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installati
 |DATABASE_CONTAINER_NAME  |klaros_db         |Containername für die Datenbank
 |DATABASE_PASSWORD        |P@ssw0rd          |Datenbank-Passwort
 |DATABASE_ROOT_PASSWORD   |P@ssw0rd          |[MariaDB/MySQL Only] Root Passwort für den "root" Nutzer
-|DATABASE_PORT            |10001             |Öffentlicher Port für die Datenbank
+|DATABASE_PORT            |10001             |Öffentlicher Port, um von außen auf die Datenbank zuzugreifen
 |KLAROS_CONTAINER_NAME    |klaros_postgresql |Containername für die Klaros-Testmanagement Anwendung
-|KLAROS_PORT              |18080             |Öffentlicher Port von Klaros-Testmanagement
+|KLAROS_PORT              |18080             |Öffentlicher Port, um später auf die Webseite zuzugreifen
 |TOMCAT_PASSWORD          |P@ssw0rd          |Passwort für den Login auf 127.0.0.1:18080/monitoring
 |TIMEZONE                 |                  |Zeitzone
 |MEMORY_MIN               |128               |Minimal verfügbarer Arbeitsspeicher in MB
 |MEMORY_MAX               |786               |Maximal verfügbarer Arbeitsspeicher in MB
-|VOLUME_NAME              |klaros-data       |Das Volume wird von Docker Compose automatisch mit dem Namen "klaros-data" erzeugt, falls es nicht bereits vorhanden ist
+|VOLUME_NAME              |klaros-data       |Das Volume wird von Docker Compose automatisch mit dem Namen "klaros-data" erzeugt, falls es nicht bereits vorhanden ist. Hier werden die Daten gespeichert
 |=======================
 
 .Veränderbare Variablen nach dem ersten Serverstart über das .env file
@@ -243,7 +243,7 @@ Bevor die Konfigurationsänderungen vorgenommen werden, muss jede Instanz in ein
 .PostgreSQL
 [%collapsible]
 ====
-.Kopieren und speichern Sie das Verzeichnis mit einem anderen Namen.
+.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an.
 ----
 cp -r PostgreSQL/ PostgreSQL2
 ----
@@ -258,9 +258,9 @@ vi .env
 .MySQL
 [%collapsible]
 ====
-.Kopieren und speichern Sie das Verzeichnis mit einem anderen Namen.
+.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an.
 ----
-cp -r MySQL/  MySQL2
+cp -r MySQL/ MySQL2
 ----
 
 .Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
@@ -273,9 +273,9 @@ vi .env
 .MariaDB
 [%collapsible]
 ====
-.Kopieren und speichern Sie das Verzeichnis mit einem anderen Namen.
+.Kopieren Sie das Verzeichnis und geben Sie ein entsprechendes Zielverzeichnis an.
 ----
-cp -r MariaDB/  MariaDB2
+cp -r MariaDB/ MariaDB2
 ----
 
 .Öffnen Sie das .env file mit Ihrem bevorzugten Texteditor. Unter Windows kann Notepad++ als Texteditor verwendet werden.
@@ -293,8 +293,8 @@ Um eine zweite Instanz unabhängig von der ersten Instanz auszuführen, müssen 
 |Aktueller Wert                          |Neuer Wert                               |Beschreibung
 |KLAROS_PORT=18080                       |KLAROS_PORT=18081                        |Öffentlicher Port, um später auf die Webseite zuzugreifen
 |DATABASE_PORT=10001                     |DATABASE_PORT=10002                      |Öffentlicher Port, um von außen auf die Datenbank zuzugreifen
-|DATABASE_CONTAINER_NAME=klaros_db       |DATABASE_CONTAINER_NAME=klaros_db2       |Datenbank Containername
-|KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Klaros-Testmanagement Containername
+|DATABASE_CONTAINER_NAME=klaros_db       |DATABASE_CONTAINER_NAME=klaros_db2       |Containername für die Datenbank
+|KLAROS_CONTAINER_NAME=klaros_postgresql |KLAROS_CONTAINER_NAME=klaros_postgresql2 |Containername für die Klaros-Testmanagement Anwendung
 |VOLUME_NAME=klaros-data                 |VOLUME_NAME=klaros-data2                 |Volumename. Hier werden die Daten gespeichert
 |=======================
 
@@ -305,11 +305,9 @@ docker-compose up
 
 === Instanz herunterfahren
 
-Wenn der Container im Vordergrund gestartet wurde, drücken Sie STRG + C, um zum Terminal zurückzukehren und den Container automatisch herunterzufahren. Im abgetrennten Modus muss der Server über "Docker-Compose Stop" heruntergefahren werden.
+Wenn der Container im Vordergrund gestartet wurde, können Sie den Server mit der Tastenkombination STRG + C herunterfahren.
 
-----
-docker-compose stop
-----
+Alternativ lässt sich der Server auch über `docker-compose stop` herunterfahren.
 
 <<Top-of-the-page,(Nach Oben)>>
 
