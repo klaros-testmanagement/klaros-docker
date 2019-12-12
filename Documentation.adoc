@@ -21,31 +21,25 @@ toc::[]
 == Introduction
 
 IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MySQL or PostgreSQL database.
-The instructions for test installations with Apache Derby as a database can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.]
+The instructions for the test installations with the integrated Apache Derby database can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here.]
 
-This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.
+This installation documentation shows step by step how to install and configure Klaros Test Management under Docker for Windows and Linux.
 
 === About Docker
 https://www.docker.com/[Docker] is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux.
 
-You can find further information at https://www.docker.com/why-docker[Why-Docker]
+You can find further information at https://www.docker.com/why-docker[Why-Docker].
 
 === About Klaros Test Management
-Klaros Test Management is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
+https://www.klaros-testmanagement.com/en_US/home[Klaros Test Management] is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
 
-Klaros Test Management is available free of charge in the Community Edition.
+Klaros Test Management is available free of charge in the https://www.klaros-testmanagement.com/en_US/download[Community Edition] and can also be used for commercial purposes without restrictions.
 
-The Community Edition can be used without restrictions and has a reduced range of functions.
+The https://www.klaros-testmanagement.com/en_US/download[Enterprise Edition] offers you the full range of functions, including one-year support and free access to all software updates. An overview of the features of both editions can be found https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[here].
 
-With no limitation on the number of projects, test cases or users, it is ideal for getting started in a small team.
+To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here].
 
-You can upgrade the Community Edition to the Enterprise Edition at any time by uploading a license file.
-
-The Enterprise Edition offers you the full range of functions, including one year of support and free access to all software updates. Take a look at the Community and Enterprise Edition comparison https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison[here.]
-
-To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here.]
-
-You can find further information at https://www.klaros-testmanagement.com/en_US/[Klaros Test Management.]
+You can find further information at https://www.klaros-testmanagement.com/en_US/[Klaros Test Management].
 
 <<Top-of-the-page,(Back to top)>>
 
