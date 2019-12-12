@@ -220,7 +220,7 @@ docker-compose up
 docker-compose up -d
 ----
 
-Weitere Informationen finden Sie in der https://docs.docker.com/compose/reference/up/[offiziellen Docker Compose Dokumentation.]
+Weitere Informationen zu den `docker-compose up` Parametern finden Sie in der https://docs.docker.com/compose/reference/up/[offiziellen Docker Compose Dokumentation.]
 
 Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
 
