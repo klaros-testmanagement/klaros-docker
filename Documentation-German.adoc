@@ -21,7 +21,7 @@ toc::[]
 
 == Einführung
 
-IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit der integrierten Apache Derby-Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier.]
+IMPORTANT: Diese Dokumentation behandelt die Installation von Klaros-Testmanagement für Produktionssysteme, die eine MariaDB-, MySQL- oder PostgreSQL-Datenbank verwenden. Die Anleitung für die Testinstallationen mit der integrierten Apache Derby-Datenbank finden Sie https://github.com/klaros-testmanagement/klaros-docker/blob/master/README-German.adoc[hier].
 
 In dieser Dokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.
 
@@ -36,11 +36,11 @@ https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement] ist eine
 
 Klaros-Testmanagement ist in der https://www.klaros-testmanagement.com/de_DE/download[Community Edition] kostenlos erhältlich und uneingeschränkt auch für kommerzielle Zwecke einsetzbar.
 
-Die https://www.klaros-testmanagement.com/de_DE/download[Enterprise Edition] bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Eine Feature-Übersicht der beiden Editionen sehen Sie https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier.]
+Die https://www.klaros-testmanagement.com/de_DE/download[Enterprise Edition] bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Eine Feature-Übersicht der beiden Editionen sehen Sie https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison[hier].
 
 Eine kostenlose 30-tägige Testlizenz für die Enterprise Edition, können Sie https://www.klaros-testmanagement.com/de_DE/trial[hier] anfordern.
 
-Ausführliche  Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos?_33_redirect=https%3A%2F%2Fwww.klaros-testmanagement.com%3A443%2Fde_DE%2Fblog-de%3Fp_p_id%3D33%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D1[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement.]
+Ausführliche  Informationen, umfangreiche <<Documentation,Dokumentationen>>, https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[Videos] sowie eine frei zugängliche https://www.klaros-testmanagement.com/demo/pages/login.seam[Online-Demo] finden Sie unter https://www.klaros-testmanagement.com/de_DE/home[Klaros-Testmanagement].
 
 <<Top-of-the-page,(Nach Oben)>>
 
@@ -49,10 +49,9 @@ Ausführliche  Informationen, umfangreiche <<Documentation,Dokumentationen>>, ht
 .Windows
 [%collapsible]
 ====
-
 Die aktuellen Hardwareanforderungen und Installationsschritte sind in der https://docs.docker.com/docker-for-windows/install/[offiziellen Docker-Dokumentation] beschrieben. Für die Installation von Docker Desktop ist eine Anmeldung erforderlich.
 
-Um das spätere Aktualisieren von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile mit https://git-scm.com[Git] von GitHub herunterzuladen.
+Um das spätere Aktualisieren von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile von GitHub mit https://git-scm.com[Git] herunterzuladen.
 
 Dadurch das sich der Server während dem Betrieb in einem Linux-Container befindet, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, muss bei der Installation von Git die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ ausgewählt werden.
 
@@ -93,7 +92,7 @@ sudo yum install git-core
 Ob die Installation erfolgreich war, lässt sich mit folgendem Kommando überprüfen:
 ----
 git --version
-Ausgabe: git version 2.20.1
+Ausgabe: git version 2.17.1
 ----
 
 Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel <<Installation,Installation>> wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.
@@ -218,7 +217,7 @@ docker-compose up
 docker-compose up -d
 ----
 
-Weitere Informationen zu den `docker-compose up` Parametern finden Sie in der https://docs.docker.com/compose/reference/up/[offiziellen Docker Compose Dokumentation.]
+Weitere Informationen zu den `docker-compose up` Parametern finden Sie in der https://docs.docker.com/compose/reference/up/[offiziellen Docker Compose Dokumentation].
 
 Nach dem Serverstart erscheint am Ende die Meldung „Serverstart in x ms“. Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.
 
@@ -584,9 +583,8 @@ cd -
 
 ====
 
-=== Backup wiederherstellen
-
-Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv „backup_klaros<Datum> .tar.gz“, wenn eine „backup<Datum>.sql“ Datei vorhanden ist. Beachten Sie, dass der Datenbank-Container weiterhin ausgeführt sein muss, während der Server heruntergefahren wird. Danach wird der Container über `docker-compose stop` angehalten.
+=== SQL-Backup wiederherstellen
+Das Wiederherstellen über eine .sql-Datei funktioniert auch mit dem Sicherungsarchiv „backup_klaros<Datum>.tar.gz“, wenn eine „backup<Datum>.sql“ Datei vorhanden ist. Beachten Sie, dass der Datenbank-Container weiterhin ausgeführt sein muss, während der Server heruntergefahren wird. Danach wird der Container über `docker-compose stop` angehalten.
 
 NOTE: Beachten Sie, das Datum der jeweiligen Backups anzupassen.
 
@@ -684,7 +682,7 @@ cd -
 
 ====
 
-=== Volume wiederherstellen
+=== Volume-Backup wiederherstellen
 IMPORTANT: Vor der Wiederherstellung müssen die Container heruntergefahren werden.
 
 .Windows
@@ -781,7 +779,7 @@ _/data/mysql-data_ ← Zusätzlich für MySQL
 
 NOTE: Bitte beachten Sie, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
 
-.Die Logfiles können dann mit `more` gelesen werden.
+.Die Logfiles können dann mit `more` gelesen werden
 ----
 docker exec -it klaros_db /bin/sh
 more /data/catalina-base/logs/catalina.2019-12-09.log
@@ -813,11 +811,11 @@ Anschließend lassen sich die Klaros-Testmanagement Logs im „logs“ Ordner vo
 
 == Update
 
-IMPORTANT: Nach einem Update von Klaros-Testmanagement ist das aufspielen der vorherigen Version nicht mehr möglich. Achte ebenfalls darauf das Image nach dem Update zu aktualisieren, da sonst weiterhin die vorherige Version verwendet wird.
+IMPORTANT: Nach einem Update von Klaros-Testmanagement, ist das aufspielen der vorherigen Version nicht mehr möglich. Achte ebenfalls darauf das Image nach dem Update zu aktualisieren, da sonst weiterhin die vorherige Version verwendet wird.
 
 === Update über master branch
 
-Klaros kann mit `git pull` auf die neueste Version aktualisiert werden.
+.Klaros kann mit `git pull` auf die neueste Version aktualisiert werden
 ----
 git pull origin master
 ----
@@ -903,7 +901,7 @@ rm -rf ~/klaros-docker/
 [[Documentation]]
 == Dokumentation
 
-Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch.] Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
+Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[Tutorial] und im https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[Benutzerhandbuch]. Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.
 
 Unsere Installationsdokumentation enthält die Beschreibung der Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.
 
@@ -911,7 +909,7 @@ Unsere Installationsdokumentation enthält die Beschreibung der Installation von
 
 == FAQ
 
-Eine https://www.klaros-testmanagement.com/de_DE/support?inheritRedirect=true[technische FAQ] sowie eine FAQ zu https://www.klaros-testmanagement.com/de_DE/faq?inheritRedirect=true[Preisen, Bestellung und Lieferung] finden Sie auf unserer Webseite. 
+Eine https://www.klaros-testmanagement.com/de_DE/support?inheritRedirect=true[technische FAQ] sowie eine FAQ zu https://www.klaros-testmanagement.com/de_DE/faq?inheritRedirect=true[Preisen, Bestellung und Lieferung] finden Sie auf unserer Webseite.
 
 <<Top-of-the-page,(Nach Oben)>>
 
@@ -925,9 +923,9 @@ Durch die Installation unserer Software über Docker stimmen Sie auch unserer Li
 
 == Kontakt
 
-Wir hoffen, dass wir Ihnen mit dieser Beschreibung einen reibunglosen Start ermöglicht haben. 
+Wir hoffen, dass wir Ihnen mit dieser Beschreibung einen reibungslosen Start ermöglicht haben.
 
-Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum.]
+Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an support@verit.de oder nutzen Sie unser https://www.klaros-testmanagement.com/de_DE/forum[Forum].
 
 <<Top-of-the-page,(Nach Oben)>>
 
