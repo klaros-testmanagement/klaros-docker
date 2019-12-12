@@ -31,6 +31,7 @@ https://www.docker.com/[Docker] is a free container-based software that allows a
 You can find further information at https://www.docker.com/why-docker[Why-Docker].
 
 === About Klaros Test Management
+
 https://www.klaros-testmanagement.com/en_US/home[Klaros Test Management] is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.
 
 Klaros Test Management is available free of charge in the https://www.klaros-testmanagement.com/en_US/download[Community Edition] and can also be used for commercial purposes without restrictions.
@@ -39,7 +40,7 @@ The https://www.klaros-testmanagement.com/en_US/download[Enterprise Edition] off
 
 To receive your free 30-day trial license for the Enterprise Edition, you can request your license key https://www.klaros-testmanagement.com/en_US/trial[here].
 
-Detailed information, extensive <<Documentation,documentation>>, https://www.klaros-testmanagement.com/en_US/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[videos] and a freely accessible https://www.klaros-testmanagement.com/demo/pages/login.seam[online demo] can be found under https://www.klaros-testmanagement.com/en_US/home[Klaros-Testmanagement].
+Detailed information, extensive <<Documentation,documentation>>, https://www.klaros-testmanagement.com/en_US/blog-de/-/blogs/klaros-testmanagement-tutorial-videos[videos] and a freely accessible https://www.klaros-testmanagement.com/demo/pages/login.seam[online demo] can be found under https://www.klaros-testmanagement.com/en_US/home[Klaros Test Management].
 
 <<Top-of-the-page,(Back to top)>>
 
@@ -303,7 +304,7 @@ docker-compose up
 
 If the container was started in the foreground, you can shut down the server with the key combination CTRL + C.
 
-Alternatively, the server can also be shut down via `docker-compose stop`.
+Alternatively the server can also be shut down via `docker-compose stop`.
 
 <<Top-of-the-page,(Back to top)>>
 
