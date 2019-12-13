@@ -20,7 +20,7 @@ toc::[]
 
 == Introduction
 
-IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MySQL or PostgreSQL database.
+IMPORTANT: This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MSSQL, MySQL or PostgreSQL database.
 The instructions for the test installations with the integrated Apache Derby database can be found https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc[here].
 
 This installation documentation shows step by step how to install and configure Klaros Test Management under Docker for Windows and Linux.
@@ -198,6 +198,12 @@ cd ~/klaros-docker/MariaDB
 docker-compose build
 ----
 
+.Microsoft SQL Server
+----
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose build
+----
+
 <<Top-of-the-page,(Back to top)>>
 
 == Usage
@@ -278,6 +284,21 @@ cp -r MariaDB/ MariaDB2
 .Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor
 ----
 cd ~/klaros-docker/MariaDB2
+vi .env
+----
+====
+
+.Microsoft SQL Server
+[%collapsible]
+====
+.Copy the directory and specify an appropriate target directory
+----
+cp -r Microsoft\ SQL\ Server/ Microsoft\ SQL\ Server2
+----
+
+.Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor
+----
+cd Microsoft\ SQL\ Server2/
 vi .env
 ----
 ====
@@ -374,6 +395,16 @@ tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${
 rm ${BACKUP_DIR}/backup${DATE}.sql
 ----
 
+.Microsoft SQL Server
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" && docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.bak
+rm ${BACKUP_DIR}/backup${DATE}.bak
+----
+
 ====
 
 .Linux
@@ -397,6 +428,16 @@ mkdir -p ${BACKUP_DIR}
 sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" > ${BACKUP_DIR}/backup${DATE}.sql
 tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
 rm ${BACKUP_DIR}/backup${DATE}.sql
+----
+
+.Microsoft SQL Server
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" && sudo docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+sudo tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.bak
+rm -f ${BACKUP_DIR}/backup${DATE}.bak
 ----
 
 ====
@@ -443,6 +484,18 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -
 ----
 
+.Microsoft SQL Server
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data"
+cd -
+----
+
 ====
 
 .Linux
@@ -481,6 +534,18 @@ cd ~/klaros-docker/MariaDB
 mkdir -p ${BACKUP_DIR}
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -
+----
+
+.Microsoft SQL Server
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data"
 cd -
 ----
 
@@ -534,6 +599,20 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 cd -
 ----
 
+.Microsoft SQL Server
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" && docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data -C /backup backup${DATE}.bak"
+rm ${BACKUP_DIR}/backup${DATE}.bak
+cd -
+----
+
 ====
 
 .Linux
@@ -578,6 +657,20 @@ sudo docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\$
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /$BACKUP_DIR:/backup alpine sh -c "tar cvzf /backup/$BACKUP_NAME /data/klaros-home /data/catalina-base/logs /data/mariadb-data -C /backup backup$DATE.sql"
 rm ${BACKUP_DIR}/backup${DATE}.sql
+cd -
+----
+
+.Microsoft SQL Server
+----
+DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" && sudo docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data -C /backup backup${DATE}.bak"
+rm -f ${BACKUP_DIR}/backup${DATE}.bak
 cd -
 ----
 
@@ -633,6 +726,21 @@ docker-compose stop
 cd -
 ----
 
+.Microsoft SQL Server
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker stop klaros_mssql2017
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.bak
+docker cp backup${DATE}.bak klaros_db:/data/mssql-data/backup.bak
+docker exec -i klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"RESTORE DATABASE [klaros] FROM DISK = N'/data/mssql-data/backup.bak' WITH FILE = 1, REPLACE, STATS = 5\""
+rm backup${DATE}.bak
+docker-compose stop
+cd -
+----
+
 ====
 
 .Linux
@@ -680,6 +788,21 @@ sudo docker-compose stop
 cd -
 ----
 
+.Microsoft SQL Server
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+sudo docker stop klaros_mssql2017
+sudo tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.bak
+sudo docker cp backup${DATE}.bak klaros_db:/data/mssql-data/backup.bak
+sudo docker exec -i klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"RESTORE DATABASE [klaros] FROM DISK = N'/data/mssql-data/backup.bak' WITH FILE = 1, REPLACE, STATS = 5\""
+rm -f backup${DATE}.bak
+sudo docker-compose stop
+cd -
+----
+
 ====
 
 === Restore a backup from volume
@@ -722,6 +845,17 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -
 ----
 
+.Microsoft SQL Server
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.bak"
+cd -
+----
+
 ====
 
 .Linux
@@ -758,6 +892,17 @@ BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd ~/klaros-docker/MariaDB
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+cd -
+----
+
+.Microsoft SQL Server
+----
+DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.bak"
 cd -
 ----
 
@@ -895,6 +1040,14 @@ docker rmi mariadb-klaros_db
 rm -rf ~/klaros-docker/
 ----
 
+.Microsoft SQL Server
+----
+docker-compose down --volume
+docker rmi klaros-mssql2017
+docker rmi mssql2017-klaros_db
+rm -rf ~/klaros-docker/
+----
+
 <<Top-of-the-page,(Back to top)>>
 
 [[Documentation]]
@@ -902,7 +1055,7 @@ rm -rf ~/klaros-docker/
 
 You will find information on how to get started with Klaros Test Management in our https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html[tutorial] and in the https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html[user manual]. Both are available in the application itself after successful login.
 
-Our installation documentation contains a description of how to install Klaros Test Management under Docker for ApacheDerby, MariaDB, MySQL and PostgreSQL databases.
+Our installation documentation contains a description of how to install Klaros Test Management under Docker for ApacheDerby, MariaDB, MSSQL, MySQL and PostgreSQL databases.
 
 <<Top-of-the-page,(Back to top)>>
 
