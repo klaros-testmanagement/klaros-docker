@@ -668,8 +668,8 @@ BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd Microsoft\ SQL\ Server/
 mkdir -p ${BACKUP_DIR}
 sudo docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" && sudo docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
-docker-compose stop
-docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data -C /backup backup${DATE}.bak"
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data -C /backup backup${DATE}.bak"
 rm ${BACKUP_DIR}/backup${DATE}.bak
 cd -
 ----
@@ -794,12 +794,12 @@ DATE=19-11-28
 BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
 cd Microsoft\ SQL\ Server/
-docker stop klaros_mssql2017
+sudo docker stop klaros_mssql2017
 tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.bak
 sudo docker cp backup${DATE}.bak klaros_db:/data/mssql-data/backup.bak
 sudo docker exec -i klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"RESTORE DATABASE [klaros] FROM DISK = N'/data/mssql-data/backup.bak' WITH FILE = 1, REPLACE, STATS = 5\""
 rm backup${DATE}.bak
-docker-compose stop
+sudo docker-compose stop
 cd -
 ----
 
@@ -852,7 +852,7 @@ BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd Microsoft\ SQL\ Server/
 docker-compose stop
-docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.bak"
 cd -
 ----
 
@@ -902,7 +902,7 @@ BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd Microsoft\ SQL\ Server/
 sudo docker-compose stop
-sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.sql"
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data && tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.bak"
 cd -
 ----
 
