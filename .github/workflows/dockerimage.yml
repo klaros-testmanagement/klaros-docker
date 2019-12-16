@@ -6,17 +6,13 @@ jobs:
 
   build:
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-  
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        cd ApacheDerby; sudo docker build -t klaros .
-        cd MySQL; sudo docker-compose build;
-        cd PostgreSQL; sudo docker-compose build;
-        cd MariaDB; sudo docker-compose build;
-        cd Microsoft\ SQL\ Server/; sudo docker-compose build;
+        cd ApacheDerby && sudo docker build -t klaros . && cd -
+        cd MySQL && sudo docker-compose build && cd -
+        cd PostgreSQL && sudo docker-compose build && cd -
+        cd MariaDB && sudo docker-compose build && cd -
+        cd Microsoft\ SQL\ Server/ && sudo docker-compose build && cd -
