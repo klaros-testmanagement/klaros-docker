@@ -6,7 +6,11 @@ jobs:
 
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+  
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
