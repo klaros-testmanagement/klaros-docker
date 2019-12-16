@@ -1,10 +1,9 @@
-Quelle des Originalen MariaDB Dockerfiles: https://github.com/docker-library/mariadb/blob/ad6b97a27e6c09b81fb8d1e091b276b8ca5fff76/10.4/Dockerfile
-Quelle des Originalen Docker Compose file: https://github.com/akaer/Dockerfiles/blob/master/klaros/sqlserver2017/docker-compose.yml
-Quelle des Originalen Klaros Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
-Quelle des Originalen Entrypoint Datei: https://github.com/docker-library/mariadb/blob/ad6b97a27e6c09b81fb8d1e091b276b8ca5fff76/10.4/docker-entrypoint.sh
+Source of the original MariaDB files: https://github.com/docker-library/mariadb/tree/ad6b97a27e6c09b81fb8d1e091b276b8ca5fff76/10.4
+Source of the original Docker Compose file: https://github.com/akaer/Dockerfiles/blob/master/klaros/sqlserver2017/docker-compose.yml
+Source of the original Klaros Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
 
-Alle Unterschiede der Dockerfiles sind in .diff markiert.
+To view all differences of a file, download the original file and compare it with "diff".
 
-+ catalina-wrapper.sh unter klaros -> files verändert (siehe .diff)
-+ Verändern der Compose Datei und aller Dockerfiles -> Siehe .diff
-+ Unterschiede der auto-install.xml sind unter Apache Derby .diff zu finden
++ Modify catalina-wrapper.sh under klaros
++ Modify the Compose file and all Dockerfiles
++ Modify the auto-install.xml file
