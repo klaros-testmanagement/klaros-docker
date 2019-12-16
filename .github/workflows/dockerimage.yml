@@ -15,8 +15,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        cd ApacheDerby && sudo docker build -t klaros . && cd -
-        cd MySQL && sudo docker-compose build && cd -
-        cd PostgreSQL && sudo docker-compose build && cd -
-        cd MariaDB && sudo docker-compose build && cd -
-        cd Microsoft\ SQL\ Server/ && sudo docker-compose build && cd -
+        cd ApacheDerby; sudo docker build -t klaros . ; cd -
+        cd MySQL; sudo docker-compose build; cd -
+        cd PostgreSQL; sudo docker-compose build; cd -
+        cd MariaDB; sudo docker-compose build; cd -
+        cd Microsoft\ SQL\ Server/; sudo docker-compose build; cd -
