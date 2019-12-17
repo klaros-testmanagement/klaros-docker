@@ -9,3 +9,5 @@
 
 + Benutze zum Konvertieren asciidoctor und nicht asciidoc
 	Befehl: asciidoctor README.adoc
+	
++ Asciidoctor Version 2.0.10

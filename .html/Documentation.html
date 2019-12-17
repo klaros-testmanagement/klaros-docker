@@ -436,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 </head>
-<body class="article">
+<body id="Top-of-the-page" class="article">
 <div id="header">
 <h1>Klaros Test Management Docker-Integration</h1>
 </div>
@@ -444,9 +444,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><img src="https://img.shields.io/badge/Version-4.12.3-green.svg" alt="Version 4.12.3 green"></span>
-<span class="image"><img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT green"></span>
-<span class="image"><img src="https://img.shields.io/badge/Community%20Edition-FREE-green" alt="Community%20Edition FREE green"></span></p>
+<p><span class="image"><a class="image" href="https://github.com/klaros-testmanagement/klaros-docker/releases"><img src="https://img.shields.io/badge/Version-4.12.3-green.svg" alt="Version 4.12.3 green"></a></span>
+<span class="image"><a class="image" href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT green"></a></span>
+<span class="image"><a class="image" href="https://www.klaros-testmanagement.com/en_US/download"><img src="https://img.shields.io/badge/Community%20Edition-FREE-green" alt="Community%20Edition FREE green"></a></span>
+<span class="image right"><a class="image" href="https://twitter.com/intent/follow?screen_name=Klaros_TM"><img src="https://img.shields.io/twitter/follow/Klaros_TM?style=social" alt="Klaros TM?style=social"></a></span></p>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
@@ -459,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_prerequisites">2. Prerequisites</a></li>
 <li><a href="#_configuring_docker_environment_variables">3. Configuring Docker Environment Variables</a></li>
-<li><a href="#_installation">4. Installation</a>
+<li><a href="#Installation">4. Installation</a>
 <ul class="sectlevel2">
 <li><a href="#_clone">4.1. Clone</a></li>
 <li><a href="#_build">4.2. Build</a></li>
@@ -496,11 +497,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_how_to_use_a_previous_version">9. How to use a previous version</a></li>
 <li><a href="#_uninstallation">10. Uninstallation</a></li>
-<li><a href="#_documentation">11. Documentation</a></li>
+<li><a href="#Documentation">11. Documentation</a></li>
 <li><a href="#_faq">12. FAQ</a></li>
 <li><a href="#_license">13. License</a></li>
 <li><a href="#_contact">14. Contact</a></li>
-<li><a href="#_acknowledgements">15. Acknowledgements</a></li>
+<li><a href="#_contributing">15. Contributing</a></li>
+<li><a href="#_acknowledgements">16. Acknowledgements</a></li>
 </ul>
 </div>
 </div>
@@ -515,14 +517,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Important</div>
 </td>
 <td class="content">
-This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MySQL or PostgreSQL database.
-The instructions for test installations with Apache Derby as a database can be found <a href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc">here.</a>
+This documentation covers the Klaros Test Management installation for production systems using a MariaDB, MSSQL, MySQL or PostgreSQL database.
+The instructions for the test installations with the integrated Apache Derby database can be found <a href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/README.adoc">here</a>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>This installation documentation shows step-by-step how to install and configure Klaros Test Management under Docker for Windows and Linux.</p>
+<p>This installation documentation shows step by step how to install and configure Klaros Test Management under Docker for Windows and Linux.</p>
 </div>
 <div class="sect2">
 <h3 id="_about_docker">1.1. About Docker</h3>
@@ -530,34 +532,28 @@ The instructions for test installations with Apache Derby as a database can be f
 <p><a href="https://www.docker.com/">Docker</a> is a free container-based software that allows a secure installation of applications on different operating systems such as Windows and Linux.</p>
 </div>
 <div class="paragraph">
-<p>You can find further information at <a href="https://www.docker.com/why-docker">Why-Docker</a></p>
+<p>You can find further information at <a href="https://www.docker.com/why-docker">Why-Docker</a>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_about_klaros_test_management">1.2. About Klaros Test Management</h3>
 <div class="paragraph">
-<p>Klaros Test Management is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.</p>
+<p><a href="https://www.klaros-testmanagement.com/en_US/home">Klaros Test Management</a> is a professional web-based test management software. It contains components for resource management and evaluation of test activity. Tracking of test requirements is supported, as well as agile development processes. Numerous interfaces with issue trackers, test automation tools and continuous integration servers allow seamless integration into existing development environments.</p>
 </div>
 <div class="paragraph">
-<p>Klaros Test Management is available free of charge in the Community Edition.</p>
+<p>Klaros Test Management is available free of charge in the <a href="https://www.klaros-testmanagement.com/en_US/download">Community Edition</a> and can also be used for commercial purposes without restrictions.</p>
 </div>
 <div class="paragraph">
-<p>The Community Edition can be used without restrictions and has a reduced range of functions.</p>
+<p>The <a href="https://www.klaros-testmanagement.com/en_US/download">Enterprise Edition</a> offers you the full range of functions, including one-year support and free access to all software updates. An overview of the features of both editions can be found <a href="https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison">here</a>.</p>
 </div>
 <div class="paragraph">
-<p>With no limitation on the number of projects, test cases or users, it is ideal for getting started in a small team.</p>
+<p>To receive your free 30-day trial license for the Enterprise Edition, you can request your license key <a href="https://www.klaros-testmanagement.com/en_US/trial">here</a>.</p>
 </div>
 <div class="paragraph">
-<p>You can upgrade the Community Edition to the Enterprise Edition at any time by uploading a license file.</p>
+<p>Detailed information, extensive <a href="#Documentation">documentation</a>, <a href="https://www.klaros-testmanagement.com/en_US/blog-de/-/blogs/klaros-testmanagement-tutorial-videos">videos</a> and a freely accessible <a href="https://www.klaros-testmanagement.com/demo/pages/login.seam">online demo</a> can be found under <a href="https://www.klaros-testmanagement.com/en_US/home">Klaros Test Management</a>.</p>
 </div>
 <div class="paragraph">
-<p>The Enterprise Edition offers you the full range of functions, including one year of support and free access to all software updates. Take a look at the Community and Enterprise Edition comparison <a href="https://www.klaros-testmanagement.com/en_US/test-management/test-management-tool-comparison">here.</a></p>
-</div>
-<div class="paragraph">
-<p>To receive your free 30-day trial license for the Enterprise Edition, you can request your license key <a href="https://www.klaros-testmanagement.com/en_US/trial">here.</a></p>
-</div>
-<div class="paragraph">
-<p>You can find further information at <a href="https://www.klaros-testmanagement.com/en_US/">Klaros Test Management.</a></p>
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -569,23 +565,22 @@ The instructions for test installations with Apache Derby as a database can be f
 <summary class="title">Windows</summary>
 <div class="content">
 <div class="paragraph">
-<p>The current hardware requirements and installation steps are described in the <a href="https://docs.docker.com/docker-for-windows/install/">official Docker documentation.</a> The Docker Desktop installation requires a login.</p>
+<p>The current hardware requirements and installation steps are described in the <a href="https://docs.docker.com/docker-for-windows/install/">official Docker documentation</a>. The Docker Desktop installation requires a login.</p>
 </div>
 <div class="paragraph">
-<p>To make it easier to update Klaros Test Management later, it is recommended to download the Dockerfile using Git from GitHub.
-Git can be downloaded and installed from the <a href="https://git-scm.com">official site.</a></p>
+<p>To make it easier to update Klaros Test Management later, it is recommended to use <a href="https://git-scm.com">Git</a> to download the Dockerfile from GitHub.</p>
 </div>
 <div class="paragraph">
-<p>During the installation you can select whether and how the line endings of files should be converted. Since the server is running on Linux inside the container, and the line endings differ from Windows (\r) and Linux (\n), we recommend to select the option "Checkout as-is, commit Unix-style line endings" or "Checkout as-is, commit as-is".</p>
+<p>Since the server will be running inside a Linux container and the line endings of Windows (\r) and Linux (\n) will be different, the option "Checkout as-is, commit Unix-style line endings" or "Checkout as-is, commit as-is" must be selected when installing Git.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ConfigurationOfTheLineEndConversion.png" alt="Configuration of the line end conversion">
+<img src="images/ConfigurationOfTheLineEndConversion.png" alt="Configuration for converting the line endings">
 </div>
-<div class="title">Figure 1. Configuration of the line end conversion</div>
+<div class="title">Figure 1. Configuration for converting the line endings</div>
 </div>
 <div class="paragraph">
-<p>This completes the preparations for Windows. The chapter "Installation" describes how to use Git Bash to download the Dockerfile and prepare it for future updates.</p>
+<p>This completes the preparations for Windows. The chapter <a href="#Installation">Installation</a> describes how to use Git Bash to download the Dockerfile and prepare it for future updates.</p>
 </div>
 </div>
 </details>
@@ -611,40 +606,41 @@ Git can be downloaded and installed from the <a href="https://git-scm.com">offic
 <p><a href="https://docs.docker.com/compose/install/">Docker Compose</a></p>
 </div>
 <div class="listingblock">
-<div class="title">Git installation via Ubuntu/Debian:</div>
+<div class="title">Git installation via Ubuntu/Debian</div>
 <div class="content">
 <pre>sudo apt-get update
 sudo apt-get install git</pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Git installation via CentOS/RHEL:</div>
+<div class="title">Git installation via CentOS/RHEL</div>
 <div class="content">
 <pre>sudo yum check-update
 sudo yum install git-core</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The following command can be used to check whether the installation was successful:</p>
-</div>
 <div class="listingblock">
+<div class="title">The following command can be used to check whether the installation was successful</div>
 <div class="content">
 <pre>git --version
-Output: git version 2.20.1</pre>
+Output: git version 2.17.1</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This completes the preparations for Linux. The chapter "Installation" describes how the Dockerfile can be downloaded and prepared for future updates.</p>
+<p>This completes the preparations for Linux. The chapter <a href="#Installation">Installation</a> describes how the Dockerfile can be downloaded and prepared for future updates.</p>
 </div>
 </div>
 </details>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_configuring_docker_environment_variables">3. Configuring Docker Environment Variables</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Configurable environment variables before the first server start via .env</caption>
+<caption class="title">Table 1. Configurable environment variables before the first server start via the .env file</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -661,22 +657,22 @@ Output: git version 2.20.1</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_NAME</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">klaros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database name</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_USER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">klaros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database user</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_CONTAINER_NAME</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">klaros_db</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database Containername</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container name for the database</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_PASSWORD</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">P@ssw0rd</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database password</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_ROOT_PASSWORD</p></td>
@@ -686,17 +682,17 @@ Output: git version 2.20.1</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_PORT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10001</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Public Database Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public port for accessing the database from the outside</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">KLAROS_CONTAINER_NAME</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">klaros_postgresql</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klaros Test Management Containername</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container name for the Klaros Test Management application</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">KLAROS_PORT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">18080</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Public Klaros Test Management Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Public port for later access to the website</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TOMCAT_PASSWORD</p></td>
@@ -709,24 +705,24 @@ Output: git version 2.20.1</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Time zone</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MAX</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">786</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum available RAM in MB</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MIN</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">128</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Minimum available RAM in MB</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MAX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">786</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum available RAM in MB</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">VOLUME_NAME</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">klaros-data</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The volume will be automatically created by Compose with the name "klaros-data" if it does not exist.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The volume is automatically created by Docker Compose with the name "klaros-data" if it does not already exist. This is where the data is stored</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Modifiable variables after the first server start via .env</caption>
+<caption class="title">Table 2. Modifiable variables after the first server start via the .env file</caption>
 <colgroup>
 <col style="width: 100%;">
 </colgroup>
@@ -747,10 +743,10 @@ Output: git version 2.20.1</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TIMEZONE</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MAX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MIN</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MEMORY_MAX</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">VOLUME_NAME</p></td>
@@ -762,10 +758,10 @@ Output: git version 2.20.1</pre>
 For port forwarding only the ports "KLAROS_PORT" and "DATABASE_PORT" in the .env file have to be changed.</p>
 </div>
 <div class="paragraph">
-<p>When creating the image, all values in table 1 can be changed before the first server start. After the server has been started for the first time, the values in table 2 can be changed as often as desired (All changes require a restart.).</p>
+<p>When creating the image, all values in table 1 can be changed before the first server start. After the first start of the server, the values in table 2 can be changed as often as desired. All changes require a restart.</p>
 </div>
 <div class="paragraph">
-<p>If required, you can add the environment variable JAVA_OPTS to the Dockerfile of the klaros directory for additional settings of the Tomcat server.</p>
+<p>If required, the environment variable JAVA_OPTS can be added to the Dockerfile of klaros to make additional settings for the Tomcat server.</p>
 </div>
 <details>
 <summary class="title">Example to set the time zone via JAVA_OPTS</summary>
@@ -777,7 +773,7 @@ For port forwarding only the ports "KLAROS_PORT" and "DATABASE_PORT" in the .env
 <div class="title">Important</div>
 </td>
 <td class="content">
-Please consider to set the time zone in the .env file and not the Dockerfile.
+If necessary, please change the time zone in the .env file and not in the Dockerfile.
 </td>
 </tr>
 </table>
@@ -799,30 +795,30 @@ Please consider to set the time zone in the .env file and not the Dockerfile.
 <p>The .env file is located in the same directory as the docker-compose.yml file and can be opened with your preferred text editor.</p>
 </div>
 <div class="listingblock">
+<div class="title">Example</div>
 <div class="content">
 <pre>vi .env</pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation">4. Installation</h2>
+<h2 id="Installation">4. Installation</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_clone">4.1. Clone</h3>
-<div class="paragraph">
-<p>Once you are in the directory you want, you can start downloading the Dockerfile.</p>
-</div>
 <div class="listingblock">
+<div class="title">Once you are in the directory you want, you can start downloading the Dockerfile</div>
 <div class="content">
 <pre>git init
 git clone https://github.com/klaros-testmanagement/klaros-docker</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>With "ls" you can check whether the directory was created correctly.</p>
-</div>
 <div class="listingblock">
+<div class="title">With <code>ls</code> you can check whether the directory was created correctly</div>
 <div class="content">
 <pre>ls
 Output: klaros-docker</pre>
@@ -855,6 +851,16 @@ docker-compose build</pre>
 docker-compose build</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose build</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -864,7 +870,7 @@ docker-compose build</pre>
 <div class="sect2">
 <h3 id="_how_to_start_an_instance">5.1. How to start an instance</h3>
 <div class="paragraph">
-<p>During startup, two Docker-Containers are automatically created for the server and the database. The configurations can be found in the .env file.</p>
+<p>Two Docker containers for the server and the database are automatically created at startup. The configurations can be found in the .env file.</p>
 </div>
 <div class="listingblock">
 <div class="title">Starting the server</div>
@@ -882,19 +888,17 @@ docker-compose build</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can find further information in the <a href="https://docs.docker.com/compose/reference/up/">official Docker-Compose Documentation.</a></p>
+<p>For more information about the <code>docker-compose up</code> parameters, see the <a href="https://docs.docker.com/compose/reference/up/">official Docker Compose documentation</a>.</p>
 </div>
 <div class="paragraph">
 <p>After the server has been started, the message "Server startup in x ms" appears at the end. You can now use any browser to enter your IP address and port to access the Klaros website.</p>
 </div>
 <div class="listingblock">
+<div class="title">Example: 127.0.0.1:18080</div>
 <div class="content">
 <pre>Username: admin
 Password: admin</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Example: 127.0.0.1:18080</p>
 </div>
 </div>
 </details>
@@ -902,29 +906,25 @@ Password: admin</pre>
 <div class="sect2">
 <h3 id="_how_to_start_multiple_instances">5.2. How to start multiple instances</h3>
 <div class="paragraph">
-<p>For testing or validation purposes it may be desirable to have multiple instances of Klaros running simultaneously in the same docker environment. This section describes the configuration changes needed to accommodate this.</p>
+<p>For testing or validation purposes, it may be desirable to run multiple instances of Klaros simultaneously in the same Docker environment. This section describes the necessary configuration changes.</p>
 </div>
 <div class="paragraph">
-<p>Another Klaros instance can be used to check backups for completeness or to test a newer Klaros version.</p>
+<p>Another Klaros instance can be used to try a new Klaros version or to test an existing backup.</p>
 </div>
 <div class="paragraph">
-<p>To start an independent Klaros instance, some configuration changes must be done. In order to save your existing configurations, it is recommended to store each instance’s configuration in it’s own directory.</p>
+<p>Before the configuration changes are made, each instance must be stored in a separate directory.</p>
 </div>
 <details>
 <summary class="title">PostgreSQL</summary>
 <div class="content">
-<div class="paragraph">
-<p>Copy the directory under a different name.</p>
-</div>
 <div class="listingblock">
+<div class="title">Copy the directory and specify an appropriate target directory</div>
 <div class="content">
 <pre>cp -r PostgreSQL/ PostgreSQL2</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.</p>
-</div>
 <div class="listingblock">
+<div class="title">Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor</div>
 <div class="content">
 <pre>cd ~/klaros-docker/PostgreSQL2
 vi .env</pre>
@@ -935,18 +935,14 @@ vi .env</pre>
 <details>
 <summary class="title">MySQL</summary>
 <div class="content">
-<div class="paragraph">
-<p>Copy the directory under a different name.</p>
-</div>
 <div class="listingblock">
+<div class="title">Copy the directory and specify an appropriate target directory</div>
 <div class="content">
-<pre>cp -r MySQL/  MySQL2</pre>
+<pre>cp -r MySQL/ MySQL2</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.</p>
 </div>
 <div class="listingblock">
+<div class="title">Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor</div>
 <div class="content">
 <pre>cd ~/klaros-docker/MySQL2
 vi .env</pre>
@@ -957,20 +953,34 @@ vi .env</pre>
 <details>
 <summary class="title">MariaDB</summary>
 <div class="content">
-<div class="paragraph">
-<p>Copy the directory under a different name.</p>
-</div>
 <div class="listingblock">
+<div class="title">Copy the directory and specify an appropriate target directory</div>
 <div class="content">
-<pre>cp -r MariaDB/  MariaDB2</pre>
+<pre>cp -r MariaDB/ MariaDB2</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor.</p>
 </div>
 <div class="listingblock">
+<div class="title">Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor</div>
 <div class="content">
 <pre>cd ~/klaros-docker/MariaDB2
+vi .env</pre>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title">Microsoft SQL Server</summary>
+<div class="content">
+<div class="listingblock">
+<div class="title">Copy the directory and specify an appropriate target directory</div>
+<div class="content">
+<pre>cp -r Microsoft\ SQL\ Server/ Microsoft\ SQL\ Server2</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Open the .env file with your preferred text editor. Under Windows Notepad++ can be used as a text editor</div>
+<div class="content">
+<pre>cd Microsoft\ SQL\ Server2/
 vi .env</pre>
 </div>
 </div>
@@ -1007,12 +1017,12 @@ vi .env</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_CONTAINER_NAME=klaros_db</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATABASE_CONTAINER_NAME=klaros_db2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database container name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container name for the database</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">KLAROS_CONTAINER_NAME=klaros_postgresql</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">KLAROS_CONTAINER_NAME=klaros_postgresql2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klaros Test Management container name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Container name for the Klaros Test Management application</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">VOLUME_NAME=klaros-data</p></td>
@@ -1021,10 +1031,8 @@ vi .env</pre>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>The second instance is then started in the same way as the first instance.</p>
-</div>
 <div class="listingblock">
+<div class="title">The second instance is then started in the same way as the first instance</div>
 <div class="content">
 <pre>docker-compose up</pre>
 </div>
@@ -1033,12 +1041,13 @@ vi .env</pre>
 <div class="sect2">
 <h3 id="_how_to_shut_down_your_instance">5.3. How to shut down your instance</h3>
 <div class="paragraph">
-<p>If the container has been started in the foreground, press CTRL + C to return to the terminal and shut down the container automatically. In detached mode, the server must be shut down via "docker-compose stop".</p>
+<p>If the container was started in the foreground, you can shut down the server with the key combination CTRL + C.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>docker-compose stop</pre>
+<div class="paragraph">
+<p>Alternatively the server can also be shut down via <code>docker-compose stop</code>.</p>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -1047,21 +1056,30 @@ vi .env</pre>
 <h2 id="_create_and_restore_a_backup">6. Create and restore a backup</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A distinction is made here between SQL backup (dump) and volume backup. Using an SQL backup, a database can be backed up while the system is running, while a volume backup requires the server to be shut down beforehand. An SQL backup requires less storage than a volume backup, but is missing vital data as e.g. the configuration and log files as well as binary attachments.  Both backup strategies have their advantages, so it is desirable to combine them.</p>
+<p>A distinction is made between an SQL backup (dump) and a volume backup. You can use an SQL backup to back up the database while it is running. With a volume backup, the server must be shut down beforehand. An SQL backup also requires less memory than a volume backup, but lacks important data such as configuration and log files. Both backup strategies have their advantages, so it is desirable to combine them.</p>
 </div>
 <div class="paragraph">
-<p>Individual SQL backups will be named "backup_sql_klaros&lt;Date&gt;.tar.gz".</p>
+<p>Individual SQL backups can be found under the name "backup_sql_klaros&lt;Date&gt;.tar.gz".</p>
 </div>
 <div class="paragraph">
-<p>Volumes or SQL with volume backups are marked with the name "backup_klaros&lt;Date&gt;.tar.gz". If you create multiple backups a day, it is recommended to specify a time (hours, minutes, and seconds) when creating backups. To do this, add %H(hour), %M(minute) and %S(second) in date/Get-Date.</p>
+<p>Volume or volume and SQL backups are named "backup_klaros&lt;Date&gt;.tar.gz". If you create several backups per day, it is recommended to specify a time (hours, minutes and seconds) when creating the backups. To do this, add %H(hour), %M(minute) and %S(second) in date.</p>
 </div>
-<div class="paragraph">
-<p>If an error occurs while creating the backup, the log file provides useful hints.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If an error occurs while creating a backup, the log files provide traceable procedures for the error messages.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="title">Windows Example</div>
 <div class="content">
-<pre>$(Get-Date -UFormat "%y-%m-%d-%Hh-%Mm-%Ss")</pre>
+<pre>$(date '%y-%m-%d-%Hh-%Mm-%Ss')</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1077,11 +1095,11 @@ vi .env</pre>
 <p>This would give the backup the following name:</p>
 </div>
 <div class="paragraph">
-<p>Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz<br>
-Linux: backup_klaros19-10-28-11:34:33.tar.gz</p>
+<p>Windows: <code>backup_klaros19-10-28-11h-34m-33s.tar.gz</code><br>
+Linux: <code>backup_klaros19-10-28-11:34:33.tar.gz</code></p>
 </div>
 <div class="paragraph">
-<p>You can change the backup path using the variable "BACKUP_DIR".</p>
+<p>To change the backup path, the variable "BACKUP_DIR" can be adjusted.</p>
 </div>
 <div class="listingblock">
 <div class="title">Windows Example</div>
@@ -1099,8 +1117,17 @@ Linux: backup_klaros19-10-28-11:34:33.tar.gz</p>
 </details>
 <div class="sect2">
 <h3 id="_creating_a_sql_backup">6.1. Creating a SQL backup</h3>
-<div class="paragraph">
-<p>An SQL backup can only be created while the system is running.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+An SQL backup can only be created while the system is running.
+</td>
+</tr>
+</table>
 </div>
 <details>
 <summary class="title">Windows</summary>
@@ -1125,6 +1152,17 @@ mkdir -p ${BACKUP_DIR}
 docker exec klaros_db bash -c "mysqldump -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME} --single-transaction --routines --triggers" &gt; ${BACKUP_DIR}/backup${DATE}.sql
 tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.sql
 rm ${BACKUP_DIR}/backup${DATE}.sql</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" &amp;&amp; docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.bak
+rm ${BACKUP_DIR}/backup${DATE}.bak</pre>
 </div>
 </div>
 </div>
@@ -1154,13 +1192,33 @@ tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${
 rm ${BACKUP_DIR}/backup${DATE}.sql</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" &amp;&amp; sudo docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+sudo tar cvzf ${BACKUP_DIR}/backup_sql_klaros${DATE}.tar.gz -C ${BACKUP_DIR} backup${DATE}.bak
+rm -f ${BACKUP_DIR}/backup${DATE}.bak</pre>
+</div>
+</div>
 </div>
 </details>
 </div>
 <div class="sect2">
 <h3 id="_creating_a_volume_backup">6.2. Creating a volume backup</h3>
-<div class="paragraph">
-<p>For a volume backup, the server must be shut down.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+For a volume backup, the server must be shut down.
+</td>
+</tr>
+</table>
 </div>
 <details>
 <summary class="title">Windows</summary>
@@ -1201,6 +1259,19 @@ cd ~/klaros-docker/MariaDB
 mkdir -p ${BACKUP_DIR}
 docker-compose stop
 docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data"
 cd -</pre>
 </div>
 </div>
@@ -1245,6 +1316,19 @@ cd ~/klaros-docker/MariaDB
 mkdir -p ${BACKUP_DIR}
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mariadb-data"
+cd -</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data"
 cd -</pre>
 </div>
 </div>
@@ -1304,6 +1388,21 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 cd -</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" &amp;&amp; docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data -C /backup backup${DATE}.bak"
+rm ${BACKUP_DIR}/backup${DATE}.bak
+cd -</pre>
+</div>
+</div>
 </div>
 </details>
 <details>
@@ -1317,7 +1416,7 @@ BACKUP_DIR=~/klaros-docker/backup
 BACKUP_NAME=backup_klaros${DATE}.tar.gz
 cd ~/klaros-docker/PostgreSQL
 mkdir -p ${BACKUP_DIR}
-sudo docker exec -t klaros_db bash -c "pg_dump -c  -U \${DATABASE_USER} -d \${DATABASE_NAME}" &gt; ${BACKUP_DIR}/backup${DATE}.sql
+sudo docker exec -t klaros_db bash -c "pg_dump -c -U \${DATABASE_USER} -d \${DATABASE_NAME}" &gt; ${BACKUP_DIR}/backup${DATE}.sql
 sudo docker-compose stop
 sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/postgres-data -C /backup backup${DATE}.sql"
 rm ${BACKUP_DIR}/backup${DATE}.sql
@@ -1354,13 +1453,40 @@ rm ${BACKUP_DIR}/backup${DATE}.sql
 cd -</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=$(date '+%y-%m-%d')
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+mkdir -p ${BACKUP_DIR}
+sudo docker exec -t klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"BACKUP DATABASE [klaros] TO DISK = N'/data/mssql-data/backup.bak' WITH FORMAT\"" &amp;&amp; sudo docker cp klaros_db:/data/mssql-data/backup.bak ${BACKUP_DIR}/backup${DATE}.bak
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "tar cvzf /backup/${BACKUP_NAME} /data/klaros-home /data/catalina-base/logs /data/mssql-data -C /backup backup${DATE}.bak"
+rm -f ${BACKUP_DIR}/backup${DATE}.bak
+cd -</pre>
+</div>
+</div>
 </div>
 </details>
 </div>
 <div class="sect2">
 <h3 id="_restore_a_backup_from_sql">6.4. Restore a backup from SQL</h3>
 <div class="paragraph">
-<p>Restoring via a .sql file also works using the backup archive "backup_klaros&lt;Date&gt;.tar.gz" if a "backup&lt;Date&gt;.sql" file exists. Please note that the database must continue to run while the server is shut down. After that the container will be stopped via "docker-compose stop".</p>
+<p>Restoring from a .sql file also works with the backup archive "backup_klaros&lt;Date&gt;.tar.gz" if a "backup&lt;Date&gt;.sql" file exists. Note that the database container must still be running while the server is shutting down. Then the container is stopped via <code>docker-compose stop</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Note to adjust the date of the respective backups.
+</td>
+</tr>
+</table>
 </div>
 <details>
 <summary class="title">Windows</summary>
@@ -1406,6 +1532,22 @@ docker stop klaros_mariadb
 tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
 cat backup${DATE}.sql | docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
 rm backup${DATE}.sql
+docker-compose stop
+cd -</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker stop klaros_mssql2017
+tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.bak
+docker cp backup${DATE}.bak klaros_db:/data/mssql-data/backup.bak
+docker exec -i klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"RESTORE DATABASE [klaros] FROM DISK = N'/data/mssql-data/backup.bak' WITH FILE = 1, REPLACE, STATS = 5\""
+rm backup${DATE}.bak
 docker-compose stop
 cd -</pre>
 </div>
@@ -1456,6 +1598,22 @@ sudo docker stop klaros_mariadb
 tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.sql
 cat backup${DATE}.sql | sudo docker exec -i klaros_db bash -c "mysql -u \${DATABASE_USER} --password=\${DATABASE_PASSWORD} \${DATABASE_NAME}"
 rm backup${DATE}.sql
+sudo docker-compose stop
+cd -</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_sql_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+sudo docker stop klaros_mssql2017
+sudo tar xvzf ${BACKUP_DIR}/${BACKUP_NAME} backup${DATE}.bak
+sudo docker cp backup${DATE}.bak klaros_db:/data/mssql-data/backup.bak
+sudo docker exec -i klaros_db bash -c "./opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P \$DATABASE_PASSWORD -Q \"RESTORE DATABASE [klaros] FROM DISK = N'/data/mssql-data/backup.bak' WITH FILE = 1, REPLACE, STATS = 5\""
+rm -f backup${DATE}.bak
 sudo docker-compose stop
 cd -</pre>
 </div>
@@ -1516,6 +1674,18 @@ docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c 
 cd -</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+docker-compose stop
+docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data &amp;&amp; tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.bak"
+cd -</pre>
+</div>
+</div>
 </div>
 </details>
 <details>
@@ -1557,8 +1727,23 @@ sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine s
 cd -</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>DATE=19-11-28
+BACKUP_DIR=~/klaros-docker/backup
+BACKUP_NAME=backup_klaros${DATE}.tar.gz
+cd ~/klaros-docker/Microsoft\ SQL\ Server/
+sudo docker-compose stop
+sudo docker run --rm --volumes-from klaros_db -v /${BACKUP_DIR}:/backup alpine sh -c "cd /data &amp;&amp; tar xvzf /backup/${BACKUP_NAME} --strip 1 --exclude=backup${DATE}.bak"
+cd -</pre>
+</div>
+</div>
 </div>
 </details>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -1578,7 +1763,7 @@ cd -</pre>
 <div class="sect2">
 <h3 id="_show_log_files_via_docker_shell">7.1. Show log files via Docker shell</h3>
 <div class="paragraph">
-<p>Open a shell with "docker exec" in the Klaros container to get access to the logs.</p>
+<p>In the Klaros container, open a shell with <code>docker exec</code> to get access to the logs.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1593,7 +1778,7 @@ Please note that the server must be started when accessing via the shell and is 
 </table>
 </div>
 <div class="listingblock">
-<div class="title">The log files can then be read using more</div>
+<div class="title">The log files can then be read using <code>more</code></div>
 <div class="content">
 <pre>docker exec -it klaros_db sh
 more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
@@ -1616,10 +1801,8 @@ more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 <details>
 <summary class="title">Linux</summary>
 <div class="content">
-<div class="paragraph">
-<p>To read the logs from the backup, use tar to unpack the archive.</p>
-</div>
 <div class="listingblock">
+<div class="title">To read the logs from the backup, use <code>tar</code> to unpack the archive.</div>
 <div class="content">
 <pre>sudo tar -xzf backup_klaros19-10-28.tar.gz</pre>
 </div>
@@ -1629,6 +1812,9 @@ more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 </div>
 </div>
 </details>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -1642,17 +1828,15 @@ more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 <div class="title">Important</div>
 </td>
 <td class="content">
-If the update is only for testing purposes, do not use its original branch (klaros or master), otherwise the configurations for the previous version will be lost(You can clone the directory for this). Also make sure to use a different volume and rebuild the old image with "docker-compose build" after testing, so that your original version is not accidentally updated.
+After an update of Klaros Test Management, it is no longer possible to install the previous version. Also make sure to refresh the image after the update, otherwise the previous version will still be used.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect2">
 <h3 id="_update_via_master_branch">8.1. Update via master branch</h3>
-<div class="paragraph">
-<p>Klaros can be updated to the latest version with "git pull".</p>
-</div>
 <div class="listingblock">
+<div class="title">Klaros can be updated to the latest version with <code>git pull</code></div>
 <div class="content">
 <pre>git pull origin master</pre>
 </div>
@@ -1661,7 +1845,7 @@ If the update is only for testing purposes, do not use its original branch (klar
 <div class="sect2">
 <h3 id="_update_via_tags">8.2. Update via tags</h3>
 <div class="paragraph">
-<p>To perform an update from an older to a newer version, the first step is to check for new updates in the GitHub repository. Current versions can be displayed via "git tag". Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.</p>
+<p>To perform an update from an older to a newer version, the first step is to search for new updates in the GitHub repository. Current versions can be viewed via <code>git tag</code>. Then a local branch "update" with the desired version can be created and merged. Alternatively, you can merge your local branch directly with the master instead of creating a second branch.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1676,23 +1860,22 @@ git branch -D update</pre>
 </div>
 <div class="sect2">
 <h3 id="_refresh_image">8.3. Refresh image</h3>
-<div class="paragraph">
-<p>After downloading the update from the Git repository, a new image will be created and all "dangling" images will be removed.</p>
-</div>
 <div class="listingblock">
+<div class="title">After downloading the update from the GitHub repository, a new image is created and all dangling images are removed</div>
 <div class="content">
 <pre>docker-compose down
 docker-compose build
 docker image prune</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>After the new image has been created, the container is started as usual.</p>
-</div>
 <div class="listingblock">
+<div class="title">After the new image has been created, the container is started as usual</div>
 <div class="content">
 <pre>docker-compose up</pre>
 </div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -1700,22 +1883,32 @@ docker image prune</pre>
 <div class="sect1">
 <h2 id="_how_to_use_a_previous_version">9. How to use a previous version</h2>
 <div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre>NOTE: If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.</pre>
-</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+If a newer version is already in use, then an older version can only be used by creating a new instance or a re-installation.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>You can view currently supported versions on <a href="https://github.com/klaros-testmanagement/klaros-docker/releases">GitHub releases</a>.</p>
 </div>
 <div class="paragraph">
-<p>After the repository has been cloned, the tags can be listed with "git tag" and selected as local branch with "git checkout".</p>
+<p>After the repository has been cloned, the tags can be listed using <code>git tag</code> and with <code>git checkout tags/&lt;tag_name&gt; -b &lt;new_branch&gt;</code> a new branch is created and checked out.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>git tag
 git checkout tags/&lt;tag_name&gt; -b klaros</pre>
 </div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -1755,16 +1948,31 @@ docker rmi mariadb-klaros_db
 rm -rf ~/klaros-docker/</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">Microsoft SQL Server</div>
+<div class="content">
+<pre>docker-compose down --volume
+docker rmi klaros-mssql2017
+docker rmi mssql2017-klaros_db
+rm -rf ~/klaros-docker/</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_documentation">11. Documentation</h2>
+<h2 id="Documentation">11. Documentation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To get started with Klaros Test Management please refer to our <a href="https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html">tutorial</a> and the <a href="https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html">user manual.</a> Both are also available in the application itself after a successful login.</p>
+<p>You will find information on how to get started with Klaros Test Management in our <a href="https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html">tutorial</a> and in the <a href="https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html">user manual</a>. Both are available in the application itself after successful login.</p>
 </div>
 <div class="paragraph">
-<p>Our installation documentation includes the installation of Klaros Test Management under Docker for Apache Derby, MariaDB, MySQL and PostgreSQL databases.</p>
+<p>Our installation documentation contains a description of how to install Klaros Test Management under Docker for ApacheDerby, MariaDB, MSSQL, MySQL and PostgreSQL databases.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -1772,7 +1980,10 @@ rm -rf ~/klaros-docker/</pre>
 <h2 id="_faq">12. FAQ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you have further questions about Klaros Test Management and the Enterprise Edition, do not miss our <a href="https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true">Pricing-FAQ</a> and <a href="https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true">Support-FAQ.</a></p>
+<p>A <a href="https://www.klaros-testmanagement.com/en_US/support?inheritRedirect=true">technical FAQ</a> as well as a FAQ on <a href="https://www.klaros-testmanagement.com/en_US/faq?inheritRedirect=true">prices, ordering and delivery</a> can be found on our website.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -1780,10 +1991,13 @@ rm -rf ~/klaros-docker/</pre>
 <h2 id="_license">13. License</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Klaros Test Management for Docker is licensed under the terms of the <a href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE">MIT License.</a></p>
+<p>Klaros Test Management for Docker is licensed under the terms of the <a href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE">MIT License</a>.</p>
 </div>
 <div class="paragraph">
-<p>By installing our software through Docker, you also agree to our <a href="https://www.klaros-testmanagement.com/files/current/LICENSE.txt">Limited Use Software License Agreement.</a></p>
+<p>By installing our software through Docker, you also agree to our <a href="https://www.klaros-testmanagement.com/files/current/LICENSE.txt">Limited Use Software License Agreement</a>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
@@ -1791,15 +2005,54 @@ rm -rf ~/klaros-docker/</pre>
 <h2 id="_contact">14. Contact</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We thank you for your attention and hope to meet the interests of many users with this documentation. We are continuously working on improving Klaros Test Management.</p>
+<p>We hope that we have given you a smooth start with this description.</p>
 </div>
 <div class="paragraph">
-<p>So if you have any questions or requests or simply want to give feedback, please write to us at <a href="mailto:support@verit.de">support@verit.de</a> or use our <a href="https://www.klaros-testmanagement.com/en_US/forum">User Forum.</a></p>
+<p>If you have any questions, requests or just want to give feedback, please write to us at <a href="mailto:support@verit.de">support@verit.de</a> or use our <a href="https://www.klaros-testmanagement.com/en_US/forum">forum</a>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_acknowledgements">15. Acknowledgements</h2>
+<h2 id="_contributing">15. Contributing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Would you like to help us or make suggestions for improvement? Follow these steps to suggest your changes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create an issue and describe your idea</p>
+</li>
+<li>
+<p>Fork the <a href="https://github.com/klaros-testmanagement/klaros-docker">repo</a></p>
+</li>
+<li>
+<p>Create a new branch (<code>git checkout -b feature/my-idea</code>)</p>
+</li>
+<li>
+<p>Make your changes</p>
+</li>
+<li>
+<p>Commit your changes (<code>git commit -am 'Adding feature'</code>)</p>
+</li>
+<li>
+<p>Push to your branch (<code>git push origin feature/my-idea</code>)</p>
+</li>
+<li>
+<p>Create a Pull Request</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acknowledgements">16. Acknowledgements</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1808,12 +2061,15 @@ rm -rf ~/klaros-docker/</pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Back to top)</a></p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-09 16:42:44 +0100
+Last updated 2019-12-17 17:52:12 +0100
 </div>
 </div>
 </body>
