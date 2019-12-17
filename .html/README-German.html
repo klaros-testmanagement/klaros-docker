@@ -436,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 </head>
-<body class="article">
+<body id="Top-of-the-page" class="article">
 <div id="header">
 <h1>Klaros-Testmanagement Docker-Integration</h1>
 </div>
@@ -444,9 +444,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image"><img src="https://img.shields.io/badge/Version-4.12.3-green.svg" alt="Version 4.12.3 green"></span>
-<span class="image"><img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT green"></span>
-<span class="image"><img src="https://img.shields.io/badge/Community%20Edition-FREE-green" alt="Community%20Edition FREE green"></span></p>
+<p><span class="image"><a class="image" href="https://github.com/klaros-testmanagement/klaros-docker/releases"><img src="https://img.shields.io/badge/Version-4.12.3-green.svg" alt="Version 4.12.3 green"></a></span>
+<span class="image"><a class="image" href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License MIT green"></a></span>
+<span class="image"><a class="image" href="https://www.klaros-testmanagement.com/en_US/download"><img src="https://img.shields.io/badge/Community%20Edition-FREE-green" alt="Community%20Edition FREE green"></a></span>
+<span class="image right"><a class="image" href="https://twitter.com/intent/follow?screen_name=Klaros_TM"><img src="https://img.shields.io/twitter/follow/Klaros_TM?style=social" alt="Klaros TM?style=social"></a></span></p>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Inhaltsverzeichnis</div>
@@ -465,9 +466,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_konfiguration_über_eine_datei">3.3. Konfiguration über eine Datei</a></li>
 </ul>
 </li>
-<li><a href="#_installation">4. Installation</a>
+<li><a href="#Installation">4. Installation</a>
 <ul class="sectlevel2">
-<li><a href="#_repository_klonen">4.1. Repository Klonen</a></li>
+<li><a href="#_repository_klonen">4.1. Repository – klonen</a></li>
 <li><a href="#_image_erstellen">4.2. Image erstellen</a></li>
 </ul>
 </li>
@@ -499,11 +500,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_vorherige_version_nutzen">9. Vorherige Version nutzen</a></li>
 <li><a href="#_deinstallation">10. Deinstallation</a></li>
-<li><a href="#_dokumentation">11. Dokumentation</a></li>
+<li><a href="#Documentation">11. Dokumentation</a></li>
 <li><a href="#_faq">12. FAQ</a></li>
 <li><a href="#_lizenz">13. Lizenz</a></li>
 <li><a href="#_kontakt">14. Kontakt</a></li>
-<li><a href="#_danksagung">15. Danksagung</a></li>
+<li><a href="#_mitmachen">15. Mitmachen</a></li>
+<li><a href="#_danksagung">16. Danksagung</a></li>
 </ul>
 </div>
 </div>
@@ -518,14 +520,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Important</div>
 </td>
 <td class="content">
-Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der Apache Derby Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für die Produktion.
-Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MySQL und PostgreSQL finden Sie <a href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc">hier.</a>
+Diese Dokumentation deckt nur die Klaros-Testmanagement Installation mit der integrierten Apache Derby-Datenbank ab und wird nur für Testinstallationen unterstützt. Verwenden Sie es nicht für Produktionssysteme.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In dieser Installationsdokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.</p>
+<p>Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB, MSSQL, MySQL und PostgreSQL finden Sie <a href="https://github.com/klaros-testmanagement/klaros-docker/blob/master/Documentation-German.adoc">hier</a>.</p>
+</div>
+<div class="paragraph">
+<p>In dieser Dokumentation wird Schritt für Schritt gezeigt, wie die Installation und Konfiguration von Klaros-Testmanagement unter Docker für Windows und Linux durchgeführt wird.</p>
 </div>
 <div class="sect2">
 <h3 id="_über_docker">1.1. Über Docker</h3>
@@ -533,34 +537,28 @@ Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB
 <p><a href="https://www.docker.com/">Docker</a> ist eine freie, containerbasierte Software, die eine sichere Installation von Anwendungen auf verschiedenen Betriebssystemen wie Windows und Linux ermöglicht.</p>
 </div>
 <div class="paragraph">
-<p>Weitere Informationen finden Sie unter <a href="https://www.docker.com/why-docker">Why-Docker</a></p>
+<p>Ausführliche Informationen dazu finden Sie unter <a href="https://www.docker.com/why-docker">Why-Docker</a>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_über_klaros_testmanagement">1.2. Über Klaros-Testmanagement</h3>
 <div class="paragraph">
-<p>Klaros-Testmanagement ist eine professionelle webbasierte Testmanagement-Software. Es enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Kontinuierlichen Integrationsservern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.</p>
+<p><a href="https://www.klaros-testmanagement.com/de_DE/home">Klaros-Testmanagement</a> ist eine professionelle webbasierte Testmanagement-Software. Sie enthält Komponenten für das Ressourcenmanagement und die Auswertung der Testaktivität. Die Verfolgung von Testanforderungen wird ebenso unterstützt wie agile Entwicklungsprozesse. Zahlreiche Schnittstellen zu Issue Trackern, Testautomatisierungstools und Continuous Integration Servern ermöglichen eine nahtlose Integration in bestehende Entwicklungsumgebungen.</p>
 </div>
 <div class="paragraph">
-<p>Klaros-Testmanagement ist in der Community Edition kostenlos verfügbar.</p>
+<p>Klaros-Testmanagement ist in der <a href="https://www.klaros-testmanagement.com/de_DE/download">Community Edition</a> kostenlos erhältlich und uneingeschränkt auch für kommerzielle Zwecke einsetzbar.</p>
 </div>
 <div class="paragraph">
-<p>Die Community Edition ist uneingeschränkt nutzbar und verfügt über einen reduzierten Funktionsumfang.</p>
+<p>Die <a href="https://www.klaros-testmanagement.com/de_DE/download">Enterprise Edition</a> bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Eine Feature-Übersicht der beiden Editionen sehen Sie <a href="https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison">hier</a>.</p>
 </div>
 <div class="paragraph">
-<p>Ohne Begrenzung der Anzahl von Projekten, Testfällen oder Benutzern ist es ideal für den Einstieg in ein kleines Team.</p>
+<p>Eine kostenlose 30-tägige Testlizenz für die Enterprise Edition, können Sie <a href="https://www.klaros-testmanagement.com/de_DE/trial">hier</a> anfordern.</p>
 </div>
 <div class="paragraph">
-<p>Sie können die Community Edition jederzeit auf die Enterprise Edition aktualisieren, indem Sie eine Lizenzdatei hochladen.</p>
+<p>Ausführliche Informationen, umfangreiche <a href="#Documentation">Dokumentationen</a>, <a href="https://www.klaros-testmanagement.com/de_DE/blog-de/-/blogs/klaros-testmanagement-tutorial-videos">Videos</a> sowie eine frei zugängliche <a href="https://www.klaros-testmanagement.com/demo/pages/login.seam">Online-Demo</a> finden Sie unter <a href="https://www.klaros-testmanagement.com/de_DE/home">Klaros-Testmanagement</a>.</p>
 </div>
 <div class="paragraph">
-<p>Die Enterprise Edition bietet Ihnen den vollen Funktionsumfang, inklusive einjährigem Support und kostenlosem Zugriff auf alle Software-Updates. Schauen Sie sich <a href="https://www.klaros-testmanagement.com/de_DE/testmanagement/testmanagement-tool-comparison">hier</a> den Vergleich der Community und Enterprise Edition an.</p>
-</div>
-<div class="paragraph">
-<p>Um Ihre kostenlose 30-tägige Testlizenz für die Enterprise Edition zu erhalten, können Sie <a href="https://www.klaros-testmanagement.com/de_DE/trial">hier</a> Ihren Lizenzschlüssel anfordern.</p>
-</div>
-<div class="paragraph">
-<p>Weitere Informationen finden Sie unter <a href="https://www.klaros-testmanagement.com/de_DE/home">Klaros-Testmanagement.</a></p>
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -575,20 +573,19 @@ Die Anleitung für die Produktionsinstallation mit den Datenbanksystemen MariaDB
 <p>Die aktuellen Hardwareanforderungen und Installationsschritte sind in der <a href="https://docs.docker.com/docker-for-windows/install/">offiziellen Docker-Dokumentation</a> beschrieben. Für die Installation von Docker Desktop ist eine Anmeldung erforderlich.</p>
 </div>
 <div class="paragraph">
-<p>Um die spätere Aktualisierung von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile mit Git von GitHub herunterzuladen.
-Git kann von der <a href="https://git-scm.com">offiziellen Webseite</a> heruntergeladen und installiert werden.</p>
+<p>Um das spätere Aktualisieren von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile von GitHub mit <a href="https://git-scm.com">Git</a> herunterzuladen.</p>
 </div>
 <div class="paragraph">
-<p>Während der Installation kann ausgewählt werden, ob und wie die Zeilenendungen von Dateien konvertiert werden soll. Da der Server innerhalb des Containers über Linux betrieben wird, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, empfehlen wir die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ auszuwählen.</p>
+<p>Dadurch das sich der Server während dem Betrieb in einem Linux-Container befindet, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, muss bei der Installation von Git die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ ausgewählt werden.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ConfigurationOfTheLineEndConversion.png" alt="Konfiguration der Zeilenenden-Konvertierung">
+<img src="images/ConfigurationOfTheLineEndConversion.png" alt="Konfiguration für das Konvertieren der Zeilenenden">
 </div>
-<div class="title">Figure 1. Konfiguration der Zeilenenden-Konvertierung</div>
+<div class="title">Figure 1. Konfiguration für das Konvertieren der Zeilenenden</div>
 </div>
 <div class="paragraph">
-<p>Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.</p>
+<p>Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel <a href="#Installation">Installation</a> wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.</p>
 </div>
 </div>
 </details>
@@ -620,14 +617,14 @@ Git kann von der <a href="https://git-scm.com">offiziellen Webseite</a> herunter
 <p><a href="https://git-scm.com/">Git</a> ist erforderlich, um das Klaros-Testmanagement Dockerfile erfolgreich von GitHub herunterzuladen.</p>
 </div>
 <div class="listingblock">
-<div class="title">Git-Installation über Ubuntu/Debian:</div>
+<div class="title">Git-Installation über Ubuntu/Debian</div>
 <div class="content">
 <pre>sudo apt-get update
 sudo apt-get install git</pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Git-Installation über CentOS/RHEL:</div>
+<div class="title">Git-Installation über CentOS/RHEL</div>
 <div class="content">
 <pre>sudo yum check-update
 sudo yum install git-core</pre>
@@ -639,14 +636,17 @@ sudo yum install git-core</pre>
 <div class="listingblock">
 <div class="content">
 <pre>git --version
-Output: git version 2.20.1</pre>
+Ausgabe: git version 2.17.1</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel „Installation“ wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.</p>
+<p>Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel <a href="#Installation">Installation</a> wird beschrieben, wie das Dockerfile heruntergeladen und für zukünftige Updates vorbereitet werden kann.</p>
 </div>
 </div>
 </details>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -690,7 +690,7 @@ Output: git version 2.20.1</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">KLAROS_VERSION</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">${KLAROS_VERSION:-4.12.1}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klaros-Release-Version, die während der Installation verwendet wird.  Eine Liste der verfügbaren Releases finden Sie auf der offiziellen <a href="https://www.klaros-testmanagement.com/de_DE/download">Klaros-Testmanagement</a> Webseite oder auf <a href="https://github.com/klaros-testmanagement/klaros-docker/releases">GitHub</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Klaros-Release-Version, die während der Installation verwendet wird. Eine Liste der verfügbaren Releases finden Sie auf der offiziellen <a href="https://www.klaros-testmanagement.com/de_DE/download">Klaros-Testmanagement</a> Webseite oder auf <a href="https://github.com/klaros-testmanagement/klaros-docker/releases">GitHub</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -701,10 +701,10 @@ Output: git version 2.20.1</pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TOMCAT_MEMORY_MAX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOMCAT_MEMORY_MIN</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TOMCAT_MEMORY_MIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOMCAT_MEMORY_MAX</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JAVA_OPTS</p></td>
@@ -714,7 +714,7 @@ Output: git version 2.20.1</pre>
 <div class="sect2">
 <h3 id="_konfiguration_über_das_dockerfile">3.1. Konfiguration über das Dockerfile</h3>
 <div class="paragraph">
-<p>Öffne das Dockerfile unter <em>~/klaros-docker/ApacheDerby</em> mit dem bevorzugten Texteditor. das Dockerfile enthält eine Liste der konfigurierbaren ENV-Variablen. Weitere Informationen finden Sie in Tabelle 1.</p>
+<p>Öffne das Dockerfile unter <em>~/klaros-docker/ApacheDerby</em> mit Ihrem bevorzugten Textbearbeitungsprogramm. das Dockerfile enthält eine Liste der konfigurierbaren ENV-Variablen. Weitere Informationen finden Sie in Tabelle 1.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -771,27 +771,26 @@ docker create --name Klaros -p 18080:18080 --env-file ./env-list klaros</pre>
 </div>
 </div>
 </details>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation">4. Installation</h2>
+<h2 id="Installation">4. Installation</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_repository_klonen">4.1. Repository Klonen</h3>
-<div class="paragraph">
-<p>Sobald Sie sich in dem gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen.</p>
-</div>
+<h3 id="_repository_klonen">4.1. Repository – klonen</h3>
 <div class="listingblock">
+<div class="title">Sobald Sie sich im gewünschten Verzeichnis befinden, können Sie das Dockerfile herunterladen</div>
 <div class="content">
 <pre>git init
 git clone https://github.com/klaros-testmanagement/klaros-docker</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Mit „ls“ können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde.</p>
-</div>
 <div class="listingblock">
+<div class="title">Mit <code>ls</code> können Sie überprüfen, ob das Verzeichnis korrekt erstellt wurde</div>
 <div class="content">
 <pre>ls
 Ausgabe: klaros-docker</pre>
@@ -809,6 +808,9 @@ Windowsnutzer wechseln von Git Bash zur Powershell.</p>
 <pre>cd ~/klaros-docker/ApacheDerby
 docker build -t klaros .</pre>
 </div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -846,13 +848,13 @@ Beim Erstellen des Containers wird ein anonymes Volume erstellt. Wenn ein benann
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Sobald der Container erstellt wurde, kann der Server mit „docker start“ hochgefahren werden.</div>
+<div class="title">Sobald der Container erstellt wurde, kann der Server mit <code>docker start</code> hochgefahren werden</div>
 <div class="content">
 <pre>docker start -a Klaros</pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Um den Container im detached mode auszuführen, muss der -a Paramter entfernt werden.</div>
+<div class="title">Um den Container im detached mode auszuführen, muss der -a Paramter entfernt werden</div>
 <div class="content">
 <pre>docker start Klaros</pre>
 </div>
@@ -861,25 +863,23 @@ Beim Erstellen des Containers wird ein anonymes Volume erstellt. Wenn ein benann
 <summary class="title">Details</summary>
 <div class="content">
 <div class="paragraph">
-<p>Weitere Informationen finden Sie in der <a href="https://docs.docker.com/engine/reference/commandline/start/">official Docker Documentation.</a></p>
+<p>Weitere Informationen zu den <code>docker start</code> Parametern finden Sie in der <a href="https://docs.docker.com/engine/reference/commandline/start/">official Docker Documentation</a>.</p>
 </div>
 <div class="paragraph">
-<p>Nach dem Serverstart erscheint am Ende die Meldung "Serverstart in x ms". Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.</p>
+<p>Nach dem Serverstart erscheint am Ende die Meldung „Serverstart in x ms“. Sie können jetzt mit jedem Browser Ihre IP-Adresse und Ihren Port eingeben, um auf die Klaros Webseite zuzugreifen.</p>
 </div>
 <div class="listingblock">
+<div class="title">Beispiel: 127.0.0.1:18080</div>
 <div class="content">
 <pre>Benutzername: admin
 Passwort: admin</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Beispiel: 127.0.0.1:18080</p>
-</div>
 </div>
 </details>
 <div class="paragraph">
-<p>Eine weitere Klaros-Instanz kann verwendet werden, um Sicherungen auf Vollständigkeit zu prüfen oder eine neuere Klaros-Version zu testen.
-Um eine weitere Instanz zu erstellen, muss lediglich der Containernamen und Port geändert werden.</p>
+<p>Eine weitere Klaros-Instanz kann dazu verwendet werden, eine neue Klaros-Version auszuprobieren oder um ein bestehendes Backup zu testen.
+Um eine weitere Instanz zu erstellen, muss lediglich der Containername und Port geändert werden.</p>
 </div>
 <div class="listingblock">
 <div class="title">Erstellen einer zweiten Klaros-Instanz mit eigener Datenbank</div>
@@ -891,13 +891,13 @@ Um eine weitere Instanz zu erstellen, muss lediglich der Containernamen und Port
 <div class="sect2">
 <h3 id="_instanz_herunterfahren">5.2. Instanz herunterfahren</h3>
 <div class="paragraph">
-<p>Im abgetrennten Modus muss der Server über "Docker Stop" heruntergefahren werden.
-Wenn der Container im Vordergrund gestartet wurde, gelangt man mit der Tastenkombination STRG + C zurück in das Terminal, wodurch der Container automatisch heruntergefahren wird. Windows gilt hierbei als Ausnahme und der Container muss über „docker stop“ beendet werden.</p>
+<p>Wenn der Container im Vordergrund gestartet wurde, können Sie den Server mit der Tastenkombination STRG + C herunterfahren (Nur für Linux möglich).</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>docker stop Klaros</pre>
+<div class="paragraph">
+<p>Alternativ lässt sich der Server auch über <code>docker stop Klaros</code> herunterfahren.</p>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -906,10 +906,19 @@ Wenn der Container im Vordergrund gestartet wurde, gelangt man mit der Tastenkom
 <h2 id="_erstellen_wiederherstellen_und_testen_eines_backups">6. Erstellen, Wiederherstellen und Testen eines Backups</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Backups sind unter dem Namen „backup_klaros&lt;Datum&gt;.tar.gz“ gekennzeichnet. Falls mehrere Backups am Tag erstellt werden, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügt man in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.</p>
+<p>Backups sind mit dem Namen „backup_klaros&lt;Datum&gt;.tar.gz“ versehen. Falls Sie mehrere Backups am Tag erstellen, wird empfohlen beim Erstellen der Backups noch eine Uhrzeit (Stunden, Minuten und Sekunden) mitzugeben. Dazu fügen Sie in date/Get-Date %H(Stunde), %M(Minute) und %S(Sekunde) hinzu.</p>
 </div>
-<div class="paragraph">
-<p>Wenn bei der Erstellung des Backups ein Fehler auftritt, enthalten die Logfiles nützliche Hinweise.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Tritt beim Erstellen eines Backups ein Fehler auf, dann geben die Logfiles nachvollziehbare Vorgänge zu den Fehlermeldungen.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="title">Windows Beispiel</div>
@@ -930,11 +939,11 @@ Wenn der Container im Vordergrund gestartet wurde, gelangt man mit der Tastenkom
 <p>Damit würde das Backup den folgenden Namen tragen:</p>
 </div>
 <div class="paragraph">
-<p>Windows: backup_klaros19-10-28-11h-34m-33s.tar.gz<br>
-Linux: backup_klaros19-10-28-11:34:33.tar.gz</p>
+<p>Windows: <code>backup_klaros19-10-28-11h-34m-33s.tar.gz</code><br>
+Linux: <code>backup_klaros19-10-28-11:34:33.tar.gz</code></p>
 </div>
 <div class="paragraph">
-<p>Um den Backup-Pfad zu wechseln, kann der Codeabschnitt hinter -v: "~/klaros-docker/backup" geändert werden.</p>
+<p>Um den Backup-Pfad zu wechseln, kann der Codeabschnitt nach „-v“ geändert werden.</p>
 </div>
 <div class="listingblock">
 <div class="title">Windows Beispiel</div>
@@ -959,8 +968,7 @@ sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/Path/backup:/backu
 <div class="content">
 <pre>docker stop Klaros
 mkdir ~/klaros-docker/backup
-docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine tar cvzf /backup/backup_klaros$(Get-Date -UFormat "%y-%m-%d").tar.gz /data/klaros-home /data/catalina-base/logs
-docker start -a Klaros</pre>
+docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine tar cvzf /backup/backup_klaros$(Get-Date -UFormat "%y-%m-%d").tar.gz /data/klaros-home /data/catalina-base/logs</pre>
 </div>
 </div>
 <div class="listingblock">
@@ -968,55 +976,88 @@ docker start -a Klaros</pre>
 <div class="content">
 <pre>sudo docker ps
 sudo docker stop Klaros
-sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine tar cvzf /backup/backup_klaros$(date '+%y-%m-%d').tar.gz /data/klaros-home /data/catalina-base/logs
-sudo docker start -a Klaros</pre>
+sudo docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine tar cvzf /backup/backup_klaros$(date '+%y-%m-%d').tar.gz /data/klaros-home /data/catalina-base/logs</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_backup_wiederherstellen">6.2. Backup wiederherstellen</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Vor der Wiederherstellung muss der Container heruntergefahren werden.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Beachten Sie, das Datum der jeweiligen Backups anzupassen.
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
-<div class="title">Beachte, das Datum der jeweiligen Backups anzupassen.</div>
 <div class="content">
 <pre>docker stop Klaros
-docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data &amp;&amp; tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
-docker start -a Klaros</pre>
+docker run --rm --volumes-from Klaros -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data &amp;&amp; tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_backup_testen">6.3. Backup testen</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Beachten Sie, das Datum der jeweiligen Backups anzupassen.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Zum Testen eines Backups kann eine zweite Klaros-Instanz erstellt werden, um darauf das Backup aufzuspielen. Die Zweite Instanz muss einmal vollständig hochgefahren werden, bevor das Backup aufgespielt werden kann.</p>
 </div>
 <div class="listingblock">
+<div class="title">Starten einer zweiten Klaros-Instanz</div>
 <div class="content">
 <pre>docker run --name Klaros-test -p 18081:18080 klaros</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Der Server wird dann mit STRG + C oder mit "Docker Stop" beendet.</p>
-</div>
 <div class="listingblock">
+<div class="title">Der Server wird dann mit STRG + C oder mit <code>docker stop Klaros-test</code> beendet</div>
 <div class="content">
 <pre>docker stop Klaros-test</pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Beachte, das Datum der jeweiligen Backups anzupassen.</div>
+<div class="title">Nun wird das zu testene Backup auf das Volume von „Klaros-test“ aufgespielt und der Server gestartet</div>
 <div class="content">
 <pre>docker run --rm --volumes-from Klaros-test -v ~/klaros-docker/backup:/backup alpine /bin/sh -c "cd /data &amp;&amp; tar xvzf /backup/backup_klaros19-10-28.tar.gz --strip 1"
 docker start -a Klaros-test</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Wenn das Backup erfolgreich getestet wurde, kann der Server gestoppt und entfernt werden.</p>
-</div>
 <div class="listingblock">
+<div class="title">Wenn das Backup erfolgreich getestet wurde, kann der Server gestoppt und entfernt werden</div>
 <div class="content">
 <pre>docker stop Klaros-test
 docker rm -v Klaros-test</pre>
 </div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -1036,7 +1077,7 @@ docker rm -v Klaros-test</pre>
 <div class="sect2">
 <h3 id="_logs_über_die_docker_shell_anzeigen">7.1. Logs über die Docker shell anzeigen</h3>
 <div class="paragraph">
-<p>Öffne im Klaros-Container eine Shell mit „docker exec“, um Zugriff auf die Logs zu bekommen.</p>
+<p>Öffnen Sie im Klaros-Container eine Shell mit <code>docker exec</code>, um Zugriff auf die Logs zu bekommen.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1045,15 +1086,15 @@ docker rm -v Klaros-test</pre>
 <div class="title">Note</div>
 </td>
 <td class="content">
-Bitte beachte, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
+Bitte beachten Sie, dass der Server beim Zugriff über die Shell gestartet sein muss und nicht heruntergefahren werden darf.
 </td>
 </tr>
 </table>
 </div>
 <div class="listingblock">
-<div class="title">Die Logfiles können dann mit "more" gelesen werden.</div>
+<div class="title">Die Logfiles können dann mit <code>more</code> gelesen werden</div>
 <div class="content">
-<pre>docker exec -it Klaros /bin/sh
+<pre>docker exec -it klaros_db /bin/sh
 more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 </div>
 </div>
@@ -1074,10 +1115,8 @@ more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 <details>
 <summary class="title">Linux</summary>
 <div class="content">
-<div class="paragraph">
-<p>Um die Logs aus dem Backup auszulesen, lässt sich mit tar das Archive entpacken.</p>
-</div>
 <div class="listingblock">
+<div class="title">Um die Logs aus dem Backup auszulesen, lässt sich mit <code>tar</code> das Archive entpacken</div>
 <div class="content">
 <pre>sudo tar -xzf backup_klaros19-10-28.tar.gz</pre>
 </div>
@@ -1087,6 +1126,9 @@ more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 </div>
 </div>
 </details>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -1100,15 +1142,13 @@ more /data/catalina-base/logs/catalina.2019-12-09.log</pre>
 <div class="title">Important</div>
 </td>
 <td class="content">
-Falls das Update lediglich für Testzwecke gedacht ist, dann verwende nicht den Original branch(klaros oder master), da sonst die Konfigurationen der vorherigen Version verloren geht(Hierfür kann das Verzeichnis kopiert werden). Achte ebenfalls darauf, ein anderes Volume zu verwenden und das alte Image nach dem testen mit "docker-compose build" neu zu erstellen, damit die Originalversion nicht versehentlich aktualisiert wird.
+Nach einem Update von Klaros-Testmanagement, ist das Aufspielen der vorherigen Version nicht mehr möglich. Achte ebenfalls darauf das Image nach dem Update zu aktualisieren, da sonst weiterhin die vorherige Version verwendet wird.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Bevor ein Update von Klaros-Testmanagement durchgeführt werden kann, muss ein temporärer Container mit den Volumes von Klaros erstellt werden.</p>
-</div>
 <div class="listingblock">
+<div class="title">Bevor ein Update von Klaros-Testmanagement durchgeführt werden kann, muss ein temporärer Container mit den Volumes von Klaros erstellt werden</div>
 <div class="content">
 <pre>docker stop Klaros
 docker create --name Klaros-tmp --volumes-from Klaros alpine
@@ -1117,10 +1157,8 @@ docker rm Klaros</pre>
 </div>
 <div class="sect2">
 <h3 id="_update_über_master_branch">8.1. Update über master branch</h3>
-<div class="paragraph">
-<p>Klaros kann mit "git pull" auf die neueste Version aktualisiert werden.</p>
-</div>
 <div class="listingblock">
+<div class="title">Klaros kann mit <code>git pull</code> auf die neueste Version aktualisiert werden</div>
 <div class="content">
 <pre>git pull origin master</pre>
 </div>
@@ -1129,7 +1167,7 @@ docker rm Klaros</pre>
 <div class="sect2">
 <h3 id="_update_über_tags">8.2. Update über tags</h3>
 <div class="paragraph">
-<p>Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub Repository gesucht. Aktuelle Versionen lassen sich über „git tag“ anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.</p>
+<p>Um ein Update von einer älteren auf eine neuere Version durchzuführen, wird als erstes nach neuen Updates im GitHub-Repository gesucht. Aktuelle Versionen lassen sich über <code>git tag</code> anzeigen. Danach kann ein lokales branch „update“ mit der gewünschten Version erstellt und gemerged werden. Alternativ kann man seinen lokalen branch auch direkt mit dem master mergen, anstatt einen zweiten branch zu erstellen.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1144,24 +1182,24 @@ git branch -D update</pre>
 </div>
 <div class="sect2">
 <h3 id="_image_aktualisieren">8.3. Image aktualisieren</h3>
-<div class="paragraph">
-<p>Nachdem das Update vom Git Repository heruntergeladen wurde, wird als nächstes das alte Image entfernt und ein neues Image erstellt.</p>
-</div>
 <div class="listingblock">
+<div class="title">Nach dem Herunterladen des Updates aus dem GitHub-Repository wird ein neues Image erstellt und alle „dangling“ Images werden entfernt</div>
 <div class="content">
-<pre>docker rmi klaros
-docker build -t klaros .</pre>
+<pre>docker stop Klaros
+docker build -t klaros .
+docker image prune</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Nachdem das neue Image erstellt wurde, wird der Server mit den Volumes von Klaros-tmp erstellt und der temporäre Container wird anschließend entfernt. Danach kann der Server wie gewohnt gestartet werden.</p>
 </div>
 <div class="listingblock">
+<div class="title">Nachdem das neue Image erstellt wurde, wird der Server mit den Volumes von Klaros-tmp erstellt und der temporäre Container wird anschließend entfernt. Danach kann der Server wie gewohnt gestartet werden</div>
 <div class="content">
 <pre>docker create --name Klaros --volumes-from Klaros-tmp -p 18080:18080 klaros
 docker rm Klaros-tmp
 docker start -a Klaros</pre>
 </div>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -1169,14 +1207,14 @@ docker start -a Klaros</pre>
 <div class="sect1">
 <h2 id="_vorherige_version_nutzen">9. Vorherige Version nutzen</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<div class="title">Important</div>
 </td>
 <td class="content">
-Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur durch das erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
+Wenn bereits eine neuere Version verwendet wird, dann kann eine ältere Version nur durch das Erstellen einer weiteren Instanz oder durch eine Neuinstallation verwendet werden.
 </td>
 </tr>
 </table>
@@ -1185,7 +1223,7 @@ Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur d
 <p>Aktuell unterstützte Versionen finden Sie unter <a href="https://github.com/klaros-testmanagement/klaros-docker/releases">GitHub releases</a>.</p>
 </div>
 <div class="paragraph">
-<p>Nachdem das Repository geklont wurde, können die Tags mit "git tag" aufgelistet und als lokalen branch mit "git checkout" ausgewählt werden.</p>
+<p>Nachdem das Repository geklont wurde, können die Tags mit <code>git tag</code> aufgelistet werden und mit <code>git checkout tags/&lt;tag_name&gt; -b &lt;neuer_branch&gt;</code> wird ein neuer branch erstellt und ausgecheckt.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1193,18 +1231,19 @@ Wenn bereits eine neuere Version verwendet wird, kann eine ältere Version nur d
 git checkout tags/&lt;tag_name&gt; -b klaros</pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_deinstallation">10. Deinstallation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Um Klaros-Testmanagement vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volumen entfernt werden können.</p>
-</div>
-<div class="paragraph">
-<p>Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image.</p>
+<p>Um Klaros-Testmanagement vollständig von Docker zu entfernen, muss der Container zuerst gestoppt werden, bevor der Container und das Volume entfernt werden kann.</p>
 </div>
 <div class="listingblock">
+<div class="title">Danach entfernen Sie das Verzeichnis ~/klaros-docker und das Image</div>
 <div class="content">
 <pre>docker stop Klaros
 docker rm -v Klaros
@@ -1212,16 +1251,22 @@ docker rmi klaros
 rm -rf ~/klaros-docker</pre>
 </div>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dokumentation">11. Dokumentation</h2>
+<h2 id="Documentation">11. Dokumentation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem <a href="https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html">Tutorial</a> und im <a href="https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html">Benutzerhandbuch.</a> Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.</p>
+<p>Informationen zum Einstieg in Klaros-Testmanagement finden Sie in unserem <a href="https://www.klaros-testmanagement.com/files/tutorial/html/Tutorial.index.html">Tutorial</a> und im <a href="https://www.klaros-testmanagement.com/files/doc/html/User-Manual.index.html">Benutzerhandbuch</a>. Beide sind nach erfolgreicher Anmeldung auch in der Anwendung selbst verfügbar.</p>
 </div>
 <div class="paragraph">
-<p>Unsere Installationsdokumentation beinhaltet die Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MySQL- und PostgreSQL-Datenbanken.</p>
+<p>Unsere Installationsdokumentation enthält die Beschreibung der Installation von Klaros-Testmanagement unter Docker für ApacheDerby-, MariaDB-, MSSQL-, MySQL- und PostgreSQL-Datenbanken.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -1229,7 +1274,10 @@ rm -rf ~/klaros-docker</pre>
 <h2 id="_faq">12. FAQ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wenn Sie weitere Fragen zu Klaros-Testmanagement und der Enterprise Edition haben, verpassen Sie nicht unsere FAQ zu <a href="https://www.klaros-testmanagement.com/de_DE/faq">Preisen</a> und <a href="https://www.klaros-testmanagement.com/de_DE/support">Support.</a></p>
+<p>Eine <a href="https://www.klaros-testmanagement.com/de_DE/support?inheritRedirect=true">technische FAQ</a> sowie eine FAQ zu <a href="https://www.klaros-testmanagement.com/de_DE/faq?inheritRedirect=true">Preisen, Bestellung und Lieferung</a> finden Sie auf unserer Webseite.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
@@ -1242,21 +1290,63 @@ rm -rf ~/klaros-docker</pre>
 <div class="paragraph">
 <p>Durch die Installation unserer Software über Docker stimmen Sie auch unserer Lizenzvereinbarung für <a href="https://www.klaros-testmanagement.com/files/current/LICENSE.txt">Limited Use Software License Agreement</a> zu.</p>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_kontakt">14. Kontakt</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wir bedanken uns für Ihre Aufmerksamkeit und hoffen, mit dieser Dokumentation den Interessen vieler Anwender gerecht zu werden. Wir arbeiten kontinuierlich an der Verbesserung von Klaros-Testmanagement.</p>
+<p>Wir hoffen, dass wir Ihnen mit dieser Beschreibung einen reibungslosen Start ermöglicht haben.</p>
 </div>
 <div class="paragraph">
-<p>Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an <a href="mailto:support@verit.de">support@verit.de</a> oder nutzen Sie unser <a href="https://www.klaros-testmanagement.com/de_DE/forum">Forum.</a></p>
+<p>Wenn Sie Fragen, Wünsche oder einfach nur Feedback geben möchten, schreiben Sie uns bitte an <a href="mailto:support@verit.de">support@verit.de</a> oder nutzen Sie unser <a href="https://www.klaros-testmanagement.com/de_DE/forum">Forum</a>.</p>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_danksagung">15. Danksagung</h2>
+<h2 id="_mitmachen">15. Mitmachen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Möchten Sie uns helfen oder Verbesserungsvorschläge machen? Führen Sie diese Schritte aus, um Ihre Änderungen vorzuschlagen.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Erstellen Sie ein issue und beschreiben Sie Ihre Idee.</p>
+</li>
+<li>
+<p>Fork des <a href="https://github.com/klaros-testmanagement/klaros-docker">Repositorys</a></p>
+</li>
+<li>
+<p>Erstelle einen neuen branch (<code>git checkout -b feature/my-idea</code>)</p>
+</li>
+<li>
+<p>Mach deine Änderungen</p>
+</li>
+<li>
+<p>Commite deine Änderungen (<code>git commit -am 'Adding feature'</code>)</p>
+</li>
+<li>
+<p>Push deine Änderungen in dein branch (<code>git push origin feature/my-idea</code>)</p>
+</li>
+<li>
+<p>Erstelle ein Pull Request</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_danksagung">16. Danksagung</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1265,12 +1355,15 @@ rm -rf ~/klaros-docker</pre>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><a href="#Top-of-the-page">(Nach Oben)</a></p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-09 16:42:44 +0100
+Last updated 2019-12-17 17:52:12 +0100
 </div>
 </div>
 </body>
