@@ -53,11 +53,6 @@ Die aktuellen Hardwareanforderungen und Installationsschritte sind in der https:
 
 Um das spätere Aktualisieren von Klaros-Testmanagement zu erleichtern, wird empfohlen, das Dockerfile von GitHub mit https://git-scm.com[Git] herunterzuladen.
 
-Dadurch das sich der Server während dem Betrieb in einem Linux-Container befindet, und sich die Zeilenendungen von Windows (\r) und Linux (\n) unterscheiden, muss bei der Installation von Git die Option „Checkout as-is, commit Unix-style line endings“ oder „Checkout as-is, commit as-is“ ausgewählt werden.
-
-.Konfiguration für das Konvertieren der Zeilenenden
-image::images/ConfigurationOfTheLineEndConversion.png[Konfiguration für das Konvertieren der Zeilenenden]
-
 Damit sind die Vorbereitungen für Windows abgeschlossen. Im Kapitel <<Installation,Installation>> wird beschrieben, wie das Dockerfile mithilfe von Git Bash heruntergeladen und für zukünftige Updates vorbereitet werden kann.
 ====
 

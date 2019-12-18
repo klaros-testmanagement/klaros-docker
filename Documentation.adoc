@@ -53,11 +53,6 @@ The current hardware requirements and installation steps are described in the ht
 
 To make it easier to update Klaros Test Management later, it is recommended to use https://git-scm.com[Git] to download the Dockerfile from GitHub.
 
-Since the server will be running inside a Linux container and the line endings of Windows (\r) and Linux (\n) will be different, the option "Checkout as-is, commit Unix-style line endings" or "Checkout as-is, commit as-is" must be selected when installing Git.
-
-.Configuration for converting the line endings
-image::images/ConfigurationOfTheLineEndConversion.png[Configuration for converting the line endings]
-
 This completes the preparations for Windows. The chapter <<Installation,Installation>> describes how to use Git Bash to download the Dockerfile and prepare it for future updates.
 ====
 
