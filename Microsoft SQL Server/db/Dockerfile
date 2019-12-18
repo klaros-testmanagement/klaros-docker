@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/mssql/server:2017-latest
-LABEL maintainer "André Raabe <andre.raabe@gmail.com>"
+LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 ENV MSSQL_DATA_DIR /data/mssql-data
 ENV MSSQL_LOG_DIR /data/mssql-data
