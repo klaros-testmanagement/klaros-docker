@@ -7,7 +7,7 @@ services:
         restart: always
         command: --default-authentication-plugin=mysql_native_password
         container_name: ${DATABASE_CONTAINER_NAME}
-        hostname: localhost
+        hostname: db
         env_file:
             ./.env
         environment:

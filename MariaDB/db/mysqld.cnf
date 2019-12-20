@@ -3,7 +3,7 @@ pid-file	= /var/run/mysqld/mysqld.pid
 socket		= /var/run/mysqld/mysqld.sock
 datadir		= /data/mariadb-data
 # By default we only accept connections from localhost
-#bind-address	= 127.0.0.1
+bind-address = 0.0.0.0
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
 
@@ -16,7 +16,7 @@ wait_timeout=604800
 
 # Anpassung verit 2017-11-16
 # Allow enough connections
-max_connections=150
+max_connections=1500
 # This is very important to raise
 innodb_buffer_pool_size=1G
 # Was set too large in the config above
