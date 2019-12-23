@@ -1,5 +1,5 @@
 ---
-version: '3.4'
+version: "3.4"
 services:
     db:
         image: mysql-klaros_db
@@ -8,8 +8,7 @@ services:
         command: --default-authentication-plugin=mysql_native_password
         container_name: ${DATABASE_CONTAINER_NAME}
         hostname: db
-        env_file:
-            ./.env
+        env_file: ./.env
         environment:
             MYSQL_DATABASE: ${DATABASE_NAME}
             MYSQL_USER: ${DATABASE_USER}
@@ -25,7 +24,7 @@ services:
 
     klaros:
         image: klaros-mysql
-        build: 
+        build:
             context: ./klaros
             args:
                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}

@@ -6,8 +6,7 @@ echo "Start Init_Database"
 #chmod 700 /data/klaros-home/postgressql
 #chown postgres /data/klaros-home/postgressql
 
-echo "host $POSTGRES_DB $POSTGRES_USER 127.0.0.1/32 md5" >> /data/postgres-data/pg_hba.conf
-
+echo "host $POSTGRES_DB $POSTGRES_USER 127.0.0.1/32 md5" >>/data/postgres-data/pg_hba.conf
 
 set -e
 

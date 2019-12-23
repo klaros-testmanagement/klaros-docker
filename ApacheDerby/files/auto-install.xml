@@ -23,7 +23,6 @@
 <entry key="start_server_flag" value="false"/>
 <entry key="tomcat_admin_name" value="admin"/>
 
-
 </com.izforge.izpack.panels.userinput.UserInputPanel>
 <com.izforge.izpack.panels.install.InstallPanel id="install"/>
 <com.izforge.izpack.panels.process.ProcessPanel id="process"/>

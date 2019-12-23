@@ -18,20 +18,14 @@ RUN set -ex; \
 
 # make the "en_US.UTF-8" locale so postgres will be utf-8 enabled by default
 # alpine doesn't require explicit locale-file generation
+
 ENV LANG en_US.utf8
-
-RUN mkdir /docker-entrypoint-initdb.d
-
 ENV PG_MAJOR 12
 ENV PG_VERSION 12.0
 ENV PG_SHA256 cda2397215f758b793f741c86be05468257b0e6bcb1a6113882ab5d0df0855c6
-
-
 ENV PGDATA /data/postgres-data
-#ENV POSTGRES_DB ${DATABASE_NAME}
-#ENV POSTGRES_USER ${DATABASE_USER}
-#ENV POSTGRES_PASSWORD ${DATABASE_PASSWORD}
 
+RUN mkdir /docker-entrypoint-initdb.d
 RUN set -ex \
 	\
 	&& apk add --no-cache --virtual .fetch-deps \
@@ -145,7 +139,6 @@ RUN set -ex \
 
 # make the sample config easier to munge (and "correct by default")
 RUN sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /usr/local/share/postgresql/postgresql.conf.sample
-
 RUN mkdir -p /var/run/postgresql && chown -R postgres:postgres /var/run/postgresql && chmod 2777 /var/run/postgresql
 
 COPY ./*.sh /docker-entrypoint-initdb.d/
@@ -163,4 +156,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 5432
 CMD ["postgres"]
-

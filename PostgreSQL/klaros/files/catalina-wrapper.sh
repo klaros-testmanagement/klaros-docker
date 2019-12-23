@@ -10,8 +10,7 @@ KT_DIR_CONF=/root/klaros-testmanagement/conf
 KT_DIR_HOME=/data/klaros-home
 counter=0
 
-function ctrl_c()
-{
+function ctrl_c() {
 	echo ""
 	counter=$((counter + 1))
 	if [ "$counter" = 1 ]; then
@@ -25,7 +24,6 @@ function ctrl_c()
 	wait "$child"
 	exit 2
 }
-
 
 if [ -d "$KT_DIR_HOME" ]; then
 	echo "$KT_DIR_HOME exists"
@@ -69,14 +67,13 @@ else
 	ln -s $KT_DIR_WEB $CA_DIR_WEB
 fi
 
-
 (
-echo "hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect";
-echo "hibernate.connection.driver_class=org.postgresql.Driver";
-echo "hibernate.connection.url = jdbc:postgresql://db/${DATABASE_NAME}";
-echo "hibernate.connection.username=${DATABASE_USER}";
-echo "hibernate.connection.password=${DATABASE_PASSWORD}";
-)> /data/klaros-home/hibernate.properties
+	echo "hibernate.dialect=org.hibernate.dialect.PostgreSQL9Dialect"
+	echo "hibernate.connection.driver_class=org.postgresql.Driver"
+	echo "hibernate.connection.url = jdbc:postgresql://db/${DATABASE_NAME}"
+	echo "hibernate.connection.username=${DATABASE_USER}"
+	echo "hibernate.connection.password=${DATABASE_PASSWORD}"
+) >/data/klaros-home/hibernate.properties
 
 # Wait for SQL Server
 sleep 60

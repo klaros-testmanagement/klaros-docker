@@ -1,5 +1,5 @@
 ---
-version: '3.4'
+version: "3.4"
 services:
     db:
         image: postgres-klaros_db
@@ -7,8 +7,7 @@ services:
         restart: always
         container_name: ${DATABASE_CONTAINER_NAME}
         hostname: db
-        env_file:
-            ./.env
+        env_file: ./.env
         environment:
             POSTGRES_DB: ${DATABASE_NAME}
             POSTGRES_USER: ${DATABASE_USER}
@@ -23,15 +22,14 @@ services:
 
     klaros:
         image: klaros-postgresql
-        build: 
+        build:
             context: ./klaros
             args:
                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}
         restart: always
         container_name: ${KLAROS_CONTAINER_NAME}
         hostname: klaros
-        env_file:
-            ./.env
+        env_file: ./.env
         environment:
             DATABASE_NAME: ${DATABASE_NAME}
             DATABASE_USER: ${DATABASE_USER}
