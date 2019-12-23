@@ -14,14 +14,15 @@
 <com.izforge.izpack.panels.userinput.UserInputPanel id="portselection">
 <entry key="tomcat_http_port" value="@@TOMCAT_HTTP_PORT@@"/>
 <entry key="tomcat_server_port" value="@@TOMCAT_SERVER_PORT@@"/>
+<entry key="tomcat_ajp_port" value="@@TOMCAT_AJP_PORT@@"/>
 <entry key="tomcat_session_timeout" value="@@TOMCAT_SESSION_TIMEOUT@@"/>
 <entry key="tomcat_memory_max" value="${TOMCAT_MEMORY_MAX:-@@TOMCAT_MEMORY_MAX@@}"/>
-<entry key="launch_browser_flag" value="false"/>
-<entry key="start_server_flag" value="false"/>
-<entry key="tomcat_ajp_port" value="@@TOMCAT_AJP_PORT@@"/>
-<entry key="tomcat_admin_name" value="admin"/>
 <entry key="tomcat_memory_min" value="${TOMCAT_MEMORY_MIN:-@@TOMCAT_MEMORY_MIN@@}"/>
 <entry key="tomcat_admin_password" value="@@TOMCAT_ADMIN_PASSWORD@@"/>
+<entry key="launch_browser_flag" value="false"/>
+<entry key="start_server_flag" value="false"/>
+<entry key="tomcat_admin_name" value="admin"/>
+
 </com.izforge.izpack.panels.userinput.UserInputPanel>
 <com.izforge.izpack.panels.install.InstallPanel id="install"/>
 <com.izforge.izpack.panels.process.ProcessPanel id="process"/>

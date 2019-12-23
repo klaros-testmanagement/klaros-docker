@@ -9,8 +9,7 @@ KT_DIR_WEB=/root/klaros-testmanagement/webapps
 KT_DIR_CONF=/root/klaros-testmanagement/conf
 counter=0
 
-function ctrl_c()
-{
+function ctrl_c() {
 	echo ""
 	counter=$((counter + 1))
 	if [ "$counter" = 1 ]; then
@@ -24,7 +23,6 @@ function ctrl_c()
 	wait "$child"
 	exit 2
 }
-
 
 if [ -d "$CA_DIR_DATA" ]; then
 	echo "$CA_DIR_DATA exists"
@@ -67,7 +65,6 @@ else
 	echo "creating $CA_DIR_WEB"
 	ln -s $KT_DIR_WEB $CA_DIR_WEB
 fi
-
 
 trap "ctrl_c" SIGTERM 2
 

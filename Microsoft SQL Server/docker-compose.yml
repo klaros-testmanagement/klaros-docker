@@ -1,5 +1,5 @@
 ---
-version: '3.4'
+version: "3.4"
 services:
     db:
         image: mssql2017-klaros_db
@@ -7,17 +7,16 @@ services:
         restart: always
         container_name: ${DATABASE_CONTAINER_NAME}
         hostname: db
-        env_file:
-            ./.env
+        env_file: ./.env
         environment:
             DATABASE_NAME: ${DATABASE_NAME}
             DATABASE_USER: ${DATABASE_USER}
             SA_PASSWORD: ${DATABASE_PASSWORD}
             MSSQL_PID: Developer
             ACCEPT_EULA: Y
-            MSSQL_AGENT_ENABLED: 'true'
+            MSSQL_AGENT_ENABLED: "true"
             MSSQL_ENABLE_HADR: 1
-            MSSQL_BACKUP_DIR: '/backup'
+            MSSQL_BACKUP_DIR: "/backup"
             TZ: ${TIMEZONE}
             LANG: en_US.UTF-8
             LANGUAGE: en_US:en
@@ -27,10 +26,10 @@ services:
         networks:
             - mssql-net
         volumes:
-              - klaros-data:/data
+            - klaros-data:/data
     klaros:
         image: klaros-mssql2017
-        build: 
+        build:
             context: ./klaros
             args:
                 TOMCAT_ADMIN_PASSWORD: ${TOMCAT_PASSWORD}

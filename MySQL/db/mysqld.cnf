@@ -7,7 +7,6 @@ datadir		= /data/mysql-data
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
 
-
 # adjustment verit 2019-12-23
 # Allow enough connections
 max_connections=150

@@ -46,7 +46,7 @@ RUN set -ex \
     && apk update \
     && apk add --no-cache \
         fontconfig \
-	ghostscript-fonts \
+	    ghostscript-fonts \
     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
     && echo "~~~~~" && cat /tmp/auto-install.xml &&  echo "~~~~~"
 
@@ -57,6 +57,5 @@ RUN set -ex \
     && mv /root/klaros-testmanagement/webapps/klaros-web.war \
         /root/klaros-testmanagement/webapps/ROOT.war \
     && chmod +x /root/catalina-wrapper.sh
-
 
 CMD [ "/root/catalina-wrapper.sh" ]

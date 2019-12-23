@@ -10,8 +10,7 @@ KT_DIR_CONF=/root/klaros-testmanagement/conf
 KT_DIR_HOME=/data/klaros-home
 counter=0
 
-function ctrl_c()
-{
+function ctrl_c() {
 	echo ""
 	counter=$((counter + 1))
 	if [ "$counter" = 1 ]; then
@@ -83,12 +82,12 @@ else
 fi
 
 (
-echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect";
-echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver";
-echo "hibernate.connection.url=jdbc:sqlserver://db:1433;databaseName=${DATABASE_NAME}";
-echo "hibernate.connection.username=${DATABASE_USER}";
-echo "hibernate.connection.password=${DATABASE_PASSWORD}";
-)> /data/klaros-home/hibernate.properties
+	echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect"
+	echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver"
+	echo "hibernate.connection.url=jdbc:sqlserver://db:1433;databaseName=${DATABASE_NAME}"
+	echo "hibernate.connection.username=${DATABASE_USER}"
+	echo "hibernate.connection.password=${DATABASE_PASSWORD}"
+) >/data/klaros-home/hibernate.properties
 
 # Wait for SQL Server
 sleep 60

@@ -42,8 +42,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		perl \
 	&& rm -rf /var/lib/apt/lists/*
 
-
-
 RUN set -ex; \
 # gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
 	key='A4A9406876FCBD3C456770C88C718D3B5072E1F5'; \

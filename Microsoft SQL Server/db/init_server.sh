@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 replace_vars() {
-    local -r DSTFILE="${1}"; shift
+    local -r DSTFILE="${1}"
+    shift
 
     sed -i -e "s|@@HOSTNAME@@|${HOSTNAME}|" \
         "${DSTFILE}"
