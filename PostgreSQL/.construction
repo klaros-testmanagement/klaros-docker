@@ -1,9 +1,0 @@
-Source of the original PostgreSQL files: https://github.com/docker-library/postgres/tree/0d0485cb02e526f5a240b7740b46c35404aaf13f/12/alpine
-Source of the original Docker Compose file: https://github.com/akaer/Dockerfiles/blob/master/klaros/sqlserver2017/docker-compose.yml
-Source of the original Klaros Dockerfile: https://github.com/akaer/Dockerfiles/blob/master/klaros/ApacheDerby/Dockerfile
-
-To view all differences of a file, download the original file and compare it with "diff".
-
-+ Modify catalina-wrapper.sh under klaros
-+ Modify the Compose file and all Dockerfiles
-+ Modify the auto-install.xml file
