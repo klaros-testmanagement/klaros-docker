@@ -1,7 +1,0 @@
-Source of the original MSSQL files: https://github.com/akaer/Dockerfiles/tree/master/klaros/sqlserver2017
-
-To view all differences of a file, download the original file and compare it with "diff".
-
-+ Modify catalina-wrapper.sh under klaros
-+ Modify the Compose file and all Dockerfiles
-+ Modify the auto-install.xml file
