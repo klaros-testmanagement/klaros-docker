@@ -1,4 +1,4 @@
-FROM verit/klaros-mysql_db:4.12.4
+FROM verit/klaros-mysql_db:4.12.5
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 COPY *.cnf /etc/mysql/mysql.conf.d
