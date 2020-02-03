@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-declare -r MAXDELAY=20
-
 run_sql() {
     local -r CMD="${1}"
     shift
@@ -18,8 +16,17 @@ replace_vars() {
         "${DSTFILE}"
 }
 
-echo "[*] Start executing sql scripts in ${MAXDELAY} seconds."
-sleep ${MAXDELAY}
+echo "Wait for server to startup"
+while [ ! -f /var/opt/mssql/log/errorlog ]
+do
+  sleep 2
+done
+
+tail -f /var/opt/mssql/log/errorlog | while read LOGLINE
+do
+   [[ "${LOGLINE}" == *"Using 'xpstar.dll' version"* ]] && pkill -P $$ tail
+done
+echo "[*] Start executing sql scripts."
 
 for sf in $(ls -v /*.sql); do
     echo "Execute ${sf}"
