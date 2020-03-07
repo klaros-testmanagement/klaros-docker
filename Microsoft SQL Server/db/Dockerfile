@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server:2017-latest
+FROM mcr.microsoft.com/mssql/server:2017-CU19-ubuntu-16.04
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 ENV MSSQL_MASTER_DATA_FILE /data/mssql-data/master.mdf
