@@ -1,4 +1,4 @@
-FROM verit/klaros-mariadb_db:4.12.6
+FROM verit/klaros-mariadb_db:4.12.7
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 COPY *.cnf /etc/mysql/mariadb.conf.d
