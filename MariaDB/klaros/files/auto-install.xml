@@ -8,7 +8,7 @@
 </com.izforge.izpack.panels.target.TargetPanel>
 <com.izforge.izpack.panels.packs.PacksPanel id="packs">
 <pack index="0" name="Tomcat 8 Application Server" selected="true"/>
-<pack index="1" name="Klaros-Testmanagement 4.12.1" selected="true"/>
+<pack index="1" name="Klaros-Testmanagement 4.12.7" selected="true"/>
 <pack index="2" name="PDF-Documentation" selected="false"/>
 </com.izforge.izpack.panels.packs.PacksPanel>
 <com.izforge.izpack.panels.userinput.UserInputPanel id="portselection">
