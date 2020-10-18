@@ -12,7 +12,7 @@
 # Do not use it for production systems. Please take a look at the documentation.
 # 
 
-FROM openjdk:8u212-alpine
+FROM adoptopenjdk:11-jre-hotspot
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 # Set Klaros language. Use 'deu' for german and 'eng' for english.
@@ -27,10 +27,10 @@ ENV TOMCAT_ADMIN_PASSWORD P@ssw0rd
 ENV TOMCAT_SESSION_TIMEOUT 60
 
 # Minimum available RAM in MB
-ENV TOMCAT_MEMORY_MIN 128
+ENV TOMCAT_MEMORY_MIN 256
 
 # Maximum available RAM in MB
-ENV TOMCAT_MEMORY_MAX 768
+ENV TOMCAT_MEMORY_MAX 1024
 
 # You can set the port by creating a container: docker create --name Klaros -p 18080:18080 klaros
 ENV TOMCAT_HTTP_PORT ${TOMCAT_HTTP_PORT:-18080}
@@ -38,7 +38,7 @@ ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
 
 # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
-ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.6}
+ENV KLAROS_VERSION ${KLAROS_VERSION:-5.0.3}
 
 ENV KLAROS_HOME /data/klaros-home
 ENV CATALINA_BASE /data/catalina-base
@@ -50,10 +50,8 @@ ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLARO
 ADD .start.sh /
 
 RUN set -xe \
-    && apk update \
-    && apk add --no-cache \
-        fontconfig \
-	    ghostscript-fonts \
+    && apt-get -y update \
+    && apt-get install -y fontconfig gsfonts \
     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
     && echo "~~~~~" && cat /tmp/auto-install.xml &&  echo "~~~~~"
 
