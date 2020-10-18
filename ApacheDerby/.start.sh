@@ -9,7 +9,7 @@ KT_DIR_WEB=/root/klaros-testmanagement/webapps
 KT_DIR_CONF=/root/klaros-testmanagement/conf
 counter=0
 
-function ctrl_c() {
+ctrl_c() {
 	echo ""
 	counter=$((counter + 1))
 	if [ "$counter" = 1 ]; then
@@ -66,7 +66,7 @@ else
 	ln -s $KT_DIR_WEB $CA_DIR_WEB
 fi
 
-trap "ctrl_c" SIGTERM 2
+trap "ctrl_c" TERM 2
 
 ./root/klaros-testmanagement/bin/catalina.sh run &
 

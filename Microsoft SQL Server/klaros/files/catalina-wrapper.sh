@@ -10,7 +10,7 @@ KT_DIR_CONF=/root/klaros-testmanagement/conf
 KT_DIR_HOME=/data/klaros-home
 counter=0
 
-function ctrl_c() {
+ctrl_c() {
 	echo ""
 	counter=$((counter + 1))
 	if [ "$counter" = 1 ]; then
@@ -24,20 +24,6 @@ function ctrl_c() {
 	wait "$child"
 	exit 2
 }
-
-if [ -d "$CA_DIR_DATA" ]; then
-	echo "$CA_DIR_DATA exists"
-else
-	echo "creating $CA_DIR_DATA"
-	mkdir -p $CA_DIR_DATA
-fi
-
-if [ -d "$MSQL_DIR_DATA" ]; then
-	echo "$MSQL_DIR_DATA exists"
-else
-	echo "creating $MSQL_DIR_DATA"
-	mkdir -p $MSQL_DIR_DATA
-fi
 
 if [ -d "$KT_DIR_HOME" ]; then
 	echo "$KT_DIR_HOME exists"
@@ -92,7 +78,7 @@ fi
 # Wait for SQL Server
 sleep 60
 
-trap "ctrl_c" SIGTERM 2
+trap "ctrl_c" TERM 2
 
 ./root/klaros-testmanagement/bin/catalina.sh run &
 
