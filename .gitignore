@@ -1,4 +1,4 @@
 *.jar
 .test/
-/.project
 /.settings/
+/.project

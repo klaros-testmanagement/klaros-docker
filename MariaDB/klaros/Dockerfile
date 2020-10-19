@@ -11,7 +11,7 @@
 # The .env file contains all possible configuration options. Further information can be found in the documentation.
 #
 
-FROM openjdk:8u212-alpine
+FROM adoptopenjdk:11-jre-hotspot
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 # Set Klaros language. Use 'deu' for german and 'eng' for english.
@@ -32,7 +32,7 @@ ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
 
 # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
-ENV KLAROS_VERSION ${KLAROS_VERSION:-4.12.7}
+ENV KLAROS_VERSION ${KLAROS_VERSION:-5.0.3}
 ENV KLAROS_HOME /data/klaros-home
 ENV CATALINA_BASE /data/catalina-base
 
@@ -42,11 +42,9 @@ ADD files/auto-install.xml /tmp/auto-install.xml
 ADD files/catalina-wrapper.sh /root/catalina-wrapper.sh
 ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
 
-RUN set -ex \
-    && apk update \
-    && apk add --no-cache \
-        fontconfig \
-	    ghostscript-fonts \
+RUN set -xe \
+    && apt-get -y update \
+    && apt-get install -y fontconfig gsfonts \
     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
     && echo "~~~~~" && cat /tmp/auto-install.xml &&  echo "~~~~~"
 

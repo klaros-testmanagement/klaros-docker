@@ -8,11 +8,11 @@ CA_DIR_WEB=$CA_DIR_BASE/webapps
 KT_DIR_WEB=/root/klaros-testmanagement/webapps
 KT_DIR_CONF=/root/klaros-testmanagement/conf
 KT_DIR_HOME=/data/klaros-home
-MSQL_DIR_DATA=/data/mysql-data
-MSQL_FILE_ERRORLOG=/var/log/mysql/error.log
+MYSQL_DIR_DATA=/data/mysql-data
+MYSQL_FILE_ERRORLOG=/var/log/mysql/error.log
 counter=0
 
-function ctrl_c() {
+ctrl_c() {
 	echo ""
 	counter=$((counter + 1))
 	if [ "$counter" = 1 ]; then
@@ -26,13 +26,6 @@ function ctrl_c() {
 	wait "$child"
 	exit 2
 }
-
-if [ -d "$CA_DIR_DATA" ]; then
-	echo "$CA_DIR_DATA exists"
-else
-	echo "creating $CA_DIR_DATA"
-	mkdir -p $CA_DIR_DATA
-fi
 
 if [ -d "$MSQL_DIR_DATA" ]; then
 	echo "$MSQL_DIR_DATA exists"
@@ -83,15 +76,15 @@ else
 	ln -s $KT_DIR_WEB $CA_DIR_WEB
 fi
 
-if [ -f "$MSQL_DIR_DATA/error.log" ]; then
-	echo "$MSQL_DIR_DATA/error.log is linked"
+if [ -f "$MYSQL_DIR_DATA/error.log" ]; then
+	echo "$MYSQL_DIR_DATA/error.log is linked"
 else
-	echo "creating link $MSQL_DIR_DATA/error.log"
-	ln -s $MSQL_FILE_ERRORLOG $MSQL_DIR_DATA
+	echo "creating link $MYSQL_DIR_DATA/error.log"
+	ln -s $MSQL_DIR_DATA/error.log $MYSQL_FILE_ERRORLOG
 fi
 
 (
-	echo "hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect"
+	echo "hibernate.dialect=org.hibernate.dialect.MySQL57Dialect"
 	echo "hibernate.connection.driver_class=com.mysql.jdbc.Driver"
 	echo "hibernate.connection.url = jdbc:mysql://db/${DATABASE_NAME}?autoReconnect=true&useSSL=false"
 	echo "hibernate.connection.username=${DATABASE_USER}"
@@ -101,7 +94,7 @@ fi
 # Wait for SQL Server
 sleep 60
 
-trap "ctrl_c" SIGTERM 2
+trap "ctrl_c" TERM 2
 
 ./root/klaros-testmanagement/bin/catalina.sh run &
 
