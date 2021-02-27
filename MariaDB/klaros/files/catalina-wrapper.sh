@@ -25,20 +25,6 @@ ctrl_c() {
 	exit 2
 }
 
-if [ -d "$CA_DIR_DATA" ]; then
-	echo "$CA_DIR_DATA exists"
-else
-	echo "creating $CA_DIR_DATA"
-	mkdir -p $CA_DIR_DATA
-fi
-
-if [ -d "$MSQL_DIR_DATA" ]; then
-	echo "$MSQL_DIR_DATA exists"
-else
-	echo "creating $MSQL_DIR_DATA"
-	mkdir -p $MSQL_DIR_DATA
-fi
-
 if [ -d "$KT_DIR_HOME" ]; then
 	echo "$KT_DIR_HOME exists"
 else
