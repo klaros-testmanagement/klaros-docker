@@ -27,11 +27,11 @@ ctrl_c() {
 	exit 2
 }
 
-if [ -d "$MSQL_DIR_DATA" ]; then
-	echo "$MSQL_DIR_DATA exists"
+if [ -d "$MYSQL_DIR_DATA" ]; then
+	echo "$MYSQL_DIR_DATA exists"
 else
-	echo "creating $MSQL_DIR_DATA"
-	mkdir -p $MSQL_DIR_DATA
+	echo "creating $MYSQL_DIR_DATA"
+	mkdir -p $MYSQL_DIR_DATA
 fi
 
 if [ -d "$KT_DIR_HOME" ]; then
