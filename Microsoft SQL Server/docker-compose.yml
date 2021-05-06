@@ -13,7 +13,7 @@ services:
             DATABASE_USER: ${DATABASE_USER}
             SA_PASSWORD: ${DATABASE_PASSWORD}
             MSSQL_PID: Developer
-            ACCEPT_EULA: Y
+            ACCEPT_EULA: "Y"
             MSSQL_AGENT_ENABLED: "true"
             MSSQL_ENABLE_HADR: 1
             MSSQL_BACKUP_DIR: "/backup"
