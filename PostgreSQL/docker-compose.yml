@@ -33,6 +33,7 @@ services:
         environment:
             DATABASE_NAME: ${DATABASE_NAME}
             DATABASE_USER: ${DATABASE_USER}
+            DATABASE_HOST: ${DATABASE_HOST}
             DATABASE_PASSWORD: ${DATABASE_PASSWORD}
             JAVA_OPTS: -Duser.timezone=${TIMEZONE}
             TOMCAT_MEMORY_MAX: ${MEMORY_MAX}
