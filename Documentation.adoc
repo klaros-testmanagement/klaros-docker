@@ -100,6 +100,7 @@ This completes the preparations for Linux. The chapter <<Installation,Installati
 [options="header"]
 |=======================
 |Variable                 |Default           |Description
+|DATABASE_HOST            |db                |Database host
 |DATABASE_NAME            |klaros            |Database name
 |DATABASE_USER            |klaros            |Database user
 |DATABASE_CONTAINER_NAME  |klaros_db         |Container name for the database
@@ -1092,5 +1093,6 @@ Would you like to help us or make suggestions for improvement? Follow these step
 == Acknowledgements
 
 * https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
+* https://github.com/x3nb63 for adding the DATABASE_HOST variable
 
 <<Top-of-the-page,(Back to top)>>

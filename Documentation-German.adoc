@@ -100,6 +100,7 @@ Damit sind die Vorbereitungen für Linux abgeschlossen. Im Kapitel <<Installatio
 [options="header"]
 |=======================
 |Variable                 |Voreinstellung    |Beschreibung
+|DATABASE_HOST            |db                |Datenbank-Host
 |DATABASE_NAME            |klaros            |Datenbankname
 |DATABASE_USER            |klaros            |Datenbankbenutzer
 |DATABASE_CONTAINER_NAME  |klaros_db         |Containername für die Datenbank
@@ -1093,5 +1094,6 @@ Möchten Sie uns helfen oder Verbesserungsvorschläge machen? Führen Sie diese 
 == Danksagung
 
 * https://github.com/tuxknowledge[André Raabe] für das Bereitstellen der https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby und Microsoft SQL Server Version]
+* https://github.com/x3nb63 für das Hinzufügen der DATABASE_HOST Variablen
 
 <<Top-of-the-page,(Nach Oben)>>
