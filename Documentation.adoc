@@ -11,7 +11,7 @@ endif::[]
 :toc: macro
 :sectnums:
 
-image:https://img.shields.io/badge/Version-5.0.9-green.svg[link="https://github.com/klaros-testmanagement/klaros-docker/releases"]
+image:https://img.shields.io/badge/Version-5.1.0-green.svg[link="https://github.com/klaros-testmanagement/klaros-docker/releases"]
 image:https://img.shields.io/badge/License-MIT-green[link="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE"]
 image:https://img.shields.io/badge/Community%20Edition-FREE-green[link="https://www.klaros-testmanagement.com/en_US/download"]
 image:https://img.shields.io/twitter/follow/Klaros_TM?style=social[float="right", link="https://twitter.com/intent/follow?screen_name=Klaros_TM"]
@@ -100,6 +100,7 @@ This completes the preparations for Linux. The chapter <<Installation,Installati
 [options="header"]
 |=======================
 |Variable                 |Default           |Description
+|DATABASE_HOST            |db                |Database host
 |DATABASE_NAME            |klaros            |Database name
 |DATABASE_USER            |klaros            |Database user
 |DATABASE_CONTAINER_NAME  |klaros_db         |Container name for the database
@@ -1092,5 +1093,6 @@ Would you like to help us or make suggestions for improvement? Follow these step
 == Acknowledgements
 
 * https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
+* https://github.com/x3nb63 for adding the DATABASE_HOST variable
 
 <<Top-of-the-page,(Back to top)>>
