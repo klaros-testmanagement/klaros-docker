@@ -28,4 +28,8 @@ query_cache_type=0
 innodb_checksum_algorithm=crc32
 default-storage-engine=INNODB
 wait_timeout=604800
-# Ende of adjustment
+# End of adjustment
+
+# Issue #51
+character-set-server=utf8
+# End
