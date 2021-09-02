@@ -32,7 +32,7 @@ ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
 
 # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
-ENV KLAROS_VERSION ${KLAROS_VERSION:-5.1.1}
+ENV KLAROS_VERSION ${KLAROS_VERSION:-5.2.0}
 ENV KLAROS_HOME /data/klaros-home
 ENV CATALINA_BASE /data/catalina-base
 
