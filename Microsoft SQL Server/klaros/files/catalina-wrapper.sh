@@ -68,7 +68,6 @@ else
 fi
 
 (
-	echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect"
 	echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver"
 	if [ -z "${DATABASE_INSTANCE}" ]; then
 		echo "hibernate.connection.url=jdbc:sqlserver://${DATABASE_HOST}:1433;databaseName=${DATABASE_NAME}"
