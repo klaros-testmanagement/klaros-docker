@@ -78,6 +78,9 @@ fi
 	echo "hibernate.connection.password=${DATABASE_PASSWORD}"
 ) >/data/klaros-home/hibernate.properties
 
+# Allow for the Tomcat admin password to be changed on container start
+sed -i -e "s/password=\".*\" roles/password=\"${TOMCAT_ADMIN_PASSWORD}\" roles/g" /root/klaros-testmanagement/conf/tomcat-users.xml
+
 # Wait for SQL Server
 sleep 60
 
