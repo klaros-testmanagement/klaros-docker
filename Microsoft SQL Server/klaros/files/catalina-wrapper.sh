@@ -68,9 +68,12 @@ else
 fi
 
 (
-	echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect"
 	echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver"
-	echo "hibernate.connection.url=jdbc:sqlserver://${DATABASE_HOST}:1433;databaseName=${DATABASE_NAME}"
+	if [ -z "${DATABASE_INSTANCE}" ]; then
+		echo "hibernate.connection.url=jdbc:sqlserver://${DATABASE_HOST}:1433;databaseName=${DATABASE_NAME}"
+	else
+		echo "hibernate.connection.url=jdbc:sqlserver://${DATABASE_HOST};instanceName=${DATABASE_INSTANCE};databaseName=${DATABASE_NAME}"
+	fi
 	echo "hibernate.connection.username=${DATABASE_USER}"
 	echo "hibernate.connection.password=${DATABASE_PASSWORD}"
 ) >/data/klaros-home/hibernate.properties
