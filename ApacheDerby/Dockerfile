@@ -3,14 +3,14 @@
 #
 # Klaros Testmanagement (Community Edition) (https://www.klaros-testmanagement.com)
 #
-# With JAVA_OPTS additional settings can be transferred to the Tomcat server. 
+# With JAVA_OPTS additional settings can be transferred to the Tomcat server.
 # For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
 #
 # docker build -t klaros .
 # docker run --name Klaros -p 18080:18080 klaros
-# 
+#
 # Do not use it for production systems. Please take a look at the documentation.
-# 
+#
 
 FROM adoptopenjdk:11-jre-hotspot
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
@@ -46,7 +46,8 @@ ENV CATALINA_BASE /data/catalina-base
 EXPOSE ${TOMCAT_HTTP_PORT}
 
 ADD files/auto-install.xml /tmp/auto-install.xml
-ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
+ADD https://ftl.pi-hole.net/adam/Klaros-5.2.0-Setup.jar /tmp/Klaros-Setup.jar
+#ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
 ADD .start.sh /
 
 RUN set -xe \
