@@ -3,7 +3,7 @@
 #
 # Klaros Testmanagement (Community Edition) (https://www.klaros-testmanagement.com)
 #
-# With JAVA_OPTS additional settings can be transferred to the Tomcat server. 
+# With JAVA_OPTS additional settings can be transferred to the Tomcat server.
 # For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
 #
 # docker-compose up
@@ -44,7 +44,8 @@ ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLARO
 
 RUN set -xe \
     && apt-get -y update \
-    && apt-get install -y fontconfig gsfonts \
+    && apt-get install --no-install-recommends -y fontconfig gsfonts \
+    && rm -rf /var/lib/apt/lists/* \
     && sed -i "s/@@TOMCAT_ADMIN_PASSWORD@@/${TOMCAT_ADMIN_PASSWORD}/g;s/@@TOMCAT_HTTP_PORT@@/${TOMCAT_HTTP_PORT}/g;s/@@TOMCAT_SERVER_PORT@@/${TOMCAT_SERVER_PORT}/g;s/@@TOMCAT_AJP_PORT@@/${TOMCAT_AJP_PORT}/g;s/@@TOMCAT_SESSION_TIMEOUT@@/${TOMCAT_SESSION_TIMEOUT}/g;s/@@TOMCAT_MEMORY_MAX@@/${TOMCAT_MEMORY_MAX}/g;s/@@TOMCAT_MEMORY_MIN@@/${TOMCAT_MEMORY_MIN}/g;s/@@KLAROS_LANG@@/${KLAROS_LANG}/g" /tmp/auto-install.xml \
     && echo "~~~~~" && cat /tmp/auto-install.xml &&  echo "~~~~~"
 

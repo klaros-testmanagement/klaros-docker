@@ -91,8 +91,11 @@ fi
 	echo "hibernate.connection.password=${DATABASE_PASSWORD}"
 ) >/data/klaros-home/hibernate.properties
 
-# Wait for SQL Server
-sleep 60
+# Allow for the Tomcat admin password to be changed on container start if TOMCAT_ADMIN_PASSWORD is set on start, else keep as it is in the built image
+[ ! -z ${TOMCAT_ADMIN_PASSWORD} ] && sed -i -e "s/password=\".*\" roles/password=\"${TOMCAT_ADMIN_PASSWORD}\" roles/g" /root/klaros-testmanagement/conf/tomcat-users.xml
+
+# Wait for SQL Server (override by setting CATALINA_SKIP_SLEEP to anything e.g CATALINA_SKIP_SLEEP: 1)
+[ -z "${CATALINA_SKIP_SLEEP}" ] && sleep 60
 
 trap "ctrl_c" TERM 2
 
