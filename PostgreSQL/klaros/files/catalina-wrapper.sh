@@ -68,7 +68,6 @@ else
 fi
 
 (
-	echo "hibernate.dialect=org.hibernate.dialect.PostgreSQL10Dialect"
 	echo "hibernate.connection.driver_class=org.postgresql.Driver"
 	echo "hibernate.connection.url = jdbc:postgresql://${DATABASE_HOST}/${DATABASE_NAME}"
 	echo "hibernate.connection.username=${DATABASE_USER}"

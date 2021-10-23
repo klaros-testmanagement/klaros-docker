@@ -68,7 +68,6 @@ else
 fi
 
 (
-	echo "hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect"
 	echo "hibernate.connection.driver_class=com.microsoft.sqlserver.jdbc.SQLServerDriver"
 	echo "hibernate.connection.url=jdbc:sqlserver://${DATABASE_HOST}:1433;databaseName=${DATABASE_NAME}"
 	echo "hibernate.connection.username=${DATABASE_USER}"

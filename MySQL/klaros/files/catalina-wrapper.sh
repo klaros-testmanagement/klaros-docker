@@ -84,7 +84,6 @@ else
 fi
 
 (
-	echo "hibernate.dialect=org.hibernate.dialect.MySQL57Dialect"
 	echo "hibernate.connection.driver_class=com.mysql.jdbc.Driver"
 	echo "hibernate.connection.url = jdbc:mysql://${DATABASE_HOST}/${DATABASE_NAME}?autoReconnect=true&useSSL=false"
 	echo "hibernate.connection.username=${DATABASE_USER}"
