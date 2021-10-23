@@ -3,10 +3,15 @@
 #
 # Klaros Testmanagement (Community Edition) (https://www.klaros-testmanagement.com)
 #
-# With JAVA_OPTS additional settings can be transferred to the Tomcat server. 
+# With JAVA_OPTS additional settings can be transferred to the Tomcat server.
 # For example the time zone can be set to Europe/Berlin with JAVA_OPTS -Duser.timezone=Europe/Berlin
 #
+# Standalone, docker instance of SQL server:
 # docker-compose up
+#
+# External SQL server connection:
+# Ensure you have created the database by running 002_create_database.sql on your server, then:
+# docker-compose -f docker-compose.externaldb.yml up
 #
 # The .env file contains all possible configuration options. Further information can be found in the documentation.
 #
