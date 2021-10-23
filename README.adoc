@@ -512,5 +512,7 @@ Would you like to help us or make suggestions for improvement? Follow these step
 == Acknowledgements
 
 * https://github.com/tuxknowledge[André Raabe] for providing the https://github.com/akaer/Dockerfiles/tree/master/klaros[Apache Derby and Microsoft SQL Server Version]
+* https://github.com/PromoFaux[Adam Warner] for providing the https://github.com/klaros-testmanagement/klaros-docker/pull/59[GHA workflow to publish pre-built images to ghcr.io] and 
+https://github.com/klaros-testmanagement/klaros-docker/pull/58[tweaking the Microsoft SQL Server version to allow for remote instances]
 
 <<Top-of-the-page,(Back to top)>>
