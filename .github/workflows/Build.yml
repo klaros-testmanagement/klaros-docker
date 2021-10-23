@@ -1,0 +1,60 @@
+name: Build Klaros Application images
+on:
+  pull_request:
+  push:
+    tags:
+      - "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - db_backend: ApacheDerby
+            context: ApacheDerby/.
+            tag_suffix: apachederby
+          - db_backend: MariaDB
+            context: MariaDB/klaros/.
+            tag_suffix: mariadb
+          - db_backend: Microsoft SQL Server
+            context: 'Microsoft SQL Server/klaros/.'
+            tag_suffix: mssql
+          - db_backend: MySQL
+            context: MySQL/klaros/.
+            tag_suffix: mysql
+          - db_backend: PostgreSQL
+            context: PostgreSQL/klaros/.
+            tag_suffix: postgresql
+    steps:
+    -
+      name: Checkout the repo
+      uses: actions/checkout@v2
+    -
+      name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: |
+          ghcr.io/${{ github.repository_owner }}/klaros
+        flavor: |
+          latest=false
+        tags: |
+          type=ref,event=tag,suffix=-${{ matrix.tag_suffix }}
+          type=raw,value=${{matrix.tag_suffix}},enable=${{ startsWith(github.ref, 'refs/tags/') }}
+    -
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    -
+      name: Build The Docker image
+      uses: docker/build-push-action@v2
+      with:
+          context: ${{ matrix.context }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
