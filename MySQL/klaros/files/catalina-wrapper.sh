@@ -80,7 +80,7 @@ if [ -f "$MYSQL_DIR_DATA/error.log" ]; then
 	echo "$MYSQL_DIR_DATA/error.log is linked"
 else
 	echo "creating link $MYSQL_DIR_DATA/error.log"
-	ln -s $MSQL_DIR_DATA/error.log $MYSQL_FILE_ERRORLOG
+	ln -s $MYSQL_FILE_ERRORLOG $MYSQL_DIR_DATA/error.log
 fi
 
 (
