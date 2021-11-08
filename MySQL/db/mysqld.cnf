@@ -33,3 +33,8 @@ wait_timeout=604800
 # Issue #51
 character-set-server=utf8
 # End
+
+# New behaviors
+explicit_defaults_for_timestamp = 1
+# Disallow TLSv1.1
+tls_version = TLSv1.2
