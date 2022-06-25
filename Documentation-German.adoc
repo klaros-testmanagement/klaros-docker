@@ -12,7 +12,7 @@ endif::[]
 :sectnums:
 :toc-title: Inhaltsverzeichnis
 
-image:https://img.shields.io/badge/Version-5.3.3-green.svg[link="https://github.com/klaros-testmanagement/klaros-docker/releases"]
+image:https://img.shields.io/badge/Version-5.4.0-green.svg[link="https://github.com/klaros-testmanagement/klaros-docker/releases"]
 image:https://img.shields.io/badge/License-MIT-green[link="https://github.com/klaros-testmanagement/klaros-docker/blob/master/LICENSE"]
 image:https://img.shields.io/badge/Community%20Edition-FREE-green[link="https://www.klaros-testmanagement.com/en_US/download"]
 image:https://img.shields.io/twitter/follow/Klaros_TM?style=social[float="right", link="https://twitter.com/intent/follow?screen_name=Klaros_TM"]
