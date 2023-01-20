@@ -69,7 +69,7 @@ fi
 
 (
 	echo "hibernate.connection.driver_class=org.mariadb.jdbc.Driver"
-	echo "hibernate.connection.url = jdbc:mysql://${DATABASE_HOST}/${DATABASE_NAME}?autoReconnect=true&useSSL=false"
+	echo "hibernate.connection.url = jdbc:mariadb://${DATABASE_HOST}/${DATABASE_NAME}?autoReconnect=true&useSSL=false"
 	echo "hibernate.connection.username=${DATABASE_USER}"
 	echo "hibernate.connection.password=${DATABASE_PASSWORD}"
 ) >/data/klaros-home/hibernate.properties
