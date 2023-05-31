@@ -52,9 +52,12 @@ services:
             - mssql-net
         volumes:
             - klaros-data:/data
+            - jvm-security:/root/klaros-testmanagement/jre/lib/security
 
 networks:
     mssql-net:
 volumes:
     klaros-data:
         name: ${VOLUME_NAME}
+    jvm-security:
+        name: jvm-security
