@@ -31,6 +31,7 @@ wait_timeout=604800
 # End of adjustment
 
 # Issue #51
-character-set-server=utf8
+character-set-server=utf8mb4
+collation_server=utf8mb4_general_ci
 # End
 

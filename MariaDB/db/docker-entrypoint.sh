@@ -71,12 +71,12 @@ docker_process_init_files() {
 mysql_check_config() {
 	local toRun=( "$@" --verbose --help --log-bin-index="$(mktemp -u)" ) errors
 	if ! errors="$("${toRun[@]}" 2>&1 >/dev/null)"; then
-		mysql_error $'mysqld failed while attempting to check config\n\tcommand was: '"${toRun[*]}"$'\n\t'"$errors"
+		mysql_error $'mariadbd failed while attempting to check config\n\tcommand was: '"${toRun[*]}"$'\n\t'"$errors"
 	fi
 }
 
 # Fetch value from server config
-# We use mysqld --verbose --help instead of my_print_defaults because the
+# We use mariadbd --verbose --help instead of my_print_defaults because the
 # latter only show values present in config files, and not server defaults
 mysql_get_config() {
 	local conf="$1"; shift
@@ -147,7 +147,7 @@ docker_init_database_dir() {
 		# (this flag doesn't exist in 10.0 and below)
 		installArgs+=( --auth-root-authentication-method=normal )
 	fi
-	# "Other options are passed to mysqld." (so we pass all "mysqld" arguments directly here)
+	# "Other options are passed to mariadbd." (so we pass all "mariadbd" arguments directly here)
 	mysql_install_db "${installArgs[@]}" "${@:2}"
 	mysql_note "Database files initialized"
 }
@@ -267,7 +267,7 @@ _mysql_passfile() {
 	fi
 }
 
-# check arguments for an option that would cause mysqld to stop
+# check arguments for an option that would cause mariadbd to stop
 # return true if there is one
 _mysql_want_help() {
 	local arg
@@ -282,14 +282,14 @@ _mysql_want_help() {
 }
 
 _main() {
-	# if command starts with an option, prepend mysqld
+	# if command starts with an option, prepend mariadbd
 	if [ "${1:0:1}" = '-' ]; then
-		set -- mysqld "$@"
+		set -- mariadbd "$@"
 	fi
 
-	# skip setup if they aren't running mysqld or want an option that stops mysqld
-	if [ "$1" = 'mysqld' ] && ! _mysql_want_help "$@"; then
-		mysql_note "Entrypoint script for MySQL Server ${MARIADB_VERSION} started."
+	# skip setup if they aren't running mariadbd or want an option that stops mariadbd
+	if [ "$1" = 'mariadbd' ] && ! _mysql_want_help "$@"; then
+		mysql_note "Entrypoint script for MariaDB Server ${MARIADB_VERSION} started."
 
 		mysql_check_config "$@"
 		# Load various environment variables
@@ -323,7 +323,7 @@ _main() {
 			mysql_note "Temporary server stopped"
 
 			echo
-			mysql_note "MySQL init process done. Ready for start up."
+			mysql_note "MariaDB init process done. Ready for start up."
 			echo
 		fi
 	fi
