@@ -39,6 +39,8 @@ ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
 
 # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
 ENV KLAROS_VERSION ${KLAROS_VERSION:-5.5.4}
+# The location of the distributed Klaros installation files
+ENV KLAROS_DISTRIBUTION ${KLAROS_DISTRIBUTION:-https://www.klaros-testmanagement.com/files}
 
 ENV KLAROS_HOME /data/klaros-home
 ENV CATALINA_BASE /data/catalina-base
@@ -46,7 +48,7 @@ ENV CATALINA_BASE /data/catalina-base
 EXPOSE ${TOMCAT_HTTP_PORT}
 
 ADD files/auto-install.xml /tmp/auto-install.xml
-ADD https://www.klaros-testmanagement.com/files/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
+ADD ${KLAROS_DISTRIBUTION}/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
 ADD .start.sh /
 
 RUN set -xe \
