@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN set -ex; \
 # gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-	key='467B942D3A79BD29'; \
+	key='B7B3B788A8D3785C'; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	gpg --batch --keyserver hkp://keyserver.ubuntu.com --recv-keys "$key"; \
 	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
