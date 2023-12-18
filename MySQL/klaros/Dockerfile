@@ -43,7 +43,7 @@ EXPOSE ${TOMCAT_HTTP_PORT}
 
 ADD files/auto-install.xml /tmp/auto-install.xml
 ADD files/catalina-wrapper.sh /root/catalina-wrapper.sh
-ADD ${KLAROS_DISTRIBUTION}/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
+ADD ${KLAROS_DISTRIBUTION}/${KLAROS_VERSION}/Klaros-Setup.jar /tmp/Klaros-Setup.jar
 
 RUN set -xe \
     && apt-get -y update \

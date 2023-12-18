@@ -48,7 +48,7 @@ ENV CATALINA_BASE /data/catalina-base
 EXPOSE ${TOMCAT_HTTP_PORT}
 
 ADD files/auto-install.xml /tmp/auto-install.xml
-ADD ${KLAROS_DISTRIBUTION}/${KLAROS_VERSION}/Klaros-${KLAROS_VERSION}-Setup.jar /tmp/Klaros-Setup.jar
+ADD ${KLAROS_DISTRIBUTION}/${KLAROS_VERSION}/Klaros-Setup.jar /tmp/Klaros-Setup.jar
 ADD .start.sh /
 
 RUN set -xe \
