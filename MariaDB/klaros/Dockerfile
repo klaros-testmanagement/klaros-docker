@@ -11,7 +11,7 @@
 # The .env file contains all possible configuration options. Further information can be found in the documentation.
 #
 
-FROM adoptopenjdk:11-jre-hotspot
+FROM eclipse-temurin:21-jre-jammy
 LABEL maintainer "BreadSpoon <susp425@verit.de>"
 
 # Set Klaros language. Use 'deu' for german and 'eng' for english.
@@ -33,7 +33,7 @@ ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
 
 # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
-ENV KLAROS_VERSION ${KLAROS_VERSION:-5.5.5}
+ENV KLAROS_VERSION ${KLAROS_VERSION:-5.6.0}
 # The location of the distributed Klaros installation files
 ENV KLAROS_DISTRIBUTION ${KLAROS_DISTRIBUTION:-https://www.klaros-testmanagement.com/files}
 
