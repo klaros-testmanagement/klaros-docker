@@ -92,7 +92,7 @@ RUN set -e;\
 		echo 'Pin-Priority: 999'; \
 	} > /etc/apt/preferences.d/mariadb
 # add repository pinning to make sure dependencies from this MariaDB repo are preferred over Debian dependencies
-#  libmariadbclient18 : Depends: libmysqlclient18 (= 5.7.02+maria-1~wheezy) but 5.7.03-0+deb7u1 is to be installed
+#  libmariadbclient18 : Depends: libmysqlclient18 (= 5.7.12+maria-1~wheezy) but 5.7.13-0+deb7u1 is to be installed
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 # also, we set debconf keys to make APT a little quieter
