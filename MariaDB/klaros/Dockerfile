@@ -33,7 +33,7 @@ ENV TOMCAT_SERVER_PORT ${TOMCAT_SERVER_PORT:-18005}
 ENV TOMCAT_AJP_PORT ${TOMCAT_AJP_PORT:-18009}
 
 # Klaros release version, which is used during installation. A list of available releases can be found on the official Klaros Test Management website or on GitHub.
-ENV KLAROS_VERSION ${KLAROS_VERSION:-5.7.2}
+ENV KLAROS_VERSION ${KLAROS_VERSION:-5.7.3}
 # The location of the distributed Klaros installation files
 ENV KLAROS_DISTRIBUTION ${KLAROS_DISTRIBUTION:-https://www.klaros-testmanagement.com/files}
 
